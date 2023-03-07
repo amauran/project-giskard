@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "project-giskard"
+version = "0.1.0"
+description = ""
+authors = ["Anne"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "project_giskard"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+robotframework = "^6.0.2"
+robotframework-browser = "^16.0.0"
+robotframework-seleniumlibrary = "^6.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
