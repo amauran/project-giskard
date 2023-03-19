@@ -1,0 +1,9 @@
+---
+# these are real paths for the site used for the first tests
+# (Dreamwidth)
+paths:
+  login_button_relcsspath: input[value='Log in'][name='action:login']
+  logout_button_relxpath: //input[@name='logout_one']
+  username_box_relxpath: //input[@id='user']
+  password_box_relxpath: //input[@id='lj_loginwidget_password']
+  login_error_relxpath: //strong[normalize-space()='There was an error processing your request:']

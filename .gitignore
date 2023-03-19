@@ -6,6 +6,13 @@ browser/
 log.html
 output.xml
 report.html
+selenium-screenshot-*
+
+# Ignore my messy practice tests
+sandbox/
+
+# Ignore documentation temp
+/documentation temp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
