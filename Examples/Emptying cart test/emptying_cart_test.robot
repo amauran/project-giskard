@@ -86,6 +86,7 @@ Clear Shopping Cart
         Sleep    1 sec
     END
 
+    # make sure page no longer contains remove buttons
     Page Should Not Contain Element    css:a.remove
 
     Close All Browsers
