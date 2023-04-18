@@ -1,0 +1,22 @@
+---
+
+paths:
+    main_url: https://happy-robot.nimbus.fi/              # main page url (also shop page as it is the main page)
+    login_url: https://happy-robot.nimbus.fi/my-account/  # login page url
+    basket_url: https://happy-robot.nimbus.fi/basket/     # shopping cart/basket url
+    username_box_relxpath: //input[@id='username']        # relative xpath username box
+    password_box_relxpath: //input[@id='password']        # relative xpath to password box
+    login_button_relxpath: //button[@name='login']        # relative xpath to login button
+
+    account_details_relxpath: //a[normalize-space()='Account details']
+
+    shop_relxpath: //a[normalize-space()='Shop']
+    basket_relxpath: //a[@title='View your shopping basket']
+
+    search_top_field_csspath: css:input#woocommerce-product-search-field-0    # top corner search box
+
+    # logout links on my account page
+    logout_1_absxpath: /html[1]/body[1]/div[1]/div[2]/div[1]/div[2]/main[1]/article[1]/div[1]/div[1]/div[1]/p[1]/a[1]
+    logout_2_absxpath: /html[1]/body[1]/div[1]/div[2]/div[1]/div[2]/main[1]/article[1]/div[1]/div[1]/nav[1]/ul[1]/li[6]/a[1]
+
+

@@ -7,6 +7,7 @@ log.html
 output.xml
 report.html
 selenium-screenshot-*
+interactive_console_output.xml
 
 # Ignore my messy practice tests
 sandbox/

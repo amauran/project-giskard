@@ -1,0 +1,70 @@
+==============================================================================
+20230329 19:34:35.736 - INFO - + START SUITE: Selector Tests [ ]
+==============================================================================
+20230329 19:34:35.736 - INFO - +- START TEST: Test find right page [ ]
+------------------------------------------------------------------------------
+20230329 19:34:35.737 - INFO - +-- START KEYWORD: SeleniumLibrary.Open Browser [ ${URL} | ${Browser} ]
+20230329 19:34:35.738 - INFO - Opening browser 'Chrome' to base url 'https://happy-robot.nimbus.fi/'.
+20230329 19:34:39.813 - DEBUG - Opened browser with session id d7a9a12c8098e8b2a8f27c49eb42b725.
+20230329 19:34:39.814 - INFO - +-- END KEYWORD: SeleniumLibrary.Open Browser (4076)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20230329 19:34:39.814 - INFO - +-- START KEYWORD: SeleniumLibrary.Location Should Be [ ${URL} ]
+20230329 19:34:39.831 - INFO - Current location is 'https://happy-robot.nimbus.fi/'.
+20230329 19:34:39.832 - INFO - +-- END KEYWORD: SeleniumLibrary.Location Should Be (18)
+------------------------------------------------------------------------------
+20230329 19:34:39.832 - INFO - +- END TEST: Test find right page (4096)
+------------------------------------------------------------------------------
+20230329 19:34:39.833 - INFO - +- START TEST: Test type selector [ ]
+------------------------------------------------------------------------------
+20230329 19:34:39.833 - INFO - +-- START KEYWORD: SeleniumLibrary.Element Should Contain [ css:h1 | Shop ]
+20230329 19:34:39.900 - INFO - Element 'css:h1' contains text 'Shop'.
+20230329 19:34:39.901 - INFO - +-- END KEYWORD: SeleniumLibrary.Element Should Contain (67)
+------------------------------------------------------------------------------
+20230329 19:34:39.901 - INFO - +- END TEST: Test type selector (69)
+------------------------------------------------------------------------------
+20230329 19:34:39.901 - INFO - +- START TEST: Test class selector [ ]
+------------------------------------------------------------------------------
+20230329 19:34:39.902 - INFO - +-- START KEYWORD: SeleniumLibrary.Page Should Contain Element [ css:.wp-block-search__button ]
+20230329 19:34:39.935 - INFO - Current page contains element 'css:.wp-block-search__button'.
+20230329 19:34:39.935 - INFO - +-- END KEYWORD: SeleniumLibrary.Page Should Contain Element (33)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20230329 19:34:39.935 - INFO - +-- START KEYWORD: SeleniumLibrary.Element Should Contain [ css:.wp-block-search__button | Search ]
+20230329 19:34:39.983 - INFO - Element 'css:.wp-block-search__button' contains text 'Search'.
+20230329 19:34:39.984 - INFO - +-- END KEYWORD: SeleniumLibrary.Element Should Contain (49)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20230329 19:34:39.984 - INFO - +-- START KEYWORD: SeleniumLibrary.Page Should Contain Element [ css:.wp-block-search__input ]
+20230329 19:34:40.001 - INFO - Current page contains element 'css:.wp-block-search__input'.
+20230329 19:34:40.001 - INFO - +-- END KEYWORD: SeleniumLibrary.Page Should Contain Element (17)
+------------------------------------------------------------------------------
+20230329 19:34:40.002 - INFO - +- END TEST: Test class selector (101)
+------------------------------------------------------------------------------
+20230329 19:34:40.003 - INFO - +- START TEST: Test ID selector [ ]
+------------------------------------------------------------------------------
+20230329 19:34:40.003 - INFO - +-- START KEYWORD: SeleniumLibrary.Page Should Contain Element [ css:#woocommerce-product-search-field-0 ]
+20230329 19:34:40.029 - INFO - Current page contains element 'css:#woocommerce-product-search-field-0'.
+20230329 19:34:40.030 - INFO - +-- END KEYWORD: SeleniumLibrary.Page Should Contain Element (27)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20230329 19:34:40.031 - INFO - +-- START KEYWORD: SeleniumLibrary.Element Text Should Be [ css:#menu-item-14 | My account ]
+20230329 19:34:40.032 - INFO - Verifying element 'css:#menu-item-14' contains exact text 'My account'.
+20230329 19:34:40.084 - INFO - +-- END KEYWORD: SeleniumLibrary.Element Text Should Be (53)
+------------------------------------------------------------------------------
+20230329 19:34:40.085 - INFO - +- END TEST: Test ID selector (83)
+------------------------------------------------------------------------------
+20230329 19:34:40.085 - INFO - +- START TEST: Test attribute selectors [ ]
+------------------------------------------------------------------------------
+20230329 19:34:40.086 - INFO - +-- START KEYWORD: SeleniumLibrary.Element Attribute Value Should Be [ css:[alt="Happy Robot"] | class | custom-logo ]
+20230329 19:34:40.148 - INFO - Element 'css:[alt="Happy Robot"]' attribute 'class' contains value 'custom-logo'.
+20230329 19:34:40.148 - INFO - +-- END KEYWORD: SeleniumLibrary.Element Attribute Value Should Be (62)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20230329 19:34:40.148 - INFO - +-- START KEYWORD: SeleniumLibrary.Element Should Contain [ css:[title~="ecommerce" i] | WooCommerce ]
+20230329 19:34:40.200 - INFO - Element 'css:[title~="ecommerce" i]' contains text 'WooCommerce'.
+20230329 19:34:40.201 - INFO - +-- END KEYWORD: SeleniumLibrary.Element Should Contain (52)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20230329 19:34:40.201 - INFO - +-- START KEYWORD: SeleniumLibrary.Element Attribute Value Should Be [ css:[title~="ecommerce" i] | href | https://woocommerce.com/ ]
+20230329 19:34:40.233 - INFO - Element 'css:[title~="ecommerce" i]' attribute 'href' contains value 'https://woocommerce.com/'.
+20230329 19:34:40.234 - INFO - +-- END KEYWORD: SeleniumLibrary.Element Attribute Value Should Be (33)
+------------------------------------------------------------------------------
+20230329 19:34:40.234 - INFO - +- END TEST: Test attribute selectors (149)
+------------------------------------------------------------------------------
+20230329 19:34:40.236 - INFO - + END SUITE: Selector Tests (4658)
+==============================================================================
