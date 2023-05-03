@@ -1,0 +1,7 @@
+# Ignore passwordfile for test user in Happy Robot
+shop_loginpwds.yaml
+# Must contain the following info:
+# ---
+# logins:
+#     username: username
+#     password: password
