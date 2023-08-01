@@ -1,0 +1,12 @@
+---
+# this variable defines which web library wrapper is used for testing,
+# 'SeleniumLibrary' or 'Browser' library (selenium/browser as value for variable)
+wrapper: selenium
+usebrowser: chrome
+resource_path: /home/anne/Git/project-giskard/Examples/Resources/
+
+
+
+
+
+
