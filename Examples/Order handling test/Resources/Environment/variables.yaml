@@ -6,8 +6,7 @@
 
 wrapper: selenium             # choose selenium or browser
 usebrowser: chrome            # only chrome, firefox, safari work for this test version
-                              # (must of course be installed)
-
+                              # (anything used must of course be installed)
 
 
 

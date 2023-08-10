@@ -22,7 +22,7 @@ Library         SeleniumLibrary
 Open New Browser Window
     [Documentation]            Open a new browser window
     [Arguments]                ${browser}
-    # Note: dictionary is defined with '%' but referred to here with '$' like a variable
+    # Note: dictionary is defined with '&' but referred to here with '$' like a variable
     # Note: SeleniumLibrary Open Browser requires 'browser=' to be defined, or default browser is firefox
     Open Browser               browser=${generic_browser_name_to_local_name}[${browser}]
 
@@ -33,22 +33,29 @@ Go To Given Page
     Go To                      ${url}
 
 Check Location By Element
-    [Documentation]            Check current location by findind an element on the page
-    [Arguments]                         ${element_locator}
-    Wait Until Page Contains Element    ${element_locator}    10sec  # 10 second timeout
+    [Documentation]                     Check current location by findind an element on the page
+    [Arguments]                         ${locator}
+    Wait Until Page Contains Element    ${locator}    10sec  # 10 second timeout
 
 Check Location By URL
     [Documentation]            Check current location by url
     [Arguments]                ${url}
     Location Should Be         ${url}
 
+Check Location By Partial URL
+    [Documentation]            Check that current url matches a partial url
+    [Arguments]                ${partial_url}
+    Location Should Contain    ${partial_url}
+
 Close Current Browser
     [Documentation]            Close current active browser
-    SeleniumLibrary.Close Browser
+    Close Browser
 
 Close All Browsers
     [Documentation]            Close all open browsers
     Close All Browsers
+
+
 
 ### Input
 
@@ -62,12 +69,31 @@ Fill Password Field With Input
     [Arguments]                ${locator}    ${input}
     Input Password             ${locator}    ${input}    True
 
+Press Enter
+    [Documentation]            Simulate pressing Return/Enter on keyboard
+    [Arguments]                ${locator}
+    Press Keys                 ${locator}    RETURN
+
+    # NOTE: the format is actually 'Press Keys    locator    key',
+    # but if the locator is left empty, the key is sent to the currently active browser
+    # (so hopefully to the currently active text field...)
+
 
 
 ### Actions
 
-Click That Button
-    [Documentation]            Click button indicated by locator
+Click Selected
+    [Documentation]            Click element indicated by locator
     [Arguments]                ${locator}
-    Click Button               ${locator}
+    Click Element              ${locator}
 
+
+Wait Until Visible
+    [Documentation]                    Wait until element specified by locator is visible
+    [Arguments]                        ${locator}
+    Wait Until Page Contains Element   ${locator}    10sec  # 10 second timeout
+
+Confirm No Such Element
+    [Documentation]                    Confirm element is not found
+    [Arguments]                        ${locator}
+    Page Should Not Contain Element    ${locator}

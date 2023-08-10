@@ -1,6 +1,12 @@
 ---
+# main page url (also shop page as it is the main page)
+main_url: https://happy-robot.nimbus.fi/
+
 # login page url
 login_url: https://happy-robot.nimbus.fi/my-account/
+
+# shopping cart/basket url
+basket_url: https://happy-robot.nimbus.fi/basket/
 
 # locators needed for shop login
 username_field: //input[@id='username']

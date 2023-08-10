@@ -1,0 +1,77 @@
+---
+### ADMIN
+
+# this section is not used in the test, shop side will be handled by a 'manager' level user
+
+### MANAGER
+
+## Manager Login
+
+# login page (Wordpress)
+manager_login_url: https://happy-robot.nimbus.fi/wp-login.php
+
+# login locators
+manager_username_field: //input[@id='user_login']
+manager_password_field: //input[@id='user_pass']
+manager_login_button: //input[@id='wp-submit']
+
+# locator for checking successful manager login
+# (points to the manager's display name, will be compared to the one in password file)
+manager_checkforpass: //*[@id="wp-admin-bar-my-account"]/a/span                                    #xpath
+manager_checkforpass2: css:#wp-admin-bar-my-account.menupop.with-avatar .display-name:first-child  #CSS
+
+
+# orders page (Wordpress, woocommerce)
+manager_orders_url: https://happy-robot.nimbus.fi/wp-admin/edit.php?post_type=shop_order
+
+
+
+### CUSTOMER
+
+
+## Shop Main Page
+
+# main page url (also shop page as it is the main page)
+main_url: https://happy-robot.nimbus.fi/
+
+# shop/main page link locator
+shop_link: //a[normalize-space()='Shop']
+
+
+## Customer Login / Logout
+
+# login / logout page url (which are both on the My Account page)
+login_url: https://happy-robot.nimbus.fi/my-account/
+logout_url: https://happy-robot.nimbus.fi/my-account/
+
+# locators needed for shop login - on login/my account page
+username_field: //input[@id='username']
+password_field: //input[@id='password']
+login_button: //button[@name='login']
+
+# locator used to check login is succesful (this should exist only if logged in)
+checkforpass: //a[normalize-space()='Account details']
+
+# locator for the link to click to log out, on the left side menu of My Accounts page
+logout_link: css:.woocommerce-MyAccount-navigation-link--customer-logout a
+
+
+## Shopping And Orders
+
+# shopping cart/basket url
+basket_url: https://happy-robot.nimbus.fi/basket/
+
+# shopping cart/basket locator
+basket_relxpath: //a[@title='View your shopping basket']
+
+# orders page
+orders_url: https://happy-robot.nimbus.fi/my-account/orders/
+
+# locator for 'Orders' page link on My Account page, on the left side menu
+orders_link: css:.woocommerce-MyAccount-navigation-link--orders a
+
+
+## Search
+
+# top corner search box (should be there on every shop page)
+search_top_field_csspath: css:input#woocommerce-product-search-field-0

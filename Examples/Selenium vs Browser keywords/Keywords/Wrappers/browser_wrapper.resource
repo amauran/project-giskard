@@ -22,7 +22,7 @@ Library         Browser
 Open New Browser Window
     [Documentation]            Open a new browser window
     [Arguments]                ${browser}
-    # Note: dictionary is defined with '%' but referred to here with '$' like a variable
+    # Note: dictionary is defined with '&' but referred to here with '$' like a variable
     # Note: define 'browser=' or default browser is used
     Open Browser               browser=${generic_browser_name_to_local_name}[${browser}]
 
@@ -41,6 +41,11 @@ Check Location By URL
     [Documentation]            Check current location by url
     [Arguments]                ${url}
     Wait For Navigation        ${url}        timeout=10 s
+
+Check Location By Partial URL
+    [Documentation]            Check that current url matches a partial url
+    [Arguments]                ${partial_url}
+    Get Url                    *=            ${partial_url}
 
 Close Current Browser
     [Documentation]            Close current active browser
@@ -64,16 +69,32 @@ Fill Password Field With Input
     Fill Secret                ${locator}    ${input}
 
 # Note: for Browser library the input for Fill Secret cannot have curly braces! (so $input or %input, etc.)
-# Using normal Robot Framework variables like ${Password} will not work! Normal plain text will not work!
-# For example, '$Password' will resolve to '${Password}'
+# If 'secret' variable is prefixed with %, library will resolve corresponding environment variable.
+# Example $Password` will resolve to ${Password} Robot Framework variable, %ENV_PWD will resolve to %{ENV_PWD} environment variable.
+# Using normal Robot Framework variables like ${password} will not work!
+# Normal plain text will not work. If you want to use plain text, use Fill Text keyword instead.
+
+Press Enter
+    [Documentation]            Simulate pressing Return/Enter on keyboard
+    [Arguments]                ${locator}
+    Keyboard Key               press        ENTER
 
 
 
 ### Actions
 
-Click That Button
-    [Documentation]            Click button indicated by locator
+Click Selected
+    [Documentation]            Click element indicated by locator
     [Arguments]                ${locator}
     # this uses left mouse button as default
     Click                      ${locator}
 
+Wait Until Visible
+    [Documentation]            Wait until element specified by locator is visible
+    [Arguments]                ${locator}
+    Wait For Elements State    ${locator}    visible    timeout=10 s
+
+Confirm No Such Element
+    [Documentation]            Confirm element is not found        # in this case, element count is 0
+    [Arguments]                ${locator}
+    Get Element Count          ${locator}    =    0
