@@ -46,6 +46,11 @@ Check Location By Partial URL
     [Arguments]                ${partial_url}
     Get Url                    *=            ${partial_url}
 
+Get Current Location URL
+    [Documentation]            # Get the url of the currently active page
+    ${current_url} =           Get Url
+    RETURN                     ${current_url}
+
 Close Current Browser
     [Documentation]            Close current active browser
     Close Browser              CURRENT       # 'CURRENT' is optional if only one browser is open
@@ -87,7 +92,7 @@ Press Enter
 
 ### Actions
 
-Click Selected
+Click Selected Element
     [Documentation]            Click element indicated by locator
     [Arguments]                ${locator}
     # this uses left mouse button as default
@@ -109,4 +114,10 @@ Get Element Text
     # NOTE: remember the result  must be returned, so it's visible to the main test
     ${element_text} =    Get Text    ${locator}
     RETURN    ${element_text}
+
+Count Element
+    [Documentation]            Count how many of specified elements there are on the page
+    [Arguments]                ${locator}
+     ${element_count} =        Get Element Count          ${locator}
+    RETURN                     ${element_count}
 

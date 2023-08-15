@@ -15,15 +15,16 @@ Variables       ../Resources/Environment/variables.yaml
 Variables       ../Resources/Environment/locators.yaml
 Variables       ../Resources/Environment/product_names.yaml
 
-# import password file with customer and manager login info (this is in gitignore!!!)
-Variables        ../Resources/Environment//shop_loginpwds.yaml
+# # import password file with customer and manager login info (this is in gitignore!!!)
+# Variables       ../Resources/Environment//shop_loginpwds.yaml
 
 # import environment-indicated keyword wrapper (selenium or browser)
-Resource    ../Resources/Keywords/Wrappers/${wrapper}_wrapper.resource
+Resource        ../Resources/Keywords/Wrappers/${wrapper}_wrapper.resource
 
 # import user created keywords for user actions, and manager actions
-Resource        ../Resources/Keywords/Actions/user_actions.resource
+Resource        ../Resources/Keywords/Actions/customer_actions.resource
 Resource        ../Resources/Keywords/Actions/manager_actions.resource
+
 
 
 *** Variables ***
@@ -31,45 +32,40 @@ Resource        ../Resources/Keywords/Actions/manager_actions.resource
 ${browser}  ${usebrowser}
 
 *** Test Cases ***
-# Login As Customer To Make Order
-#     # set local variable 'usertype' value to 'customer' for this part of testing
-#     Set Local Variable                 ${usertype}          customer
-
-#     Open New Browser Window            ${browser}
-#     Go To Given Page                   ${login_url}
-#     Fill Text Field With Input         ${username_field}    ${users}[${usertype}][username]
-#     Fill Password Field With Input     ${password_field}    ${users}[${usertype}][password]
-#     Click Selected                     ${login_button}
-
-#     # check login succeeded (should be on My Accounts page and find element 'Account details')
-#     Check Location By Element          ${checkforpass}
-
-# Add Items To Cart And Place Order
-#     Add Products To Cart
-
-#     # customer logs out at this point
-
-
-
-
-Login As Manager To Edit Order
-    # set local variable 'usertype' value to 'admin' for this part of testing
-    Set Local Variable                 ${usertype}        manager
-    Set Local Variable                 ${manager_name}    ${users}[${usertype}][display_name]
-
-    # go to login page and fill username and password
+Login As Customer To Make Order
+    # Open a new browser page (do this here, not in external keywords)
     Open New Browser Window            ${browser}
-    Go To Given Page                   ${manager_login_url}
 
-    Fill Text Field With Input         ${manager_username_field}    ${users}[${usertype}][username]
-    Fill Password Field With Input     ${manager_password_field}    ${users}[${usertype}][password]
-    Click Selected                     ${manager_login_button}
 
-    # check location for successful login
-    # (in this case, find the manager's display name, and compare to name on file)
-    Wait Until Visible                 ${manager_checkforpass}
-    ${text_found} =                    Get Element Text             ${manager_checkforpass}
-    Should Be Equal                    ${manager_name}              ${text_found}
+    Login As Existing Customer
+    Sleep  2 sec
+    Logout Customer From Shop
+
+#Add Items To Cart And Place Order
+    # add one of each product into cart (using user made keyword)
+    # Add Products To Cart
+    # Clear Shopping Cart
+
+    # # go to cart
+    # Click Selected Element    ${cart_link}
+
+    # # check correct amount of product types (as listed in yaml file)
+
+    # Set Local Variable    ${table_row}    0
+    # ${path} =   "//tbody/tr[${table_row}]/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/label"
+    # Log    ${path}
+
+    # and correct amount of products (1 of each)
+
+    # customer logs out at this point
+
+
+
+
+# Login As Manager To Edit Order
+# NOTE: a browser page should be left open from the previous section, no need to open a new one
+#     Login As Shop Manager
+
 
 
 
@@ -82,6 +78,7 @@ Login As Manager To Edit Order
 
 
 # Login As Customer To Check Order Status
+# NOTE: a browser page should be left open from the previous section, no need to open a new one
 #     # set local variable 'usertype' value to 'customer' for this part of testing
 #     Set Local Variable                 ${usertype}          customer
 
@@ -105,6 +102,7 @@ Login As Manager To Edit Order
 
 
 # # Login As Manager To Delete Order
+# NOTE: a browser page should be left open from the previous section, no need to open a new one
 #     # set local variable 'usertype' value to 'admin' for this part of testing
 #     Set Local Variable                 ${usertype}          manager
 

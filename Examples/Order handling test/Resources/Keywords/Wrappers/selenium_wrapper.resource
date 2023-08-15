@@ -46,6 +46,10 @@ Check Location By Partial URL
     [Arguments]                ${partial_url}
     Location Should Contain    ${partial_url}
 
+Get Current Location URL
+    [Documentation]            # Get the url of the currently active page
+    ${current_url} =           Get Location
+    RETURN                     ${current_url}
 
 Close Current Browser
     [Documentation]            Close current active browser
@@ -74,7 +78,6 @@ Fill Password Field With Input
     # Input Text Into Alert ???
 
 
-
 Press Enter
     [Documentation]            Simulate pressing Return/Enter on keyboard
     [Arguments]                ${locator}
@@ -88,7 +91,7 @@ Press Enter
 
 ### Actions
 
-Click Selected
+Click Selected Element
     [Documentation]            Click element indicated by locator
     [Arguments]                ${locator}
     Click Element              ${locator}
@@ -103,14 +106,18 @@ Confirm No Such Element
     [Arguments]                        ${locator}
     Page Should Not Contain Element    ${locator}
 
-
 Get Element Text
     [Documentation]            Get text content of given element
     [Arguments]                ${locator}
     # NOTE: remember the result  must be returned, so it's visible to the main test
-    ${element_text} =    Get Text    ${locator}
-    RETURN    ${element_text}
+    ${element_text} =          Get Text    ${locator}
+    RETURN                     ${element_text}
 
+Count Element
+    [Documentation]            Count how many of specified elements there are on the page
+    [Arguments]                ${locator}
+    ${element_count} =         Get Element Count          ${locator}
+    RETURN                     ${element_count}
 
 
 

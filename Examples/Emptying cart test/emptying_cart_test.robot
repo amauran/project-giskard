@@ -83,7 +83,7 @@ Clear Shopping Cart
         Wait Until Page Contains Element    css:a.remove
         Click Element    css:a.remove
         # NOTE: this sleep is required so the page can 'find' the button again (this is a javascript issue)
-        Sleep    1 sec
+        Sleep    2 sec
     END
 
     Page Should Not Contain Element    css:a.remove
