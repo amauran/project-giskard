@@ -7,9 +7,10 @@ product_names:
   - Varied Nuts & Bolts
   - Versatile Thin Arm
 
-# # list of product name in the urls (the bit after https://happy-robot.nimbus.fi/product/)
-# product_namesinurl:
-#   - dexterous-thin-leg/
-#   - varied-nuts-bolts/
-#   - versatile-thin-arm/
-#   - can-of-oil/
+# list of product name in the urls (the bit after https://happy-robot.nimbus.fi)
+# this must be in the same order as the product_names list, so they can be looped in sync
+product_namesinurl:
+   - /product/can-of-oil/
+   - /product/dexterous-thin-leg/
+   - /product/varied-nuts-bolts/
+   - /product/versatile-thin-arm/

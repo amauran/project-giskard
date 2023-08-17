@@ -1,5 +1,9 @@
 *** Settings ***
-Documentation        This test will try out things from both customer and shop manager sides
+Documentation        This test will try out things from both customer and shop manager sides.
+
+### WHAT WILL BE TESTED ###
+
+# The test will run in a single browser window, so customer and manager will log out when switching sides
 
 # 1) customer will place an order (for test purposes the payment method is set to cash on delivery)
 # 2) shop manager will find the order, edit it (add coupon), mark the order as completed and save it.
@@ -10,69 +14,62 @@ Documentation        This test will try out things from both customer and shop m
 # 1) a wrapper for either Seleniumlibrary or Browser library
 # 2) user or admin action keywords as needed
 
+
+### IMPORTS ###
+
 # importing variable files with test environment specific variables and locators
 Variables       ../Resources/Environment/variables.yaml
 Variables       ../Resources/Environment/locators.yaml
 Variables       ../Resources/Environment/product_names.yaml
 
-# # import password file with customer and manager login info (this is in gitignore!!!)
-# Variables       ../Resources/Environment//shop_loginpwds.yaml
-
 # import environment-indicated keyword wrapper (selenium or browser)
 Resource        ../Resources/Keywords/Wrappers/${wrapper}_wrapper.resource
 
-# import user created keywords for user actions, and manager actions
+# import user created keywords for customer actions, and manager actions
 Resource        ../Resources/Keywords/Actions/customer_actions.resource
 Resource        ../Resources/Keywords/Actions/manager_actions.resource
 
+
+### SETUP AND TEARDOWN
+
+# As test setup, open a new browser page
+# (do this here, not in external keyword files or inside test segments)
+
+Test Setup      Open New Browser Window            ${browser}
+# For test teardown, close all open browsers (should be only one, but still)
+Test Teardown   Close All Open Browsers
 
 
 *** Variables ***
 # set 'browser' variable to be the browser chosen in variables.yaml
 ${browser}  ${usebrowser}
 
+
 *** Test Cases ***
-Login As Customer To Make Order
-    # Open a new browser page (do this here, not in external keywords)
-    Open New Browser Window            ${browser}
-
-
+Login As Customer To Make An Order
+    # the customer logs in, adds procucts to cart and places the order
     Login As Existing Customer
-    Sleep  2 sec
-    Logout Customer From Shop
+    Add Products To Cart
+    Go To Shopping Cart
+    Check Shopping Cart Items
+    Proceed To Checkout
+    Say Thank You In Comment Box
+    Complete Order
 
-#Add Items To Cart And Place Order
-    # add one of each product into cart (using user made keyword)
-    # Add Products To Cart
+    # this is used here when testing partial segments, cart needs to be cleared then
     # Clear Shopping Cart
 
-    # # go to cart
-    # Click Selected Element    ${cart_link}
-
-    # # check correct amount of product types (as listed in yaml file)
-
-    # Set Local Variable    ${table_row}    0
-    # ${path} =   "//tbody/tr[${table_row}]/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/label"
-    # Log    ${path}
-
-    # and correct amount of products (1 of each)
-
-    # customer logs out at this point
-
-
+    # customer logs out at this point so manager can take over
+    Logout Customer From Shop
 
 
 # Login As Manager To Edit Order
-# NOTE: a browser page should be left open from the previous section, no need to open a new one
+
 #     Login As Shop Manager
-
-
-
+#     Logout Shop Manager
 
 
 # Find Order, Add Coupon, Process Order
-
-
 
     # admin logs out at this point
 
@@ -114,7 +111,6 @@ Login As Customer To Make Order
 #     # check location
 #     # find order, view, delete
 
-[Teardown]    Close Current Browser
 
 
 *** Keywords ***
@@ -122,5 +118,5 @@ Login As Customer To Make Order
 
 *** Comments ***
 
-While using the same browser windonw, the customer has to log out before the admin can log in, and vice versa.
+While using the same browser window, the customer has to log out before the admin can log in, and vice versa.
 This is to ensure the current user is who it's supposed to be.

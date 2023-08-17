@@ -25,10 +25,12 @@ Open New Browser Window
     # Note: define 'browser=' or default browser is used
     Open Browser               browser=${generic_browser_name_to_local_name}[${browser}]
 
+
 Go To Given Page
     [Documentation]            Go to a given page in an already opened browser
     [Arguments]                ${url}
     Go To                      ${url}
+
 
 Check Location By Element
     [Documentation]            Check current location by findind an element on the page
@@ -36,28 +38,34 @@ Check Location By Element
     # this waits until the element is visible, or runs into timeout (other states can be used too)
     Wait For Elements State    ${element_locator}    visible    timeout=10 s
 
+
 Check Location By URL
     [Documentation]            Check current location by url
     [Arguments]                ${url}
     Wait For Navigation        ${url}        timeout=10 s
+
 
 Check Location By Partial URL
     [Documentation]            Check that current url matches a partial url
     [Arguments]                ${partial_url}
     Get Url                    *=            ${partial_url}
 
+
 Get Current Location URL
     [Documentation]            # Get the url of the currently active page
     ${current_url} =           Get Url
     RETURN                     ${current_url}
 
+
 Close Current Browser
     [Documentation]            Close current active browser
     Close Browser              CURRENT       # 'CURRENT' is optional if only one browser is open
 
-Close All Browsers
+
+Close All Open Browsers
     [Documentation]            Close all open browsers
     Close Browser              ALL
+
 
 
 ### Input
@@ -66,6 +74,7 @@ Fill Text Field With Input
     [Documentation]            Fill field indicated by locator with given input
     [Arguments]                ${locator}    ${input}
     Fill Text                  ${locator}    ${input}
+
 
 Fill Password Field With Input
     [Documentation]            Fill password field indicated by locator with given input
@@ -98,26 +107,51 @@ Click Selected Element
     # this uses left mouse button as default
     Click                      ${locator}
 
+
+Hover Over Element
+    [Documentation]            Simulate hovering over element with mouse cursor
+    [Arguments]                ${locator}
+    Hover                      ${locator}
+
+
 Wait Until Visible
+    # NOTE: visible means logically visible, not visually (but anything with display:none will not be found)
     [Documentation]            Wait until element specified by locator is visible
     [Arguments]                ${locator}
     Wait For Elements State    ${locator}    visible    timeout=10 s
+
 
 Confirm No Such Element
     [Documentation]            Confirm element is not found        # in this case, element count is 0
     [Arguments]                ${locator}
     Get Element Count          ${locator}    =    0
 
+
 Get Element Text
     [Documentation]            Get text content of given element
     [Arguments]                ${locator}
     # NOTE: remember the result  must be returned, so it's visible to the main test
-    ${element_text} =    Get Text    ${locator}
+    ${element_text} =          Get Text    ${locator}
     RETURN    ${element_text}
+
+
+Get Attribute Value
+    [Documentation]            Get the value inside specified attribute
+    [Arguments]                ${locator}
+    ${attribute_value} =       Get Attribute  ${locator}  value   # only returns value of attribute named 'value'???
+    RETURN                     ${attribute_value}
+
 
 Count Element
     [Documentation]            Count how many of specified elements there are on the page
     [Arguments]                ${locator}
      ${element_count} =        Get Element Count          ${locator}
     RETURN                     ${element_count}
+
+
+Set Focus To Selected Element
+    [Documentation]            Set focus to specified element
+    [Arguments]                ${locator}
+    Focus                      ${locator}
+
 

@@ -3,7 +3,7 @@
 
 # this section is not used in the test, shop side will be handled by a 'manager' level user
 
-### MANAGER
+### MANAGER (Wordpress side)
 
 ## Manager Login
 
@@ -21,12 +21,19 @@ manager_checkforpass:     //*[@id="wp-admin-bar-my-account"]/a/span             
 manager_checkforpass2:    css:#wp-admin-bar-my-account.menupop.with-avatar .display-name:first-child  #CSS
 
 
-# orders page (Wordpress, woocommerce)
+## Manager Other Links And Locators (wordpress + woocommerce)
+
+# manager mouse over popup menu locator, hover menu visible and the logout link inside popup menu
+manager_hovermenu_link:         css:#wp-admin-bar-my-account.menupop.with-avatar
+manager_hovermenu_visible:      css:#wp-admin-bar-my-account.menupop.with-avatar.hover
+manager_hovermenu_logout_link:  //*[@id="wp-admin-bar-logout"]/a
+
+# orders page url (Wordpress, woocommerce)
 manager_orders_url:       https://happy-robot.nimbus.fi/wp-admin/edit.php?post_type=shop_order
 
 
 
-### CUSTOMER
+### CUSTOMER (Happy Robot shop side)
 
 
 ## Shop Main Page
@@ -36,14 +43,14 @@ main_url:   https://happy-robot.nimbus.fi/
 
 # shop/main page link locator
 shop_link: //a[normalize-space()='Shop']
+main_link: //a[normalize-space()='Shop']
 
 
-## Customer My Account page, Login / Logout in the shop
+## Customer My Account page, Login / Logout (in the shop)
 
-# My Account page url and xpath
-
+# My Account page url and xpath link locator
 my_account_url:   https://happy-robot.nimbus.fi/my-account/
-my_account_path:  //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")]
+my_account_link:  //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")]
 
 # login / logout page url (which are both on the My Account page so the url is the same as for that)
 login_url:  https://happy-robot.nimbus.fi/my-account/
@@ -62,9 +69,9 @@ login_button:   //button[@name='login']
 checkforpass:   //a[normalize-space()='Account details']
 
 
-
-
 ## Shopping And Orders
+
+# Shopping cart
 
 # shopping cart/basket url
 cart_url:     https://happy-robot.nimbus.fi/basket/
@@ -72,8 +79,24 @@ cart_url:     https://happy-robot.nimbus.fi/basket/
 # shopping cart/basket locator (upper right basket on the page, not the menu item)
 cart_link:    //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/basket/")]
 
-# cart_link_old:    //a[@title="View your shopping basket"]
+# This should point to all elements in table with class product-name (the number of product types)
+cart_product_types:     //tbody/tr/td[@class="product-name"]/a/parent::td
 
+# product quantity, containing label, which should hold the product type name (use Get Text to find value)
+cart_product_names:     //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/label
+
+# find product name, go to parent, then following sibling with class product-quantity (the general locator for all)
+# NOTE: you need 'get attribute' type of keyword to access the value inside
+cart_product_quantity:  //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/input/
+
+# add item to cart (general for any such button on any page, full shop or single product)
+add_to_cart:        css:button[name="add-to-cart"]
+
+# remove button in cart (general for any such button)
+cart_remove:        css:a.remove
+
+
+# Orders and checkout
 
 # orders page
 orders_url:     https://happy-robot.nimbus.fi/my-account/orders/
@@ -81,34 +104,30 @@ orders_url:     https://happy-robot.nimbus.fi/my-account/orders/
 # locator for 'Orders' page link on My Account page, on the left side menu
 orders_link:    css:.woocommerce-MyAccount-navigation-link--orders a
 
-
-
-# # CSS locator for counting product types in cart (table rows <tr>)
-# cart_product_types:  css:tr.woocommerce-cart-form__cart-item'
-
-# This should point to all elements in table with class product-name (the number of product types)
-cart_product_types:     //tbody/tr/td[@class="product-name"]/a/parent::td
-
-# product quantity, containing label, which should hold the product type name (use Get Text to find value)
-cart_product_names:     //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/label
-
-# find product name, go to parent, then following sibling with class product-quantity
-# '@value' in the end should point to product quantity number (how many are in the cart)
-cart_product_quantity:  //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/input/@value
-
-
-
-# add item to cart (general for any such button on any page)
-add_to_cart:        css:button[name="add-to-cart"]
-
-# remove button in cart (general for any such button)
-cart_remove:        css:a.remove
-
-# proceed to checkout button on shopping cart page (visible when there is something in the basket)
+# 'Proceed to checkout' button on shopping cart page (visible when there is something in the cart)
 checkout_button:    css:a.checkout-button
 
+# checkout page url
+checkout_url:       https://happy-robot.nimbus.fi/checkout/
 
-## Search
+# comment box
+comment_box:        css:textarea#order_comments.input-text
+
+# privacy policy link (to set focus to, to remove focus from comment box after entering text)
+privacy_policy:     css:a.woocommerce-privacy-policy-link
+
+# 'Place order' button on checkout page
+place_order_button: css:button#place_order
+
+# order received announcement check (find this after placing order to check for success)
+order_received:     css:.woocommerce-thankyou-order-received
+
+# order number of the successfully placed order (on the page that opens right after placing order)
+# use 'get attribute' or something to retrieve value
+order_received_number:      css:.woocommerce-order li.woocommerce-order-overview__order strong
+
+
+# Search
 
 # top corner search box (should be there on every shop page)
 search_top_field_csspath: css:input#woocommerce-product-search-field-0

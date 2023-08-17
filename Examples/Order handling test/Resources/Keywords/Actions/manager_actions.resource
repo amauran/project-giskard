@@ -1,5 +1,6 @@
 *** Settings ***
-Documentation    user created keywords for admin actions
+Documentation    user created keywords for shop manager actions
+# NOTE: manager does not have admin rights! (can handle orders and customers though)
 
 # import test environment variables and locators
 Variables       ../../Environment/variables.yaml
@@ -9,12 +10,14 @@ Variables       ../../Environment/locators.yaml
 Variables        ../../Environment/shop_loginpwds.yaml
 
 # import keyword wrapper (selenium or browser) indicated by the variables.yaml file
-Resource        ../Wrappers/${wrapper}_wrapper.resource
+Resource         ../Wrappers/${wrapper}_wrapper.resource
+
 
 *** Variables ***
 
 # set 'browser' variable to be the browser chosen in variables.yaml
 ${browser}  ${usebrowser}
+
 
 *** Keywords ***
 
@@ -38,6 +41,11 @@ Login As Shop Manager
 
 
 Logout Shop Manager
+    # should work from any page on the wordpress, provided of course the manager is logged in
+    Wait Until Visible        ${manager_hovermenu_link}
+    Hover Over Element        ${manager_hovermenu_link}
+    Wait Until Visible        ${manager_hovermenu_visible}
+    Click Selected Element    ${manager_hovermenu_logout_link}
 
 # Edit Order Status
 # Mark Order As Processed

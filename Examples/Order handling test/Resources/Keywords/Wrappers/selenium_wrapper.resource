@@ -31,31 +31,37 @@ Go To Given Page
     [Arguments]                ${url}
     Go To                      ${url}
 
+
 Check Location By Element
     [Documentation]                     Check current location by findind an element on the page
     [Arguments]                         ${locator}
     Wait Until Page Contains Element    ${locator}    10sec  # 10 second timeout
+
 
 Check Location By URL
     [Documentation]            Check current location by url
     [Arguments]                ${url}
     Location Should Be         ${url}
 
+
 Check Location By Partial URL
     [Documentation]            Check that current url matches a partial url
     [Arguments]                ${partial_url}
     Location Should Contain    ${partial_url}
+
 
 Get Current Location URL
     [Documentation]            # Get the url of the currently active page
     ${current_url} =           Get Location
     RETURN                     ${current_url}
 
+
 Close Current Browser
     [Documentation]            Close current active browser
     Close Browser
 
-Close All Browsers
+
+Close All Open Browsers
     [Documentation]            Close all open browsers
     Close All Browsers
 
@@ -67,6 +73,7 @@ Fill Text Field With Input
     [Documentation]            Fill field indicated by locator with given input
     [Arguments]                ${locator}    ${input}
     Input Text                 ${locator}    ${input}    True
+
 
 Fill Password Field With Input
     [Documentation]            Fill password field indicated by locator with given input
@@ -96,15 +103,25 @@ Click Selected Element
     [Arguments]                ${locator}
     Click Element              ${locator}
 
+
+Hover Over Element
+    [Documentation]            Simulate hovering over element with mouse cursor
+    [Arguments]                ${locator}
+    Mouse Over                 ${locator}
+
+
 Wait Until Visible
+    # NOTE: visible means logically visible, not visually (but anything with display:none will not be found)
     [Documentation]                    Wait until element specified by locator is visible
     [Arguments]                        ${locator}
-    Wait Until Page Contains Element   ${locator}    10sec  # 10 second timeout
+    Wait Until Page Contains Element   ${locator}    10 sec  # 10 second timeout
+
 
 Confirm No Such Element
     [Documentation]                    Confirm element is not found
     [Arguments]                        ${locator}
     Page Should Not Contain Element    ${locator}
+
 
 Get Element Text
     [Documentation]            Get text content of given element
@@ -113,6 +130,14 @@ Get Element Text
     ${element_text} =          Get Text    ${locator}
     RETURN                     ${element_text}
 
+
+Get Attribute Value
+    [Documentation]            Get the value inside specified attribute
+    [Arguments]                ${locator}
+    ${attribute_value} =       Get Element Attribute  ${locator}  value   # only returns value of attribute named 'value'???
+    RETURN                     ${attribute_value}
+
+
 Count Element
     [Documentation]            Count how many of specified elements there are on the page
     [Arguments]                ${locator}
@@ -120,4 +145,7 @@ Count Element
     RETURN                     ${element_count}
 
 
-
+Set Focus To Selected Element
+    [Documentation]            Set focus to specified element
+    [Arguments]                ${locator}
+    Set Focus To Element       ${locator}

@@ -1,11 +1,10 @@
 *** Settings ***
-Documentation    user created keywords for regular user actions
+Documentation    user created keywords for shop customer actions
 
 # import test environment variables and locators
 Variables       ../../Environment/variables.yaml
 Variables       ../../Environment/locators.yaml
 Variables       ../../Environment/product_names.yaml
-
 
 # import password file (this is in gitignore!!!)
 Variables        ../../Environment/shop_loginpwds.yaml
@@ -19,12 +18,14 @@ Resource         ../Wrappers/${wrapper}_wrapper.resource
 # set 'browser' variable to be the browser chosen in variables.yaml
 ${browser}  ${usebrowser}
 
+
 *** Keywords ***
 
 Login As Existing Customer
      # set local variable 'usertype' value to 'customer' for this part of testing
     Set Local Variable                 ${usertype}          customer
 
+    # go to Happy Robot shop and login (using wrapper keywords)
     Go To Given Page                   ${login_url}
     Fill Text Field With Input         ${username_field}    ${users}[${usertype}][username]
     Fill Password Field With Input     ${password_field}    ${users}[${usertype}][password]
@@ -46,33 +47,49 @@ Logout Customer From Shop
         Wait Until Visible            ${login_button}
     # if not on 'My Account' page, go there and then logout
     ELSE
-        Click Selected Element        ${my_account_path}
+        Wait Until Visible            ${my_account_link}
+        # once again, a sleep seems to be needed even though we just waited for the element...
+        Sleep  2 sec
+        Click Selected Element        ${my_account_link}
         Check Location By URL         ${logout_url}
         Wait Until Visible            ${logout_link}
         Click Selected Element        ${logout_link}
         Wait Until Visible            ${login_button}
     END
 
+
+Go To Shopping Cart
+    [Documentation]                   # click shopping cart link
+    Click Selected Element            ${cart_link}
+
+
+Go To Orders
+    [Documentation]                   # click link to orders page
+    Click Selected Element            ${orders_link}
+
+
 Add Products To Cart
     [Documentation]        add each product in the shop into the cart once via search box
+    # NOTE: This requires that product_names.yaml is updated if new products are added to shop
 
     # go to home page (shop main page)
-    Click Selected Element         css:.menu-item-home
+    Click Selected Element         ${shop_link}
 
     # check location is the home page (shop main page)
-    Check Location By URL    ${main_url}
+    Check Location By URL          ${main_url}
 
     # get length of product name list (from yaml file)
-    ${length} =           Get Length    ${product_names}
-    Log                   ${length}
+    ${length} =        Get Length    ${product_names}
+    Log                ${length}
 
 
     ### loop for adding products into cart one by one, by product name
 
     # a loop that runs from range 0 until the length of the product list (gotten from yaml file)
     FOR    ${product_index}    IN RANGE    0    ${length}
+
         # set current product to be the one indicated by the index number
-        ${current_product} =    Set Variable   ${product_names}[${product_index}]
+        ${current_product} =   Set Variable   ${product_names}[${product_index}]
 
         # input search string (= current product name) into search box, and press enter
         Fill Text Field With Input            ${search_top_field_csspath}    ${current_product}
@@ -86,30 +103,68 @@ Add Products To Cart
         Wait Until Visible                    ${add_to_cart}
         Click Selected Element                ${add_to_cart}
 
+        # debugging, making sure things go right
         # Log Many   ${product_index}, ${current_product}
-
     END
 
 
 Check Shopping Cart Items
     [Documentation]                Check number of product types and their quantity in cart
 
+    # NOTE: for basic testing the quantity is 1 for each product,
+    # and the shopping cart should be empty before running test series or this will fail
+
+    # get length of product name list = the number of product types in shop (from yaml file)
+    # NOTE: the yaml file must be updated if new products are added to shop
+    ${length} =           Get Length    ${product_names}
+
+    # set two local variables for creating locator for quantity of a product type in shopping cart
+    # (the missing part will be added in the loop later using Catenate)
+    Set Local Variable  ${quantity_loc_pt1}  //tbody/tr/td[@class="product-name"]/a[contains(@href,"
+    Set Local Variable  ${quantity_loc_pt2}  ")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input
+
+    # check the number of product types in cart matches that in the shop (the yaml file)
+    # (this could later be improved to count products in the actual shop instead of using the yaml file)
+    ${product_types_in_cart} =      Count Element    ${cart_product_types}
+    Should Be Equal                 ${length}        ${product_types_in_cart}
+
+    # loop for checking name and quantity of each product type in shopping cart
+    FOR    ${product_index}    IN RANGE    0   ${length}
+
+        # set current_product to product name url ending (/product-name)
+        ${current_product} =    Set Variable   ${product_namesinurl}[${product_index}]
+        ${product_name} =       Set Variable   ${product_names}[${product_index}]
+
+        # catenate locator for current product item quantity in shipping cart
+        ${quantity_locator} =   Catenate   SEPARATOR=  ${quantity_loc_pt1}  ${current_product}  ${quantity_loc_pt2}
+
+        # debugging to check things go right
+        # Log  ${quantity_locator}
+
+        # find current product's quantity with previously made locator
+        ${product_quantity} =   Get Attribute Value    ${quantity_locator}
+        # check quantity is one (should be, unless something was left in the cart from previous test runs)
+        Should Be True          ${product_quantity} == 1
+
+        # degubbing, log product name and quantity for each loop to check they are correct
+        Log Many    ${product_name}, ${product_quantity}
+    END
+
 
 Clear Shopping Cart
     [Documentation]                Clear shopping cart of all products
-    # go to shopping cart
+    # NOTE: must first be on shopping cart page of course
     Wait Until Visible             ${cart_link}
     Click Selected Element         ${cart_link}
     Check Location By URL          ${cart_url}
 
     # count number of remove buttons (= the number of product types in cart that can be removed)
     # (clicking the remove button removes that product regardless of quantity in cart)
-
     ${button_count} =               Count Element    ${cart_remove}
-    Log                   ${button_count}
 
     # for as long as there are product types in the cart (a remove button exists), click remove button
     FOR    ${click_times}    IN RANGE    0    ${button_count}
+
         Wait Until Visible          ${cart_remove}
         Click Selected Element      ${cart_remove}
         # NOTE: this sleep is required so the page can 'find' the button again (this is a javascript issue)
@@ -120,3 +175,51 @@ Clear Shopping Cart
 
     # confirm no more remove buttons exist (no more products to remove, cart should be empty)
     Confirm No Such Element         ${cart_remove}
+
+
+Proceed To Checkout
+    [Documentation]                 Click 'Proceed to checkout' button
+    # there needs to be an open order, and you need to be viewing the order for the button to exist
+    Click Selected Element          ${checkout_button}
+
+
+Say Thank You In Comment Box
+    [Documentation]                 leave a thank you message in the comment box
+    # (only works if an order is open and you are on the checkout page)
+
+    # create local variable for the thank you message used later (no quotemarks needed for message in this)
+    Set Local Variable              ${thank_you_message}    First time customer, thank you for creating this shop! ^_^
+    # enter thank you message to the comment box
+    Fill Text Field With Input      ${comment_box}     ${thank_you_message}
+    # focus elsewhere to get out of text box
+    Set Focus To Selected Element   ${privacy_policy}
+
+
+Complete Order
+    [Documentation]                 click the 'Place order' button
+    # (only works if an order is open and you are on the checkout page)
+    Click Selected Element          ${place_order_button}
+
+
+Check Order Was Succesful
+    [Documentation]                 wait until the message for succesful order is found
+    # this will hopefully happen before timeout, as a new page is loaded for the completed order
+    # NOTE: timeout (10 sec) for the keyword is set in the wrapper file, not here
+    Wait Until Visible              ${order_received}
+
+
+Save New Order Number
+    [Documentation]                 save the order number for the completed order
+    # this is used in case there are more than one order to choose from
+    ${order_number} =               Get Attribute Value    ${order_received_number}
+    RETURN                          ${order_number}
+
+
+Find And Open Placed Order
+    [Documentation]                 find a placed order on the Orders page
+    # NOTE: you will need an order number for this, and you need to be on the Orders page
+
+
+
+
+
