@@ -9,11 +9,11 @@ Library         Browser
 # (not all of them, these are just for example)
 # creating a dictionary variable to switch generic browser name
 # to one that Browser library uses
-
 &{generic_browser_name_to_local_name} =
 ...    chrome=chromium  # Google Chrome, Microsoft Edge (since 2020), Opera
 ...    firefox=firefox  # Mozilla Firefox
 ...    safari=webkit    # Apple Safari, Mail, AppStore on MacOS and iOS
+
 
 *** Keywords ***
 ### Navigation

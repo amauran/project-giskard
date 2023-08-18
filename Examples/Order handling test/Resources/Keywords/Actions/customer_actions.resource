@@ -7,10 +7,10 @@ Variables       ../../Environment/locators.yaml
 Variables       ../../Environment/product_names.yaml
 
 # import password file (this is in gitignore!!!)
-Variables        ../../Environment/shop_loginpwds.yaml
+Variables       ../../Environment/shop_loginpwds.yaml
 
 # import keyword wrapper (selenium or browser) indicated by the variables.yaml file
-Resource         ../Wrappers/${wrapper}_wrapper.resource
+Resource        ../Wrappers/${wrapper}_wrapper.resource
 
 
 *** Variables ***
@@ -22,7 +22,9 @@ ${browser}  ${usebrowser}
 *** Keywords ***
 
 Login As Existing Customer
-     # set local variable 'usertype' value to 'customer' for this part of testing
+    [Documentation]                    Go to shop url and login as an existing customer
+
+    # set local variable 'usertype' value to 'customer' for this part of testing
     Set Local Variable                 ${usertype}          customer
 
     # go to Happy Robot shop and login (using wrapper keywords)
@@ -36,7 +38,9 @@ Login As Existing Customer
 
 
 Logout Customer From Shop
-    # check the location is the 'My Account' page, and click the logout link
+    [Documentation]                   check location and logout customer from shop
+
+    # check if the current location is the 'My Account' page, and click the logout link
     ${current_page} =                 Get Current Location URL
 
     # IF current page is already logout page (My Account), click the logout link
@@ -69,15 +73,13 @@ Go To Orders
 
 
 Add Products To Cart
-    [Documentation]        add each product in the shop into the cart once via search box
+    [Documentation]                   add each product in the shop into the cart once via search box
     # NOTE: This requires that product_names.yaml is updated if new products are added to shop
 
     # go to home page (shop main page)
     Click Selected Element         ${shop_link}
-
     # check location is the home page (shop main page)
     Check Location By URL          ${main_url}
-
     # get length of product name list (from yaml file)
     ${length} =        Get Length    ${product_names}
     Log                ${length}
@@ -110,7 +112,6 @@ Add Products To Cart
 
 Check Shopping Cart Items
     [Documentation]                Check number of product types and their quantity in cart
-
     # NOTE: for basic testing the quantity is 1 for each product,
     # and the shopping cart should be empty before running test series or this will fail
 
@@ -128,7 +129,7 @@ Check Shopping Cart Items
     ${product_types_in_cart} =      Count Element    ${cart_product_types}
     Should Be Equal                 ${length}        ${product_types_in_cart}
 
-    # loop for checking name and quantity of each product type in shopping cart
+    # loop for checking the name and quantity of each product type in shopping cart
     FOR    ${product_index}    IN RANGE    0   ${length}
 
         # set current_product to product name url ending (/product-name)
@@ -154,6 +155,8 @@ Check Shopping Cart Items
 Clear Shopping Cart
     [Documentation]                Clear shopping cart of all products
     # NOTE: must first be on shopping cart page of course
+
+    # wait until link to cart is visible, click it and confirm we got to the right location
     Wait Until Visible             ${cart_link}
     Click Selected Element         ${cart_link}
     Check Location By URL          ${cart_url}
@@ -180,6 +183,7 @@ Clear Shopping Cart
 Proceed To Checkout
     [Documentation]                 Click 'Proceed to checkout' button
     # there needs to be an open order, and you need to be viewing the order for the button to exist
+
     Click Selected Element          ${checkout_button}
 
 
@@ -198,6 +202,7 @@ Say Thank You In Comment Box
 Complete Order
     [Documentation]                 click the 'Place order' button
     # (only works if an order is open and you are on the checkout page)
+
     Click Selected Element          ${place_order_button}
 
 
@@ -205,12 +210,14 @@ Check Order Was Succesful
     [Documentation]                 wait until the message for succesful order is found
     # this will hopefully happen before timeout, as a new page is loaded for the completed order
     # NOTE: timeout (10 sec) for the keyword is set in the wrapper file, not here
+
     Wait Until Visible              ${order_received}
 
 
 Save New Order Number
     [Documentation]                 save the order number for the completed order
-    # this is used in case there are more than one order to choose from
+    # NOTE: this is used in case there are more than one order to choose from
+
     ${order_number} =               Get Attribute Value    ${order_received_number}
     RETURN                          ${order_number}
 
@@ -219,7 +226,7 @@ Find And Open Placed Order
     [Documentation]                 find a placed order on the Orders page
     # NOTE: you will need an order number for this, and you need to be on the Orders page
 
-
+    # this keyword is under construction
 
 
 

@@ -2,6 +2,7 @@
 ### ADMIN
 
 # this section is not used in the test, shop side will be handled by a 'manager' level user
+# (not the same as admin, but with enough rights to handle shopside things)
 
 ### MANAGER (Wordpress side)
 
@@ -24,12 +25,24 @@ manager_checkforpass2:    css:#wp-admin-bar-my-account.menupop.with-avatar .disp
 ## Manager Other Links And Locators (wordpress + woocommerce)
 
 # manager mouse over popup menu locator, hover menu visible and the logout link inside popup menu
-manager_hovermenu_link:         css:#wp-admin-bar-my-account.menupop.with-avatar
-manager_hovermenu_visible:      css:#wp-admin-bar-my-account.menupop.with-avatar.hover
-manager_hovermenu_logout_link:  //*[@id="wp-admin-bar-logout"]/a
+manager_hovermenu_link:             css:#wp-admin-bar-my-account.menupop.with-avatar
+manager_hovermenu_visible:          css:#wp-admin-bar-my-account.menupop.with-avatar.hover
+manager_hovermenu_logout_link:      //*[@id="wp-admin-bar-logout"]/a
 
-# orders page url (Wordpress, woocommerce)
-manager_orders_url:       https://happy-robot.nimbus.fi/wp-admin/edit.php?post_type=shop_order
+# orders page url (Wordpress, WooCommerce)
+manager_orders_url:                 https://happy-robot.nimbus.fi/wp-admin/edit.php?post_type=shop_order
+
+# WP collapse/expand menu button (hide/show text components of wordpress menu items)
+manager_WPmenu_collapse_button:     //button[@id="collapse-button"]
+# if WP menu is collapsed, this is visible
+manager_WPmenu_collapsed:           //button[@id="collapse-button"][@aria-label="Expand Main menu"]
+# if WP menu is expanded, this is visible
+manager_WPmenu_expanded:           //button[@id="collapse-button"][@aria-label="Collapse Main menu"]
+
+# WooCommerce mouse over popup menu locators
+manager_WC_hovermenu_link:          //div[@class="wp-menu-name"][text()="WooCommerce"]
+manager_WC_hovermenu_orders_link:   //ul/li/a[text()="Orders "]
+
 
 
 

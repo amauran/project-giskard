@@ -46,27 +46,28 @@ ${browser}  ${usebrowser}
 
 
 *** Test Cases ***
-Login As Customer To Make An Order
-    # the customer logs in, adds procucts to cart and places the order
-    Login As Existing Customer
-    Add Products To Cart
-    Go To Shopping Cart
-    Check Shopping Cart Items
-    Proceed To Checkout
-    Say Thank You In Comment Box
-    Complete Order
+# Login As Customer To Make An Order
+#     # the customer logs in, adds procucts to cart and places the order
+#     Login As Existing Customer
+#     Add Products To Cart
+#     Go To Shopping Cart
+#     Check Shopping Cart Items
+#     Proceed To Checkout
+#     Say Thank You In Comment Box
+#     Complete Order
 
-    # this is used here when testing partial segments, cart needs to be cleared then
-    # Clear Shopping Cart
+#     # this is used here when testing partial segments, cart needs to be cleared then
+#     # Clear Shopping Cart
 
-    # customer logs out at this point so manager can take over
-    Logout Customer From Shop
+#     # customer logs out at this point so manager can take over
+#     Logout Customer From Shop
 
 
-# Login As Manager To Edit Order
+Login As Manager To Edit Order
 
-#     Login As Shop Manager
-#     Logout Shop Manager
+    Login As Shop Manager
+    Go To Orders Page
+    Logout Shop Manager
 
 
 # Find Order, Add Coupon, Process Order

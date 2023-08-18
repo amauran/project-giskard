@@ -1,19 +1,21 @@
 *** Settings ***
 Documentation   This is the wrapper for SeleniumLibrary keywords
 
+
 # importing libraries (Note: must have SeleniumLibrary here)
 Library         SeleniumLibrary
+
 
 *** Variables ***
 # dictionary of SeleniumLibrary supported browsers
 # (not all of them, these are just for example)
 # creating a dictionary variable to switch generic browser name
 # to one that SeleniumLibrary uses
-
 &{generic_browser_name_to_local_name} =
 ...    chrome=chrome        # googlechrome, chrome, gc
 ...    firefox=firefox      # firefox, ff
 ...    safari=safari
+
 
 *** Keywords ***
 ### Navigation
