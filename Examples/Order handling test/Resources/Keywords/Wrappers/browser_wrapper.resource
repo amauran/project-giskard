@@ -81,21 +81,30 @@ Fill Password Field With Input
     [Arguments]                ${locator}    ${input}
     Fill Secret                ${locator}    ${input}
 
-# Note: for Browser library the input for Fill Secret cannot have curly braces! (so $input or %input, etc.)
+# NOTE: for Browser library the input for Fill Secret cannot have curly braces! (so $input or %input, etc.)
 # If 'secret' variable is prefixed with %, library will resolve corresponding environment variable.
 # Example $Password` will resolve to ${Password} Robot Framework variable, %ENV_PWD will resolve to %{ENV_PWD} environment variable.
 # Using normal Robot Framework variables like ${password} will not work!
 # Normal plain text will not work. If you want to use plain text, use Fill Text keyword instead.
 
 
-# Fill Popup Field With Input And Press Enter
-    # Handle Future Dialogs ???
+Fill Popup Field With Input And Accept
+    [Documentation]            Enter input into a popup text field and press ENTER
+    [Arguments]                ${input}
+    Keyboard Input             insertText    ${input}
+    Keyboard Key               press         ENTER
+
+
+# NOTE: This differs from the way things are done in the Selenium wrapper, as Browser library
+# handles alerts by setting a 'Wait For Alert' command BEFORE the actual event
+# --> so if you click a button and a popup appears, you have to already be expecting the alert.
+# --> hence 'Keyboard Input' followed by 'Keyboard Key' (and hoping the focus is in the alert...)
 
 
 Press Enter
     [Documentation]            Simulate pressing Return/Enter on keyboard
     [Arguments]                ${locator}
-    Keyboard Key               press        ENTER
+    Keyboard Key               press         ENTER
 
 
 
@@ -137,9 +146,8 @@ Get Element Text
 
 Get Attribute Value
     [Documentation]            Get the value inside specified attribute
-    [Arguments]                ${locator}
-    ${attribute_value} =       Get Attribute  ${locator}  value   # only returns value of attribute named 'value'???
-    RETURN                     ${attribute_value}
+    [Arguments]                ${locator}   ${attribute_name}
+    ${attribute_value} =       Get Attribute  ${locator}  ${attribute_name}
 
 
 Count Element
@@ -155,3 +163,7 @@ Set Focus To Selected Element
     Focus                      ${locator}
 
 
+Scroll To Selected Element
+    [Documentation]            Scroll the specified element to view
+    [Arguments]                ${locator}
+    Scroll To Element          ${locator}

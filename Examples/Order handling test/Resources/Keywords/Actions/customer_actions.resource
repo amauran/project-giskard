@@ -143,7 +143,7 @@ Check Shopping Cart Items
         # Log  ${quantity_locator}
 
         # find current product's quantity with previously made locator
-        ${product_quantity} =   Get Attribute Value    ${quantity_locator}
+        ${product_quantity} =   Get Attribute Value    ${quantity_locator}      value
         # check quantity is one (should be, unless something was left in the cart from previous test runs)
         Should Be True          ${product_quantity} == 1
 
@@ -217,14 +217,18 @@ Check Order Was Succesful
 Save New Order Number
     [Documentation]                 save the order number for the completed order
     # NOTE: this is used in case there are more than one order to choose from
-
-    ${order_number} =               Get Attribute Value    ${order_received_number}
-    RETURN                          ${order_number}
+    ${new_order_number} =           Get Attribute Value    ${order_received_number}     innerText
+    RETURN                          ${new_order_number}
 
 
 Find And Open Placed Order
     [Documentation]                 find a placed order on the Orders page
+    [Arguments]                     ${order_number}
     # NOTE: you will need an order number for this, and you need to be on the Orders page
+
+
+
+
 
     # this keyword is under construction
 

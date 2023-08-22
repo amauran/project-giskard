@@ -83,8 +83,10 @@ Fill Password Field With Input
     Input Password             ${locator}    ${input}    True
 
 
-# Fill Popup Field With Input And Press Enter
-    # Input Text Into Alert ???
+Fill Popup Field With Input And Accept
+    [Documentation]            Enter input into a popup text field and accept/press OK
+    [Arguments]                ${input}
+    Input Text Into Alert      ${input}      ACCEPT  # action defined here, 'ACCEPT' is default so it's optional
 
 
 Press Enter
@@ -134,9 +136,9 @@ Get Element Text
 
 
 Get Attribute Value
-    [Documentation]            Get the value inside specified attribute
-    [Arguments]                ${locator}
-    ${attribute_value} =       Get Element Attribute  ${locator}  value   # only returns value of attribute named 'value'???
+    [Documentation]            Get the value of the named and specified attribute
+    [Arguments]                ${locator}   ${attribute_name}
+    ${attribute_value} =       Get Element Attribute  ${locator}  ${attribute_name}
     RETURN                     ${attribute_value}
 
 
@@ -151,3 +153,9 @@ Set Focus To Selected Element
     [Documentation]            Set focus to specified element
     [Arguments]                ${locator}
     Set Focus To Element       ${locator}
+
+
+Scroll To Selected Element
+    [Documentation]            Scroll the specified element to view
+    [Arguments]                ${locator}
+    Scroll Element Into View   ${locator}

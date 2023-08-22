@@ -50,20 +50,100 @@ Logout Shop Manager
     Wait Until Visible                 ${manager_hovermenu_visible}
     Click Selected Element             ${manager_hovermenu_logout_link}
 
+
+Confirm Sidebar Menu Is Expanded
+    [Documentation]                    Make sure the sidebar menu is expanded to show text elements
+
+    # create local variable, and set the value to show if menu expanded is true/false
+    ${WPmenu_expanded} =               Get Attribute Value   //button[@id="collapse-button"]      ariaExpanded
+
+    # degubbing to see value
+    Log                                ${WPmenu_expanded}
+
+    # check state of WordPress side menu (collapsed or expanded)
+    # if not expanded yet, click button to expand it (menu locators will not work otherwise!!!)
+    # NOTE: comparison needs the triple quotes (IF will not read them as equal strings otherwise)
+    IF  """${WPmenu_expanded}""" == """false"""
+        Click Selected Element             //button[@id="collapse-button"]
+        # this should only appear when the menu is expanded (if not, the text will say "Expand Main Menu")
+        Wait Until Visible                 //button[@id="collapse-button"][@aria-label="Collapse Main menu"]
+    END
+
+
 Go To Orders Page
     [Documentation]                    Use the sidebar menu to access WooCommerce Orders page
     # should work from any page on the wordpress, provided of course the manager is logged in
 
-    # pitää tarkistaa onko wp menu expanded vai ei, jos ei pitää klikata nappia että aukeaa
-    # sitten vasta kaikki tämä
-
-
+    # once the WP menu is expanded, the menu text items used as locators here should be found
+    # with them we find the WooCommerce menu, wait until popup menu appears, and click "Orders" link
     Wait Until Visible                 ${manager_WC_hovermenu_link}
     Hover Over Element                 ${manager_WC_hovermenu_link}
     Wait Until Visible                 ${manager_WC_hovermenu_orders_link}
     Click Selected Element             ${manager_WC_hovermenu_orders_link}
 
 
+Find New Order And View It
+    [Documentation]                    Check that the order the customer just made came through
 
-# Edit Order Status
-# Mark Order As Processed
+    # create variables for locating new order, and for checking we found the right order page
+    # NOTE: value for ${new_order_number} comes from a suite wide variable created in the main test!
+    ${new_order_locator} =  Catenate  SEPARATOR=  ${manager_all_orders}  [contains(@href,"post=  ${new_order_number}  ")]
+    ${order_page_check} =   Catenate  SEPARATOR=  //div[@id="order_data"]/h2[contains(text(),"  ${new_order_number}  ")]
+
+    # debugging to see what comes out
+    Log    ${new_order_locator}
+    Log    ${order_page_check}
+
+    # open the order that came through by clicking the link, and check we landed on the right order page
+    Click Selected Element             ${new_order_locator}
+    Wait Until Visible                 ${order_page_check}
+
+
+Edit Order Status To Pending Payment
+    [Documentation]                    Change order status to 'Pending payment' for editing
+    # NOTE: if this is not done, a coupon cannot be added, and this only works on a single order page
+
+    # open order status dropdown menu
+    Click Selected Element             ${manager_orderstatus_dropdownmenu_link}
+
+    # check menu is open (by checking the value of 'ariaExpanded')
+    ${menu_expanded} =  Get Attribute Value     ${manager_orderstatus_dropdownmenu_state}   ariaExpanded
+    Should Be True    """${menu_expanded}""" == """true"""
+
+    # click the option 'Pending payment' and then update order to save changes (the page should reload)
+    Click Selected Element             ${manager_orderstatus_pending_link}
+    Click Selected Element             ${manager_order_update_button}
+
+
+Add Discount Coupon To Order
+    [Documentation]                    Add a discount coupon to order just made
+    # NOTE: coupon code must exist already in the shop! (set the code as value to the local variable)
+
+    # click 'Apply coupon', input coupon code into popup, press enter (page autoloads afterwards to apply it)
+    Set Local Variable                          ${coupon code}        0000011110111000
+    Click Selected Element                      ${manager_add_coupon_button}
+    Fill Popup Field With Input And Accept      ${coupon code}
+
+    # NOTE: the user keyword for handling the popup is built differently in the two wrappers!!!
+    # this may result in some issues if focus doesn't automatically switch to popup
+    # (the popup does not have any locators that could be used for this)
+
+    # check coupon is added by finding the coupon code field and matching the code
+    Wait Until Visible                 ${manager_check coupon}
+    ${code_found} =                    Get Element Attribute    ${manager_check coupon}    innerText
+    Should Be True                     """${code_found}""" == """${coupon code}"""
+
+
+Mark Order As Processed And Completed
+    [Documentation]                   Open order status menu and change order to 'Completed'
+
+    # open order status dropdown menu
+    Click Selected Element             ${manager_orderstatus_dropdownmenu_link}
+
+    # check menu is open (by checking the value of 'ariaExpanded')
+    ${menu_expanded} =  Get Attribute Value     ${manager_orderstatus_dropdownmenu_state}   ariaExpanded
+    Should Be True    """${menu_expanded}""" == """true"""
+
+    # click the option 'Completed' and then update order to save changes (the page should reload)
+    Click Selected Element             ${manager_orderstatus_completed_link}
+    Click Selected Element             ${manager_order_update_button}
