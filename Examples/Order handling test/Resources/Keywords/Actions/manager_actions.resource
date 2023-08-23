@@ -82,20 +82,21 @@ Go To Orders Page
     Click Selected Element             ${manager_WC_hovermenu_orders_link}
 
 
-Find New Order And View It
-    [Documentation]                    Check that the order the customer just made came through
+Find Order And View It
+    [Documentation]                    Find an order and view it
+    [Arguments]                        ${order_number}
+    # (for this test case it will be the newest order made)
 
-    # create variables for locating new order, and for checking we found the right order page
-    # NOTE: value for ${new_order_number} comes from a suite wide variable created in the main test!
-    ${new_order_locator} =  Catenate  SEPARATOR=  ${manager_all_orders}  [contains(@href,"post=  ${new_order_number}  ")]
-    ${order_page_check} =   Catenate  SEPARATOR=  //div[@id="order_data"]/h2[contains(text(),"  ${new_order_number}  ")]
+    # create variables for locating the correct order, and for checking we found the right order page
+    ${order_locator} =  Catenate  SEPARATOR=  ${manager_all_orders}  [contains(@href,"post=  ${order_number}  ")]
+    ${order_page_check} =   Catenate  SEPARATOR=  //div[@id="order_data"]/h2[contains(text(),"  ${order_number}  ")]
 
     # debugging to see what comes out
-    Log    ${new_order_locator}
+    Log    ${order_locator}
     Log    ${order_page_check}
 
     # open the order that came through by clicking the link, and check we landed on the right order page
-    Click Selected Element             ${new_order_locator}
+    Click Selected Element             ${order_locator}
     Wait Until Visible                 ${order_page_check}
 
 
@@ -147,3 +148,23 @@ Mark Order As Processed And Completed
     # click the option 'Completed' and then update order to save changes (the page should reload)
     Click Selected Element             ${manager_orderstatus_completed_link}
     Click Selected Element             ${manager_order_update_button}
+
+
+Delete Single Order
+    [Documentation]                    delete a single order from arrived orders
+    # NOTE: you need to have an order number for this to work, and be on the Orders page
+    # (for this test we will delete the newest order)
+    Click Selected Element             ${manager_order_movetobin}
+
+
+Empty Bin Of Deleted Orders
+    [Documentation]                    go to the Bin and delete all orders there
+    # NOTE: you have to be on the  Orders page for this to work (or any of the sub pages (All/Bin/Completed))
+
+    # go to Bin
+    Click Selected Element             ${manager_order_bin_link}
+    Check Location By URL              ${manager_order_bin_url}
+    # click 'Empty Bin' -- THIS IS A PERMANENT DELETE AND THERE IS NO CONFIRMATION ASKED!!!
+    Click Selected Element             ${manager_empty_bin}
+    # make sure bin is empty
+    Confirm No Such Element            ${manager_order_exist_check}

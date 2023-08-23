@@ -222,15 +222,36 @@ Save New Order Number
 
 
 Find And Open Placed Order
-    [Documentation]                 find a placed order on the Orders page
+    [Documentation]                 find a previously placed order on the Orders page
     [Arguments]                     ${order_number}
     # NOTE: you will need an order number for this, and you need to be on the Orders page
 
+    ${order_link} =  Catenate  SEPARATOR=  //td[@data-title="Order"]/a[contains(@href,"/  ${new_order_number}  /")]
+
+    # degubbing to see locator
+    Log                             ${order_link}
+
+    # got to single order page and check it's the right one
+    Click Selected Element          ${order_link}
+    Check Location By Partial Url   ${order_view_partial_url}
+    ${current_url} =                Get Current Location Url
+    Should Contain                  ${current_url}    ${new_order_number}
+
+
+Confirm Discount
+    [Documentation]                 confirm a discount on an order
+    # confirms that a discount has been added, not the type or amount
+    # NOTE: you need to be viewing a single order for this to work
+    Confirm Element Found           ${order_discount_check}
+
+Confirm Order Completed
+    [Documentation]                 confirm order status is 'Complete'
+    # NOTE: you need to be viewing a single order for this to work
+    Confirm Element Found           ${order_completed_check}
 
 
 
 
-    # this keyword is under construction
 
 
 

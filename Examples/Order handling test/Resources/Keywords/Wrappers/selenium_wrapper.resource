@@ -127,6 +127,12 @@ Confirm No Such Element
     Page Should Not Contain Element    ${locator}
 
 
+Confirm Element Found
+    [Documentation]                    Confirm element is found on page
+    [Arguments]                        ${locator}
+    Page Should Contain Element        ${locator}
+
+
 Get Element Text
     [Documentation]            Get text content of given element
     [Arguments]                ${locator}

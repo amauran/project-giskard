@@ -136,6 +136,12 @@ Confirm No Such Element
     Get Element Count          ${locator}    =    0
 
 
+Confirm Element Found
+    [Documentation]            Confirm element is found on page    # element count is either 1 or more
+    [Arguments]                ${locator}
+    Get Element Count          ${locator}    >=    1
+
+
 Get Element Text
     [Documentation]            Get text content of given element
     [Arguments]                ${locator}

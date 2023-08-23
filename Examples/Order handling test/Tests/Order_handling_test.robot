@@ -94,7 +94,7 @@ Login As Manager To Edit Order
 
     Go To Orders Page
     # the next step uses the previously saved order number of the order the customer just made
-    Find New Order And View It
+    Find Order And View It        ${new_order_number}
     # the order status needs to be changed for the order to be editable
     Edit Order Status To Pending Payment
     # add predefined discount coupon code to the order
@@ -107,42 +107,38 @@ Login As Manager To Edit Order
     Logout Shop Manager
 
 
-# Find Order, Add Coupon, Process Order
 
-    # admin logs out at this point
+Login As Customer To Check Order Status
+# NOTE: a browser page should be left open from the previous section, no need to open a new one
+    Login As Existing Customer
 
+    # go to orders page, view order
+    Click Selected Element        ${orders_link}
+    Check Location By URL         ${orders_url}
 
-# Login As Customer To Check Order Status
+    # find correct order by order number (in this test case the newest order made)
+    Find And Open Placed Order    ${new_order_number}
+
+    # check coupon has been added and order has been marked as processed
+    Confirm Discount
+    Confirm Order Completed
+
+    # customer logs out at this point
+    Logout Customer From Shop
+
+Login As Manager To Delete Order
 # NOTE: a browser page should be left open from the previous section, no need to open a new one
 
-#     Go To Given Page                   ${login_url}
-#     Fill Text Field With Input         ${username_field}    ${users}[${usertype}][username]
-#     Fill Password Field With Input     ${password_field}    ${users}[${usertype}][password]
-#     Click Selected                     ${login_button}
-#     Check Location By Element          ${checkforpass}      # check login succeeded
+    # login and go to order handling page
+    Login As Shop Manager
+    Go To Orders Page
 
-#     # go to orders page, view order
-    # Click Selected    ${orders_link}
-    # Check Location By URL    ${orders_url}
+    # find specified order, view it, then delete
+    Find Order And View It    ${new_order_number}
+    Delete Single Order
+    Empty Bin Of Deleted Orders
 
-#     # check coupon has been added
-#     # check order has been marked as processed
-
-
-#     # customer logs out at this point
-
-
-
-# # Login As Manager To Delete Order
-# NOTE: a browser page should be left open from the previous section, no need to open a new one
-
-#     # go to login page and fill username and password
-
-#     Fill Text Field With Input         ${username_field}    ${users}[${usertype}][username]
-#     Fill Password Field With Input     ${password_field}    ${users}[${usertype}][password]
-
-#     # check location
-#     # find order, view, delete
+    Logout Shop Manager
 
 
 
