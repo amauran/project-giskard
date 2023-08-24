@@ -1,4 +1,12 @@
 ---
+#### IMPORTANT! ####
+
+# If the locators are used both with Selenium and Browser library,
+# the CSS selectors MUST start with 'css=' for them to work in both
+
+# Also, make sure to use "" for things inside '' or there may be errors
+
+
 ### ADMIN
 
 # this section is not used in the test, shop side will be handled by a 'manager' level user
@@ -15,18 +23,18 @@
 manager_login_url:        https://happy-robot.nimbus.fi/wp-login.php
 
 # login locators
-manager_username_field:   //input[@id='user_login']
-manager_password_field:   //input[@id='user_pass']
-manager_login_button:     //input[@id='wp-submit']
+manager_username_field:   //input[@id="user_login"]
+manager_password_field:   //input[@id="user_pass"]
+manager_login_button:     //input[@id="wp-submit"]
 
 # locator for checking successful manager login
 # (points to the manager's display name, will be compared to the one in password file)
 manager_checkforpass:     //*[@id="wp-admin-bar-my-account"]/a/span                                    #xpath
-manager_checkforpass2:    css:#wp-admin-bar-my-account.menupop.with-avatar .display-name:first-child   #CSS
+manager_checkforpass2:    css=#wp-admin-bar-my-account.menupop.with-avatar .display-name:first-child   #CSS
 
 # manager mouse over popup menu locator, hover menu visible and the logout link inside popup menu
-manager_hovermenu_link:             css:#wp-admin-bar-my-account.menupop.with-avatar
-manager_hovermenu_visible:          css:#wp-admin-bar-my-account.menupop.with-avatar.hover
+manager_hovermenu_link:             css=#wp-admin-bar-my-account.menupop.with-avatar
+manager_hovermenu_visible:          css=#wp-admin-bar-my-account.menupop.with-avatar.hover
 manager_hovermenu_logout_link:      //*[@id="wp-admin-bar-logout"]/a
 
 
@@ -37,8 +45,9 @@ manager_hovermenu_logout_link:      //*[@id="wp-admin-bar-logout"]/a
 # (locators for doing that are below)
 
 # WP collapse/expand menu button for sidebar (hide/show text components of sidebar menu items)
-# this has an attribute "ariaExpanded" which is true or false, can be used to check state of menu
 manager_WPmenu_collapse_button:     //button[@id="collapse-button"]
+# this only checks for the 'true' state of 'aria-expanded', but that is used to check if menu is expanded
+manager_WPmenu_collapse_state:      //button[@id="collapse-button"][contains(@aria-expanded,"true")]
 
 # if WP menu is collapsed, this is visible
 manager_WPmenu_collapsed:           //button[@id="collapse-button"][@aria-label="Expand Main menu"]
@@ -61,25 +70,24 @@ manager_all_orders:                 //a[@class="order-view"]
 
 # locator for single order's current status (find 'innerText' to check what it says)
 # (changed from 'processing' to 'pending payment' so order can be edited)
-manager_orderstatus:                css:#select2-order_status-container
+manager_orderstatus:                css=#select2-order_status-container
 
 # visible when status of order is 'Processing'
-manager_orderstatus_processing:     css:#select2-order_status-container[title="Processing"]
+manager_orderstatus_processing:     css=#select2-order_status-container[title="Processing"]
 # visible when status of order is 'Pending payment'
-manager_orderstatus_pending:        css:#select2-order_status-container[title="Pending payment"]
+manager_orderstatus_pending:        css=#select2-order_status-container[title="Pending payment"]
 # visible when status of order is 'Completed'
-manager_orderstatus_completed:      css:#select2-order_status-container[title="Completed"]
+manager_orderstatus_completed:      css=#select2-order_status-container[title="Completed"]
 
 # locator for single order's status dropdown menu arrow
-manager_orderstatus_dropdownmenu_link:    css:#select2-order_status-container + span.select2-selection__arrow
+manager_orderstatus_dropdownmenu_link:    css=#select2-order_status-container + span.select2-selection__arrow
 
 # this is used to check if the dropdown menu is expanded or not (should not be by default)
-# (get attribute value for 'ariaExpanded', ('true' or 'false' -- string, not boolean!))
-manager_orderstatus_dropdownmenu_state:   //span[@id="select2-order_status-container"]/ancestor::span[@class="select2-selection select2-selection--single"]
+# (uses 'aria-expanded' to see if true)(and is really long, because you really need to hit that particular menu)
+manager_orderstatus_dropdownmenu_state:   //span[@id="select2-order_status-container"]/ancestor::span[@class="select2-selection select2-selection--single"][contains(@aria-expanded,"true")]
 
-# locator for dropdown menu item "Pending payment"
+# locators for dropdown menu item 'Pending payment' and 'Completed'
 manager_orderstatus_pending_link:         //li[contains(@id,"wc-pending")]
-# locator for dropdown menu item "Completed"
 manager_orderstatus_completed_link:       //li[contains(@id,"wc-completed")]
 
 # save/update order button (must be used if changes are made)
@@ -120,8 +128,8 @@ manager_empty_bin:                //div[@class="tablenav top"]//input[@id="delet
 main_url:   https://happy-robot.nimbus.fi/
 
 # shop/main page link locator
-shop_link:  //a[normalize-space()='Shop']
-main_link:  //a[normalize-space()='Shop']
+shop_link:  //a[normalize-space()="Shop"]
+main_link:  //a[normalize-space()="Shop"]
 
 
 
@@ -137,15 +145,15 @@ logout_url:       https://happy-robot.nimbus.fi/my-account/
 
 # locator for the link to click to log out, on the left side menu of My Accounts page
 # (NOTE: This is not visible anywhere else so you have to be on the page to use it!)
-logout_link:    css:.woocommerce-MyAccount-navigation-link--customer-logout a
+logout_link:    css=.woocommerce-MyAccount-navigation-link--customer-logout a
 
 # locators needed for shop login - on login/my account page of happy Robot shop
-username_field: //input[@id='username']
-password_field: //input[@id='password']
-login_button:   //button[@name='login']
+username_field: //input[@id="username"]
+password_field: //input[@id="password"]
+login_button:   //button[@name="login"]
 
 # locator used to check login is succesful (this should exist only if logged in)
-checkforpass:   //a[normalize-space()='Account details']
+checkforpass:   //a[normalize-space()="Account details"]
 
 
 
@@ -170,10 +178,10 @@ cart_product_names:     //tbody/tr/td[@class="product-name"]/a/parent::td/follow
 cart_product_quantity:  //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/input/
 
 # add item to cart (general for any such button on any page, full shop or single product)
-add_to_cart:            css:button[name="add-to-cart"]
+add_to_cart:            css=button[name="add-to-cart"]
 
 # remove button in cart (general for any such button)
-cart_remove:            css:a.remove
+cart_remove:            css=a.remove
 
 
 
@@ -183,29 +191,29 @@ cart_remove:            css:a.remove
 orders_url:         https://happy-robot.nimbus.fi/my-account/orders/
 
 # locator for 'Orders' page link on My Account page, on the left side menu
-orders_link:        css:.woocommerce-MyAccount-navigation-link--orders a
+orders_link:        css=.woocommerce-MyAccount-navigation-link--orders a
 
 # 'Proceed to checkout' button on shopping cart page (visible when there is something in the cart)
-checkout_button:    css:a.checkout-button
+checkout_button:    css=a.checkout-button
 
 # checkout page url
 checkout_url:       https://happy-robot.nimbus.fi/checkout/
 
 # comment box
-comment_box:        css:textarea#order_comments.input-text
+comment_box:        css=textarea#order_comments.input-text
 
 # privacy policy link (to set focus to, to remove focus from comment box after entering text)
-privacy_policy:     css:a.woocommerce-privacy-policy-link
+privacy_policy:     css=a.woocommerce-privacy-policy-link
 
 # 'Place order' button on checkout page
-place_order_button: css:button#place_order
+place_order_button: css=button#place_order
 
 # order received announcement check (find this after placing order to check for success)
-order_received:     css:.woocommerce-thankyou-order-received
+order_received:     css=.woocommerce-thankyou-order-received
 
 # order number of the successfully placed order (on the page that opens right after placing order)
 # use 'get attribute' or something to retrieve value of innerText
-order_received_number:      css:.woocommerce-order li.woocommerce-order-overview__order strong
+order_received_number:      css=li.woocommerce-order-overview__order strong
 
 # check the viewed order is completed (that order's page has to be open)
 order_completed_check:      //mark[@class="order-status"][contains(text(),"Completed")]
@@ -219,4 +227,4 @@ order_discount_check:      //tr/th[@scope="row"][contains(text(),"Discount:")]
 # Search
 
 # top corner search box (should be there on every shop page)
-search_top_field_csspath: css:input#woocommerce-product-search-field-0
+search_top_field_csspath:   css=input#woocommerce-product-search-field-0

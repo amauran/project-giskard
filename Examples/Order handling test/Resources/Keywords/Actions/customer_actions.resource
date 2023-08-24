@@ -140,11 +140,13 @@ Check Shopping Cart Items
         ${quantity_locator} =   Catenate   SEPARATOR=  ${quantity_loc_pt1}  ${current_product}  ${quantity_loc_pt2}
 
         # debugging to check things go right
-        # Log  ${quantity_locator}
+        Log  ${quantity_locator}
 
         # find current product's quantity with previously made locator
         ${product_quantity} =   Get Attribute Value    ${quantity_locator}      value
         # check quantity is one (should be, unless something was left in the cart from previous test runs)
+        Log Many    ${product_name}, ${product_quantity}
+
         Should Be True          ${product_quantity} == 1
 
         # degubbing, log product name and quantity for each loop to check they are correct
@@ -217,7 +219,8 @@ Check Order Was Succesful
 Save New Order Number
     [Documentation]                 save the order number for the completed order
     # NOTE: this is used in case there are more than one order to choose from
-    ${new_order_number} =           Get Attribute Value    ${order_received_number}     innerText
+    ${new_order_number} =           Get Element Text    ${order_received_number}
+    # ${new_order_number} =           Get Attribute Value    ${order_received_number}     innerText
     RETURN                          ${new_order_number}
 
 

@@ -53,7 +53,7 @@ ${browser}  ${usebrowser}
 Login As Customer To Make An Order
     # the customer logs in, adds procucts to cart and places the order
     Login As Existing Customer
-    # add one of each product type into the shopping
+    # add one of each product type into the shopping cart (search for each one first)
     Add Products To Cart
     # go to cart and check number of product types and quantities match
     Go To Shopping Cart
@@ -89,7 +89,7 @@ Login As Manager To Edit Order
     Login As Shop Manager
 
     # NOTE: this step is needed for the menu locators to work!!!
-    # (they are based on menu text that is only visible when menu is expanded)
+    # (because they are based on menu text items that are only visible when menu is expanded)
     Confirm Sidebar Menu Is Expanded
 
     Go To Orders Page

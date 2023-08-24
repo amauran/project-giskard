@@ -83,10 +83,18 @@ Fill Password Field With Input
     Input Password             ${locator}    ${input}    True
 
 
-Fill Popup Field With Input And Accept
-    [Documentation]            Enter input into a popup text field and accept/press OK
-    [Arguments]                ${input}
+# Made a new keyword for handling the popup alert, as the other did not seem to work in Browser library...
+Handle OnClick Popup With Input And Accept
+    [Documentation]            Handle a popup/alert appearing after click, that requires input and accepting
+    [Arguments]                ${locator}  ${input}
+    Click Element              ${locator}
     Input Text Into Alert      ${input}      ACCEPT  # action defined here, 'ACCEPT' is default so it's optional
+
+## The old version (which worked fine for selenium)
+# Fill Popup Field With Input And Accept
+#     [Documentation]            Enter input into a popup text field and accept/press OK
+#     [Arguments]                ${input}
+#     Input Text Into Alert      ${input}      ACCEPT  # action defined here, 'ACCEPT' is default so it's optional
 
 
 Press Enter
@@ -141,6 +149,7 @@ Get Element Text
     RETURN                     ${element_text}
 
 
+### this works in selenium, browser library can't seem to find the properties (like innerText etc.)
 Get Attribute Value
     [Documentation]            Get the value of the named and specified attribute
     [Arguments]                ${locator}   ${attribute_name}

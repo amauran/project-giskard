@@ -23,7 +23,8 @@ Open New Browser Window
     [Arguments]                ${browser}
     # Note: dictionary is defined with '&' but referred to here with '$' like a variable
     # Note: define 'browser=' or default browser is used
-    Open Browser               browser=${generic_browser_name_to_local_name}[${browser}]
+    New Browser               browser=${generic_browser_name_to_local_name}[${browser}]     headless=False
+    New Page
 
 
 Go To Given Page
@@ -42,13 +43,14 @@ Check Location By Element
 Check Location By URL
     [Documentation]            Check current location by url
     [Arguments]                ${url}
-    Wait For Navigation        ${url}        timeout=10 s
+    Get Url                    should be  ${url}
+    # Wait For Navigation        ${url}        timeout=10 s
 
 
 Check Location By Partial URL
     [Documentation]            Check that current url matches a partial url
     [Arguments]                ${partial_url}
-    Get Url                    *=            ${partial_url}
+    Get Url                    *=  ${partial_url}
 
 
 Get Current Location URL
@@ -73,13 +75,15 @@ Close All Open Browsers
 Fill Text Field With Input
     [Documentation]            Fill field indicated by locator with given input
     [Arguments]                ${locator}    ${input}
+    Focus                      ${locator}
     Fill Text                  ${locator}    ${input}
 
 
 Fill Password Field With Input
     [Documentation]            Fill password field indicated by locator with given input
     [Arguments]                ${locator}    ${input}
-    Fill Secret                ${locator}    ${input}
+    Focus                      ${locator}
+    Fill Secret                ${locator}    $input
 
 # NOTE: for Browser library the input for Fill Secret cannot have curly braces! (so $input or %input, etc.)
 # If 'secret' variable is prefixed with %, library will resolve corresponding environment variable.
@@ -88,12 +92,20 @@ Fill Password Field With Input
 # Normal plain text will not work. If you want to use plain text, use Fill Text keyword instead.
 
 
-Fill Popup Field With Input And Accept
-    [Documentation]            Enter input into a popup text field and press ENTER
-    [Arguments]                ${input}
-    Keyboard Input             insertText    ${input}
-    Keyboard Key               press         ENTER
+# Made a new keyword for handling the popup alert, as the other did not seem to work
+Handle OnClick Popup With Input And Accept
+    [Documentation]            Handle a popup/alert appearing after click, that requires input and accepting
+    [Arguments]                ${locator}  ${input}
+    Handle Future Dialogs       action=accept  prompt_input=${input}
+    Click                       ${locator}
 
+
+### Had issues with this not actually working on a popup alert that had no selectors to choose from
+# Fill Popup Field With Input And Accept
+#     [Documentation]            Enter input into a popup text field and press Enter
+#     [Arguments]                ${input}
+#     Keyboard Input             type    ${input}
+#     Keyboard Key               press         Enter
 
 # NOTE: This differs from the way things are done in the Selenium wrapper, as Browser library
 # handles alerts by setting a 'Wait For Alert' command BEFORE the actual event
@@ -104,7 +116,7 @@ Fill Popup Field With Input And Accept
 Press Enter
     [Documentation]            Simulate pressing Return/Enter on keyboard
     [Arguments]                ${locator}
-    Keyboard Key               press         ENTER
+    Keyboard Key               press         Enter
 
 
 
@@ -133,7 +145,7 @@ Wait Until Visible
 Confirm No Such Element
     [Documentation]            Confirm element is not found        # in this case, element count is 0
     [Arguments]                ${locator}
-    Get Element Count          ${locator}    =    0
+    Get Element Count          ${locator}    ==    0
 
 
 Confirm Element Found
@@ -150,10 +162,13 @@ Get Element Text
     RETURN    ${element_text}
 
 
+### Browser library can't seem to find properties like innerText (selenium can apparently)
+### So THIS ONLY WORKS FOR CERTAIN THINGS (if you get 'Attribute not found' error, try something else)
 Get Attribute Value
     [Documentation]            Get the value inside specified attribute
     [Arguments]                ${locator}   ${attribute_name}
     ${attribute_value} =       Get Attribute  ${locator}  ${attribute_name}
+    RETURN                     ${attribute_value}
 
 
 Count Element

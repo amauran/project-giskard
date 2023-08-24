@@ -13,6 +13,7 @@ robotframework = "^6.0.2"
 robotframework-browser = "^16.0.0"
 robotframework-seleniumlibrary = "^6.0.0"
 pyyaml = "^6.0"
+playwright = "^1.37.0"
 
 
 [tool.poetry.group.dev.dependencies]

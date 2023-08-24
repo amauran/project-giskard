@@ -54,19 +54,20 @@ Logout Shop Manager
 Confirm Sidebar Menu Is Expanded
     [Documentation]                    Make sure the sidebar menu is expanded to show text elements
 
-    # create local variable, and set the value to show if menu expanded is true/false
-    ${WPmenu_expanded} =               Get Attribute Value   //button[@id="collapse-button"]      ariaExpanded
+    # create local variable to check if side menu is expanded or not ('true' should return 1, so 'false' is 0)
+    # ${WPmenu_expanded} =               Get Attribute Value   //button[@id="collapse-button"]      ariaExpanded
+    ${WPmenu_state} =  Count Element    ${manager_WPmenu_collapse_state}
 
     # degubbing to see value
-    Log                                ${WPmenu_expanded}
+    Log                                ${WPmenu_state}
 
     # check state of WordPress side menu (collapsed or expanded)
     # if not expanded yet, click button to expand it (menu locators will not work otherwise!!!)
     # NOTE: comparison needs the triple quotes (IF will not read them as equal strings otherwise)
-    IF  """${WPmenu_expanded}""" == """false"""
+    IF  """${WPmenu_state}""" == """0"""
         Click Selected Element             //button[@id="collapse-button"]
         # this should only appear when the menu is expanded (if not, the text will say "Expand Main Menu")
-        Wait Until Visible                 //button[@id="collapse-button"][@aria-label="Collapse Main menu"]
+        Confirm Element Found                 //button[@id="collapse-button"][@aria-label="Collapse Main menu"]
     END
 
 
@@ -107,9 +108,9 @@ Edit Order Status To Pending Payment
     # open order status dropdown menu
     Click Selected Element             ${manager_orderstatus_dropdownmenu_link}
 
-    # check menu is open (by checking the value of 'ariaExpanded')
-    ${menu_expanded} =  Get Attribute Value     ${manager_orderstatus_dropdownmenu_state}   ariaExpanded
-    Should Be True    """${menu_expanded}""" == """true"""
+    # check menu is open (by finding if 'aria-expanded' is 'true', which returns 1, 'false' is 0)
+    ${menu_state} =  Count Element     ${manager_orderstatus_dropdownmenu_state}
+    Should Be True    """${menu_state}""" == """1"""
 
     # click the option 'Pending payment' and then update order to save changes (the page should reload)
     Click Selected Element             ${manager_orderstatus_pending_link}
@@ -122,16 +123,17 @@ Add Discount Coupon To Order
 
     # click 'Apply coupon', input coupon code into popup, press enter (page autoloads afterwards to apply it)
     Set Local Variable                          ${coupon code}        0000011110111000
-    Click Selected Element                      ${manager_add_coupon_button}
-    Fill Popup Field With Input And Accept      ${coupon code}
 
-    # NOTE: the user keyword for handling the popup is built differently in the two wrappers!!!
-    # this may result in some issues if focus doesn't automatically switch to popup
-    # (the popup does not have any locators that could be used for this)
+    # NOTE: selenium and browser library approach handling alerts differently,
+    # so the keyword used here has to include the element that is clicked before the alert appears
+    # (other methods would have worked if the popup would have had any usable selectors, which it doesn't)
+    Handle OnClick Popup With Input And Accept  ${manager_add_coupon_button}  ${coupon code}
+    # added sleep because the page reloads after applying the coupon, so it wasn't found immediately
+    Sleep  5 sec
 
     # check coupon is added by finding the coupon code field and matching the code
-    Wait Until Visible                 ${manager_check coupon}
-    ${code_found} =                    Get Element Attribute    ${manager_check coupon}    innerText
+    Confirm Element Found                 ${manager_check coupon}
+    ${code_found} =  Get Element Text     ${manager_check coupon}
     Should Be True                     """${code_found}""" == """${coupon code}"""
 
 
@@ -141,9 +143,9 @@ Mark Order As Processed And Completed
     # open order status dropdown menu
     Click Selected Element             ${manager_orderstatus_dropdownmenu_link}
 
-    # check menu is open (by checking the value of 'ariaExpanded')
-    ${menu_expanded} =  Get Attribute Value     ${manager_orderstatus_dropdownmenu_state}   ariaExpanded
-    Should Be True    """${menu_expanded}""" == """true"""
+    # check menu is open (by finding if 'aria-expanded' is 'true', which returns 1, 'false' is 0)
+    ${menu_state} =  Count Element     ${manager_orderstatus_dropdownmenu_state}
+    Should Be True    """${menu_state}""" == """1"""
 
     # click the option 'Completed' and then update order to save changes (the page should reload)
     Click Selected Element             ${manager_orderstatus_completed_link}

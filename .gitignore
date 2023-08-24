@@ -1,5 +1,6 @@
 # Ignore passwordfile for test user in Happy Robot
 shop_loginpwds.yaml
+
 # Must contain the following info:
 # ---
 # logins:
@@ -16,6 +17,8 @@ output.xml
 report.html
 selenium-screenshot-*
 interactive_console_output.xml
+playwright-log.txt
+
 
 # Ignore my messy practice tests
 sandbox/
