@@ -1,0 +1,237 @@
+---
+#### IMPORTANT! ####
+
+# If the locators are used both with Selenium and Browser library,
+# the CSS selectors MUST start with 'css=' for them to work in both
+
+# Also, make sure to use "" for things inside '' or there may be errors
+
+
+### ADMIN ###
+
+# this section is not used in the test, shop side will be handled by a 'manager' level user
+# (not the same as admin, but with enough rights to handle shopside things)
+
+
+
+### MANAGER (WordPress/WooCommerce side) ###
+
+
+## Manager Login
+
+# login page
+manager_login_url:        https://happy-robot.nimbus.fi/wp-login.php
+
+# login locators
+manager_username_field:   //input[@id="user_login"]
+manager_password_field:   //input[@id="user_pass"]
+manager_login_button:     //input[@id="wp-submit"]
+
+# locator for checking successful manager login
+# (points to the manager's display name, will be compared to the one in password file)
+manager_checkforpass:     //*[@id="wp-admin-bar-my-account"]/a/span                                    #xpath
+manager_checkforpass2:    css=#wp-admin-bar-my-account.menupop.with-avatar .display-name:first-child   #CSS
+
+# manager mouse over popup menu locator, hover menu visible and the logout link inside popup menu
+manager_hovermenu_link:             css=#wp-admin-bar-my-account.menupop.with-avatar
+manager_hovermenu_visible:          css=#wp-admin-bar-my-account.menupop.with-avatar.hover
+manager_hovermenu_logout_link:      //*[@id="wp-admin-bar-logout"]/a
+
+
+
+## Manager Sidebar Menu Expansion (WordPress/WooCommerce)
+
+# NOTE: since we are using the text elements of the sidebar menu items (both WP and WC) to find them
+# the text elements must actually be visible to exist, so the menu HAS TO BE EXPANDED to reveal them
+# (locators for doing that are below)
+
+
+# WP collapse/expand menu button for sidebar (hide/show text components of sidebar menu items)
+manager_WPmenu_collapse_button:     //button[@id="collapse-button"]
+# this only finds the 'true' state of 'aria-expanded', but that is used to check if menu is expanded
+manager_WPmenu_collapse_state:      //button[@id="collapse-button"][contains(@aria-expanded,"true")]
+# if WP menu is collapsed, this is visible
+manager_WPmenu_collapsed:           //button[@id="collapse-button"][@aria-label="Expand Main menu"]
+# if WP menu is expanded, this is visible
+manager_WPmenu_expanded:            //button[@id="collapse-button"][@aria-label="Collapse Main menu"]
+
+
+
+## Manager Order Handling (Wordpress, WooCommerce)
+
+# manager order handling page url
+manager_orders_url:                 https://happy-robot.nimbus.fi/wp-admin/edit.php?post_type=shop_order
+
+# WooCommerce mouseover popup menu locators (only work if the sidebar menu is expanded!)
+manager_WC_hovermenu_link:          //div[@class="wp-menu-name"][text()="WooCommerce"]
+manager_WC_hovermenu_orders_link:   //ul[@class="wp-submenu wp-submenu-wrap"]/li/a[contains(@href,"shop_order")]
+
+# general locator for all orders found on the orders page (can be used to count how many)
+# used also to find a particular order (order number locator will be added to it then)
+manager_all_orders:                 //a[@class="order-view"]
+
+# locator for single order's current status on the order's page
+# (this needs to be scrolled to after adding a coupon, as it is not visible)
+manager_orderstatus:                css=#select2-order_status-container
+
+# visible when status of order is 'Processing'
+manager_orderstatus_processing:     css=#select2-order_status-container[title="Processing"]
+
+# visible when status of order is 'Pending payment'
+manager_orderstatus_pending:        css=#select2-order_status-container[title="Pending payment"]
+
+# visible when status of order is 'Completed'
+manager_orderstatus_completed:      css=#select2-order_status-container[title="Completed"]
+
+# locator for single order's status dropdown menu arrow
+manager_orderstatus_dropdownmenu_link:    css=#select2-order_status-container + span.select2-selection__arrow
+
+# this is used to check if the dropdown menu is expanded or not (should not be by default)
+# (uses 'aria-expanded' to see if true)(and is really long, because you really need to hit that particular menu)
+manager_orderstatus_dropdownmenu_state:   //span[@id="select2-order_status-container"]/ancestor::span[@class="select2-selection select2-selection--single"][contains(@aria-expanded,"true")]
+
+# locators for dropdown menu items 'Pending payment' and 'Completed'
+manager_orderstatus_pending_link:         //li[contains(@id,"wc-pending")]
+manager_orderstatus_completed_link:       //li[contains(@id,"wc-completed")]
+
+# save/update order button (must be used if changes are made)
+manager_order_update_button:        //button[@class="button save_order button-primary"]
+
+# add coupon button (clicking brings out a popup box to put code into)
+manager_add_coupon_button:          //button[@class="button add-coupon"]
+
+# locator to check coupon exists, and that it is the right one (contains coupon code)
+manager_check coupon:               //a[@class="tips"]/span
+
+# 'move to Bin' link (on the single order page) (will not permanently delete order!!!)
+manager_order_movetobin:               //a[@class="submitdelete deletion"]
+
+# message to find after an order has been moved to the bin
+manager_order_delete_check:         //div[@id="message"]/p[contains(text(),"order moved to the Bin")]
+
+# link to deleted orders (the trash bin, only visible if there's something in it) and url of bin
+manager_order_bin_link:             //li[@class="trash"]/a[contains(@href,"status=trash")]
+manager_order_bin_url:              https://happy-robot.nimbus.fi/wp-admin/edit.php?post_status=trash&post_type=shop_order
+
+# any order in the Orders or in the Bin (can be used to check if any/none exist)
+manager_order_exist_check:         //td[@data-colname="Order"]
+
+# 'Empty Bin' button (permanently deletes every order in bin -- DOES NOT ASK FOR CONFIRMATION)
+manager_empty_bin:                //div[@class="tablenav top"]//input[@id="delete_all"]
+
+
+
+
+
+### CUSTOMER (Happy Robot shop side) ###
+
+
+## Shop Main Page
+
+# main page url (also shop page as it is the main page)
+main_url:   https://happy-robot.nimbus.fi/
+
+# shop/main page link (they are the same, but a different name is easier to understand in some context)
+shop_link:  //a[normalize-space()="Shop"]
+main_link:  //a[normalize-space()="Shop"]
+
+
+
+## Customer My Account page, Login / Logout (in the shop)
+
+# My Account page url and xpath link locator
+customer_my-account_url:   https://happy-robot.nimbus.fi/my-account/
+customer_my-account_link:  //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")]
+
+# login / logout page url (which are both on the My Account page so the url is the same as for that)
+customer_login_url:        https://happy-robot.nimbus.fi/my-account/
+customer_logout_url:       https://happy-robot.nimbus.fi/my-account/
+
+# locator for the link to click to log out, on the left side menu of My Accounts page
+# (NOTE: This is not visible anywhere else so you have to be on the page to use it!)
+customer_logout_link:    css=.woocommerce-MyAccount-navigation-link--customer-logout a
+
+# locators needed for shop login - on login/my account page of happy Robot shop
+customer_username_field: //input[@id="username"]
+customer_password_field: //input[@id="password"]
+customer_login_button:   //button[@name="login"]
+
+# locator used to check login is succesful (this should exist only if logged in)
+customer_login_checkforpass:   //a[normalize-space()="Account details"]
+
+
+
+## Shopping And Orders
+
+
+# Shopping cart
+
+# shopping cart/basket url
+cart_url:     https://happy-robot.nimbus.fi/basket/
+
+# shopping cart/basket locator (upper right basket on the page, not the menu item)
+cart_link:    //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/basket/")]
+
+# This should point to all elements in table with class product-name (the number of product types)
+cart_product_types:     //tbody/tr/td[@class="product-name"]/a/parent::td
+
+# product quantity, containing label, which should hold the product type name (use Get Text to find value)
+cart_product_names:     //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/label
+
+# find product name, go to parent, then following sibling with class product-quantity (the general locator for all)
+# NOTE: you need 'get attribute' type of keyword to access the value inside
+cart_product_quantity:  //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/input/
+
+# add item to cart (general for any such button on any page, full shop or single product)
+cart_add_product:            css=button[name="add-to-cart"]
+
+# remove button in cart (general for any such button)
+cart_remove_product:            css=a.remove
+
+
+
+# Orders and checkout
+
+# orders page
+customer_orders_url:         https://happy-robot.nimbus.fi/my-account/orders/
+
+# locator for 'Orders' page link on My Account page, on the left side menu
+customer_orders_link:        css=.woocommerce-MyAccount-navigation-link--orders a
+
+# 'Proceed to checkout' button on shopping cart page (visible when there is something in the cart)
+customer_checkout_button:    css=a.checkout-button
+
+# checkout page url
+customer_checkout_url:       https://happy-robot.nimbus.fi/checkout/
+
+# comment box
+customer_checkout_commentbox:        css=textarea#order_comments.input-text
+
+# privacy policy link (to set focus to, to remove focus from comment box after entering text)
+customer_privacy_policy:     css=a.woocommerce-privacy-policy-link
+
+# 'Place order' button on checkout page
+customer_place_order_button: css=button#place_order
+
+# order received announcement check (find this after placing order to check for success)
+customer_order_received:     css=.woocommerce-thankyou-order-received
+
+# order number of the successfully placed order (on the page that opens right after placing order)
+# use 'get attribute' or something to retrieve value of innerText
+customer_order_received_number:      css=li.woocommerce-order-overview__order strong
+
+# check the viewed order is completed (that order's page has to be open)
+customer_order_completed_check:      //mark[@class="order-status"][contains(text(),"Completed")]
+
+# partial url for single order viewing page
+customer_order_view_partial_url:    https://happy-robot.nimbus.fi/my-account/view-order/
+
+# this element should exist if a discount has been added to a single order
+customer_order_discount_check:      //tr/th[@scope="row"][contains(text(),"Discount:")]
+
+
+
+# Search
+
+# top corner search box (should be there on every shop page)
+customer_searchfield_top:   css=input#woocommerce-product-search-field-0

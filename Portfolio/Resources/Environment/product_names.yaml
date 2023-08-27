@@ -1,0 +1,16 @@
+---
+# this is a list of the product names available in the shop
+# this is used for searching specific product pages etc.
+product_names:
+  - Can of Oil
+  - Dexterous Thin Leg
+  - Varied Nuts & Bolts
+  - Versatile Thin Arm
+
+# list of product name in the urls (the bit after https://happy-robot.nimbus.fi)
+# this must be in the same order as the product_names list, so they can be looped in sync
+product_namesinurl:
+   - /product/can-of-oil/
+   - /product/dexterous-thin-leg/
+   - /product/varied-nuts-bolts/
+   - /product/versatile-thin-arm/
