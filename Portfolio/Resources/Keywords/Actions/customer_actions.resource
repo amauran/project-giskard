@@ -72,12 +72,9 @@ Customer Adds Products To Cart
     Check Location By URL          ${main_url}
     # get length of product name list (from yaml file)
     ${length} =        Get Length    ${product_names}
-    Log                ${length}
-
 
     ### loop for adding products into cart one by one, by product name
-
-    # a loop that runs from range 0 until the length of the product list (gotten from yaml file)
+    # the loop runs from range 0 until the length of the product list (gotten from yaml file)
     FOR    ${product_index}    IN RANGE    0    ${length}
 
         # set current product to be the one indicated by the index number
@@ -89,7 +86,7 @@ Customer Adds Products To Cart
 
         # Check location, should now be a single product page (with part of the url without specific product page)
         # Note: this only works if the search result is a single product, otherwise the address is different
-        Check Location By Partial URL        https://happy-robot.nimbus.fi/product/
+        Check Location By Partial URL         ${product-page_partial_url}
 
         # click 'add-to-cart' (there should be only one button available if previous part worked)
         Wait Until Visible                    ${cart_add_product}
@@ -213,7 +210,7 @@ Save New Order Number
 
 Customer Finds And Opens A Placed Order
     [Documentation]                 find a previously placed order on the Orders page
-    [Arguments]                     ${order_number}
+    [Arguments]                     ${new_order_number}
     # NOTE: you will need an order number for this, and you need to be on the Orders page
     # in this test series, the order found will always be the newest one
 

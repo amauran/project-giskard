@@ -64,6 +64,7 @@ manager_orders_url:                 https://happy-robot.nimbus.fi/wp-admin/edit.
 
 # WooCommerce mouseover popup menu locators (only work if the sidebar menu is expanded!)
 manager_WC_hovermenu_link:          //div[@class="wp-menu-name"][text()="WooCommerce"]
+manager_WC_hovermenu_visible:       //li[@id="toplevel_page_woocommerce"][contains(@class,"opensub")]
 manager_WC_hovermenu_orders_link:   //ul[@class="wp-submenu wp-submenu-wrap"]/li/a[contains(@href,"shop_order")]
 
 # general locator for all orders found on the orders page (can be used to count how many)
@@ -139,7 +140,7 @@ main_link:  //a[normalize-space()="Shop"]
 
 ## Customer My Account page, Login / Logout (in the shop)
 
-# My Account page url and xpath link locator
+# My Account page url and link locators
 customer_my-account_url:   https://happy-robot.nimbus.fi/my-account/
 customer_my-account_link:  //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")]
 
@@ -162,6 +163,11 @@ customer_login_checkforpass:   //a[normalize-space()="Account details"]
 
 
 ## Shopping And Orders
+
+# Product pages
+
+# partial url of any product page (product name will be after this)
+product-page_partial_url:    https://happy-robot.nimbus.fi/product/
 
 
 # Shopping cart

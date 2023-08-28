@@ -1,16 +1,17 @@
 *** Settings ***
 Documentation   This is the wrapper for SeleniumLibrary keywords
+# NOTE: Some things work fundamentally differently in Browser compared to Selenium
+# (like a 'wait' usually needs to be set up BEFORE an action)
+# This needs to be taken into account when creating new keywords in the wrappers
 
 
-# importing libraries (Note: must have SeleniumLibrary here)
+# importing libraries (NOTE: must have SeleniumLibrary here)
 Library         SeleniumLibrary
 
 
 *** Variables ***
-# dictionary of SeleniumLibrary supported browsers
-# (not all of them, these are just for example)
-# creating a dictionary variable to switch generic browser name
-# to one that SeleniumLibrary uses
+# below is dictionary of SeleniumLibrary supported browsers (not all of them, these are just for example)
+# using a dictionary variable to switch generic browser name to one that SeleniumLibrary uses
 &{generic_browser_name_to_local_name} =
 ...    chrome=chrome        # googlechrome, chrome, gc
 ...    firefox=firefox      # firefox, ff
@@ -23,8 +24,8 @@ Library         SeleniumLibrary
 Open New Browser Window
     [Documentation]            Open a new browser window
     [Arguments]                ${browser}
-    # Note: dictionary is defined with '&' but referred to here with '$' like a variable
-    # Note: SeleniumLibrary Open Browser requires 'browser=' to be defined, or default browser is firefox
+    # NOTE: dictionary creater earlier was defined with '&' but is referred to here with '$' like a variable
+    # NOTE: define 'browser=' or the default browser will be used (for Selenium that's Firefox)
     Open Browser               browser=${generic_browser_name_to_local_name}[${browser}]
 
 
@@ -89,6 +90,7 @@ Handle OnClick Popup With Input And Accept
     [Arguments]                ${locator}  ${input}
     Click Element              ${locator}
     Input Text Into Alert      ${input}      ACCEPT  # action defined here, 'ACCEPT' is default so it's optional
+
 
 ## The old version (which worked fine for selenium)
 # Fill Popup Field With Input And Accept
@@ -174,3 +176,4 @@ Scroll To Selected Element
     [Documentation]            Scroll the specified element to view
     [Arguments]                ${locator}
     Scroll Element Into View   ${locator}
+

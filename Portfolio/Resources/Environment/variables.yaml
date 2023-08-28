@@ -4,7 +4,7 @@
 # for browsers using generic name, which will be converted to the proper one in the wrapper
 # (like chrome -> chromium for Browser library wrapper )
 
-wrapper: selenium             # choose selenium or browser
+wrapper: browser              # choose selenium or browser
 usebrowser: chrome            # only chrome, firefox, safari work for this test version
                               # (anything used must of course be installed)
 

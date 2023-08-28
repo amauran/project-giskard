@@ -1,14 +1,15 @@
 *** Settings ***
 Documentation   This is the wrapper for Browser library keywords
+# NOTE: Some things work fundamentally differently in Browser compared to Selenium
+# (like a 'wait' usually needs to be set up BEFORE an action)
+# This needs to be taken into account when creating new keywords in the wrappers
 
-# importing libraries (Note: must have Browser here)
+# importing libraries (NOTE: must have Browser here)
 Library         Browser
 
 *** Variables ***
-# dictionary of Browser library supported browsers
-# (not all of them, these are just for example)
-# creating a dictionary variable to switch generic browser name
-# to one that Browser library uses
+# below is a dictionary of Browser library supported browsers (not all of them, these are just for example)
+# using a dictionary variable to switch generic browser name to one that Browser library uses
 &{generic_browser_name_to_local_name} =
 ...    chrome=chromium  # Google Chrome, Microsoft Edge (since 2020), Opera
 ...    firefox=firefox  # Mozilla Firefox
@@ -21,9 +22,10 @@ Library         Browser
 Open New Browser Window
     [Documentation]            Open a new browser window
     [Arguments]                ${browser}
-    # Note: dictionary is defined with '&' but referred to here with '$' like a variable
-    # Note: define 'browser=' or default browser is used
-    New Browser               browser=${generic_browser_name_to_local_name}[${browser}]     headless=False
+    # NOTE: dictionary creater earlier was defined with '&' but is referred to here with '$' like a variable
+    # NOTE: define 'browser=' or the default browser will be used
+    # use 'headless=False' if you want to see GUI, otherwise Browser will run the test headless
+    New Browser               browser=${generic_browser_name_to_local_name}[${browser}]     #headless=False
     New Page
 
 
@@ -188,3 +190,4 @@ Scroll To Selected Element
     [Documentation]            Scroll the specified element to view
     [Arguments]                ${locator}
     Scroll To Element          ${locator}
+

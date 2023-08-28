@@ -79,7 +79,7 @@ Manager Goes To Order Handling Page
     # with them we find the WooCommerce menu, wait until popup menu appears, and click "Orders" link
     Wait Until Visible                 ${manager_WC_hovermenu_link}
     Hover Over Element                 ${manager_WC_hovermenu_link}
-    Wait Until Visible                 ${manager_WC_hovermenu_orders_link}
+    Wait Until Visible                 ${manager_WC_hovermenu_visible}
     Click Selected Element             ${manager_WC_hovermenu_orders_link}
 
 
