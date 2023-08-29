@@ -19,6 +19,10 @@ selenium-screenshot-*
 interactive_console_output.xml
 playwright-log.txt
 
+# Allow selected reports from Logs folder
+!Portfolio/Tests/Logs/**/log.html
+!Portfolio/Tests/Logs/**/output.xml
+!Portfolio/Tests/Logs/**/report.html
 
 # Ignore my messy practice tests
 sandbox/

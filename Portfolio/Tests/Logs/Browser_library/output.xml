@@ -1,0 +1,2402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.10.12 on linux)" generated="20230829 15:21:14.318" rpa="false" schemaversion="3">
+<suite id="s1" name="Order handling test" source="/home/anne/Git/project-giskard/Portfolio/Tests/Order_handling_test.robot">
+<kw name="Open New Browser Window" library="browser_wrapper" type="SETUP">
+<arg>${browser}</arg>
+<doc>Open a new browser window</doc>
+<kw name="New Browser" library="Browser">
+<arg>browser=${generic_browser_name_to_local_name}[${browser}]</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230829 15:21:15.869" level="INFO">{"browser": "chromium", "headless": true, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "deprecated_pos_args": [], "tracesDir": "/home/anne/Git/project-giskard/Portfolio/Tests/Logs/browser/traces/afb5285f-3889-485e-a3c2-883826c98a92"}</msg>
+<msg timestamp="20230829 15:21:16.865" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"deprecated_pos_args":[],"tracesDir":"/home/anne/Git/project-giskard/Portfolio/Tests/Logs/browser/traces/afb5285f-3889-485e-a3c2-883826c98a92"}</msg>
+<status status="PASS" starttime="20230829 15:21:15.867" endtime="20230829 15:21:16.888"/>
+</kw>
+<kw name="New Page" library="Browser">
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230829 15:21:17.919" level="INFO">Successfully initialized new page object and opened url: about:blank</msg>
+<msg timestamp="20230829 15:21:17.919" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230829 15:21:16.914" endtime="20230829 15:21:17.920"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:15.867" endtime="20230829 15:21:17.921"/>
+</kw>
+<test id="s1-t1" name="Login As Customer To Make An Order" line="55">
+<kw name="Login As Existing Customer" library="customer_actions">
+<doc>Go to shop url and login as an existing customer</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>customer</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:17.975" level="INFO">${usertype} = customer</msg>
+<status status="PASS" starttime="20230829 15:21:17.972" endtime="20230829 15:21:17.976"/>
+</kw>
+<kw name="Go To Given Page" library="browser_wrapper">
+<arg>${customer_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="Browser">
+<arg>${url}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<msg timestamp="20230829 15:21:19.160" level="INFO">Successfully opened URL https://happy-robot.nimbus.fi/my-account/</msg>
+<status status="PASS" starttime="20230829 15:21:17.977" endtime="20230829 15:21:19.160"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:17.977" endtime="20230829 15:21:19.160"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:19.162" endtime="20230829 15:21:19.247"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:19.248" level="INFO">Fills the text 'robot.giskard@nimbus.fi' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:19.247" endtime="20230829 15:21:19.284"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:19.161" endtime="20230829 15:21:19.285"/>
+</kw>
+<kw name="Fill Password Field With Input" library="browser_wrapper">
+<arg>${customer_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:19.285" endtime="20230829 15:21:19.305"/>
+</kw>
+<kw name="Fill Secret" library="Browser">
+<arg>${locator}</arg>
+<arg>$input</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Fills the given secret from ``variable_name`` into the
+text field found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:19.305" endtime="20230829 15:21:19.458"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:19.285" endtime="20230829 15:21:19.458"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:19.459" endtime="20230829 15:21:19.951"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:19.458" endtime="20230829 15:21:19.952"/>
+</kw>
+<kw name="Check Location By Element" library="browser_wrapper">
+<arg>${customer_login_checkforpass}</arg>
+<doc>Check current location by findind an element on the page</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element_locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:20.145" level="INFO">Waited for Element with selector //a[normalize-space()="Account details"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:19.953" endtime="20230829 15:21:20.145"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:19.952" endtime="20230829 15:21:20.146"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:17.971" endtime="20230829 15:21:20.146"/>
+</kw>
+<kw name="Customer Adds Products To Cart" library="customer_actions">
+<doc>add each product in the shop into the cart once via search box</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${shop_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:20.148" endtime="20230829 15:21:20.476"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:20.147" endtime="20230829 15:21:20.477"/>
+</kw>
+<kw name="Check Location By URL" library="browser_wrapper">
+<arg>${main_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Get Url" library="Browser">
+<arg>should be</arg>
+<arg>${url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:20.477" endtime="20230829 15:21:20.485"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:20.477" endtime="20230829 15:21:20.485"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${product_names}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230829 15:21:20.486" level="INFO">Length is 4</msg>
+<msg timestamp="20230829 15:21:20.487" level="INFO">${length} = 4</msg>
+<status status="PASS" starttime="20230829 15:21:20.485" endtime="20230829 15:21:20.487"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${product_index}</var>
+<value>0</value>
+<value>${length}</value>
+<iter>
+<var name="${product_index}">0</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:20.504" level="INFO">${current_product} = Can of Oil</msg>
+<status status="PASS" starttime="20230829 15:21:20.500" endtime="20230829 15:21:20.504"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:20.505" endtime="20230829 15:21:20.575"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:20.576" level="INFO">Fills the text 'Can of Oil' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:20.575" endtime="20230829 15:21:20.604"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:20.505" endtime="20230829 15:21:20.605"/>
+</kw>
+<kw name="Press Enter" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Keyboard Key" library="Browser">
+<arg>press</arg>
+<arg>Enter</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" starttime="20230829 15:21:20.605" endtime="20230829 15:21:20.618"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:20.605" endtime="20230829 15:21:20.618"/>
+</kw>
+<kw name="Check Location By Partial URL" library="browser_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Get Url" library="Browser">
+<arg>*=</arg>
+<arg>${partial_url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:20.619" endtime="20230829 15:21:21.087"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:20.618" endtime="20230829 15:21:21.088"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:21.303" level="INFO">Waited for Element with selector css=button[name="add-to-cart"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:21.089" endtime="20230829 15:21:21.303"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.088" endtime="20230829 15:21:21.303"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:21.304" endtime="20230829 15:21:21.660"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.304" endtime="20230829 15:21:21.660"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:20.495" endtime="20230829 15:21:21.660"/>
+</iter>
+<iter>
+<var name="${product_index}">1</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:21.661" level="INFO">${current_product} = Dexterous Thin Leg</msg>
+<status status="PASS" starttime="20230829 15:21:21.661" endtime="20230829 15:21:21.661"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:21.662" endtime="20230829 15:21:21.784"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:21.785" level="INFO">Fills the text 'Dexterous Thin Leg' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:21.784" endtime="20230829 15:21:21.808"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.661" endtime="20230829 15:21:21.808"/>
+</kw>
+<kw name="Press Enter" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Keyboard Key" library="Browser">
+<arg>press</arg>
+<arg>Enter</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" starttime="20230829 15:21:21.813" endtime="20230829 15:21:21.819"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.812" endtime="20230829 15:21:21.820"/>
+</kw>
+<kw name="Check Location By Partial URL" library="browser_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Get Url" library="Browser">
+<arg>*=</arg>
+<arg>${partial_url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:21.821" endtime="20230829 15:21:21.825"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.821" endtime="20230829 15:21:21.825"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:22.403" level="INFO">Waited for Element with selector css=button[name="add-to-cart"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:21.826" endtime="20230829 15:21:22.403"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.825" endtime="20230829 15:21:22.403"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:22.404" endtime="20230829 15:21:22.723"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:22.404" endtime="20230829 15:21:22.723"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:21.660" endtime="20230829 15:21:22.723"/>
+</iter>
+<iter>
+<var name="${product_index}">2</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:22.724" level="INFO">${current_product} = Varied Nuts &amp; Bolts</msg>
+<status status="PASS" starttime="20230829 15:21:22.723" endtime="20230829 15:21:22.724"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:22.726" endtime="20230829 15:21:22.828"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:22.829" level="INFO">Fills the text 'Varied Nuts &amp; Bolts' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:22.828" endtime="20230829 15:21:22.849"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:22.724" endtime="20230829 15:21:22.850"/>
+</kw>
+<kw name="Press Enter" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Keyboard Key" library="Browser">
+<arg>press</arg>
+<arg>Enter</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" starttime="20230829 15:21:22.850" endtime="20230829 15:21:22.855"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:22.850" endtime="20230829 15:21:22.855"/>
+</kw>
+<kw name="Check Location By Partial URL" library="browser_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Get Url" library="Browser">
+<arg>*=</arg>
+<arg>${partial_url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:22.856" endtime="20230829 15:21:22.862"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:22.856" endtime="20230829 15:21:22.863"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:23.398" level="INFO">Waited for Element with selector css=button[name="add-to-cart"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:22.864" endtime="20230829 15:21:23.398"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:22.863" endtime="20230829 15:21:23.399"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:23.400" endtime="20230829 15:21:23.723"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:23.399" endtime="20230829 15:21:23.724"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:22.723" endtime="20230829 15:21:23.724"/>
+</iter>
+<iter>
+<var name="${product_index}">3</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:23.726" level="INFO">${current_product} = Versatile Thin Arm</msg>
+<status status="PASS" starttime="20230829 15:21:23.725" endtime="20230829 15:21:23.726"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:23.726" endtime="20230829 15:21:23.810"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:23.811" level="INFO">Fills the text 'Versatile Thin Arm' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:23.811" endtime="20230829 15:21:23.831"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:23.726" endtime="20230829 15:21:23.831"/>
+</kw>
+<kw name="Press Enter" library="browser_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Keyboard Key" library="Browser">
+<arg>press</arg>
+<arg>Enter</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" starttime="20230829 15:21:23.832" endtime="20230829 15:21:23.837"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:23.831" endtime="20230829 15:21:23.837"/>
+</kw>
+<kw name="Check Location By Partial URL" library="browser_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Get Url" library="Browser">
+<arg>*=</arg>
+<arg>${partial_url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:23.838" endtime="20230829 15:21:23.842"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:23.838" endtime="20230829 15:21:23.842"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:24.399" level="INFO">Waited for Element with selector css=button[name="add-to-cart"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:23.843" endtime="20230829 15:21:24.399"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:23.843" endtime="20230829 15:21:24.400"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:24.401" endtime="20230829 15:21:24.712"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:24.400" endtime="20230829 15:21:24.713"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:23.725" endtime="20230829 15:21:24.713"/>
+</iter>
+<status status="PASS" starttime="20230829 15:21:20.488" endtime="20230829 15:21:24.714"/>
+</for>
+<status status="PASS" starttime="20230829 15:21:20.147" endtime="20230829 15:21:24.715"/>
+</kw>
+<kw name="Customer Goes To Shopping Cart" library="customer_actions">
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${cart_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:24.716" endtime="20230829 15:21:25.292"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:24.716" endtime="20230829 15:21:25.293"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:24.715" endtime="20230829 15:21:25.293"/>
+</kw>
+<kw name="Customer Checks Shopping Cart Items" library="customer_actions">
+<doc>Check number of product types and their quantity in cart</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${product_names}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230829 15:21:25.315" level="INFO">Length is 4</msg>
+<msg timestamp="20230829 15:21:25.315" level="INFO">${length} = 4</msg>
+<status status="PASS" starttime="20230829 15:21:25.314" endtime="20230829 15:21:25.315"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${quantity_loc_pt1}</arg>
+<arg>//tbody/tr/td[@class="product-name"]/a[contains(@href,"</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:25.363" level="INFO">${quantity_loc_pt1} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"</msg>
+<status status="PASS" starttime="20230829 15:21:25.342" endtime="20230829 15:21:25.363"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${quantity_loc_pt2}</arg>
+<arg>")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:25.372" level="INFO">${quantity_loc_pt2} = ")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:21:25.363" endtime="20230829 15:21:25.372"/>
+</kw>
+<kw name="Count Element" library="browser_wrapper">
+<var>${product_types_in_cart}</var>
+<arg>${cart_product_types}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="Browser">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<msg timestamp="20230829 15:21:25.457" level="INFO">${element_count} = 4</msg>
+<status status="PASS" starttime="20230829 15:21:25.375" endtime="20230829 15:21:25.457"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:21:25.459" endtime="20230829 15:21:25.462"/>
+</return>
+<msg timestamp="20230829 15:21:25.463" level="INFO">${product_types_in_cart} = 4</msg>
+<status status="PASS" starttime="20230829 15:21:25.373" endtime="20230829 15:21:25.463"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${length}</arg>
+<arg>${product_types_in_cart}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230829 15:21:25.464" endtime="20230829 15:21:25.465"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${product_index}</var>
+<value>0</value>
+<value>${length}</value>
+<iter>
+<var name="${product_index}">0</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.466" level="INFO">${current_product} = /product/can-of-oil/</msg>
+<status status="PASS" starttime="20230829 15:21:25.466" endtime="20230829 15:21:25.466"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.467" level="INFO">${product_name} = Can of Oil</msg>
+<status status="PASS" starttime="20230829 15:21:25.466" endtime="20230829 15:21:25.467"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:25.468" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/can-of-oil/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:21:25.467" endtime="20230829 15:21:25.468"/>
+</kw>
+<kw name="Get Attribute Value" library="browser_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value inside specified attribute</doc>
+<kw name="Get Attribute" library="Browser">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:25.488" level="INFO">Attribute is: '1'</msg>
+<msg timestamp="20230829 15:21:25.488" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.469" endtime="20230829 15:21:25.488"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:21:25.488" endtime="20230829 15:21:25.489"/>
+</return>
+<msg timestamp="20230829 15:21:25.489" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.468" endtime="20230829 15:21:25.489"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:25.489" endtime="20230829 15:21:25.491"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:25.466" endtime="20230829 15:21:25.491"/>
+</iter>
+<iter>
+<var name="${product_index}">1</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.492" level="INFO">${current_product} = /product/dexterous-thin-leg/</msg>
+<status status="PASS" starttime="20230829 15:21:25.492" endtime="20230829 15:21:25.492"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.493" level="INFO">${product_name} = Dexterous Thin Leg</msg>
+<status status="PASS" starttime="20230829 15:21:25.492" endtime="20230829 15:21:25.493"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:25.493" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/dexterous-thin-leg/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:21:25.493" endtime="20230829 15:21:25.493"/>
+</kw>
+<kw name="Get Attribute Value" library="browser_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value inside specified attribute</doc>
+<kw name="Get Attribute" library="Browser">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:25.507" level="INFO">Attribute is: '1'</msg>
+<msg timestamp="20230829 15:21:25.507" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.494" endtime="20230829 15:21:25.507"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:21:25.507" endtime="20230829 15:21:25.508"/>
+</return>
+<msg timestamp="20230829 15:21:25.508" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.493" endtime="20230829 15:21:25.508"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:25.508" endtime="20230829 15:21:25.509"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:25.491" endtime="20230829 15:21:25.509"/>
+</iter>
+<iter>
+<var name="${product_index}">2</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.510" level="INFO">${current_product} = /product/varied-nuts-bolts/</msg>
+<status status="PASS" starttime="20230829 15:21:25.510" endtime="20230829 15:21:25.510"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.511" level="INFO">${product_name} = Varied Nuts &amp; Bolts</msg>
+<status status="PASS" starttime="20230829 15:21:25.511" endtime="20230829 15:21:25.511"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:25.512" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/varied-nuts-bolts/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:21:25.511" endtime="20230829 15:21:25.512"/>
+</kw>
+<kw name="Get Attribute Value" library="browser_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value inside specified attribute</doc>
+<kw name="Get Attribute" library="Browser">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:25.528" level="INFO">Attribute is: '1'</msg>
+<msg timestamp="20230829 15:21:25.528" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.513" endtime="20230829 15:21:25.528"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:21:25.528" endtime="20230829 15:21:25.528"/>
+</return>
+<msg timestamp="20230829 15:21:25.528" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.512" endtime="20230829 15:21:25.528"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:25.529" endtime="20230829 15:21:25.529"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:25.509" endtime="20230829 15:21:25.529"/>
+</iter>
+<iter>
+<var name="${product_index}">3</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.530" level="INFO">${current_product} = /product/versatile-thin-arm/</msg>
+<status status="PASS" starttime="20230829 15:21:25.530" endtime="20230829 15:21:25.530"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:21:25.531" level="INFO">${product_name} = Versatile Thin Arm</msg>
+<status status="PASS" starttime="20230829 15:21:25.530" endtime="20230829 15:21:25.531"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:25.531" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/versatile-thin-arm/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:21:25.531" endtime="20230829 15:21:25.531"/>
+</kw>
+<kw name="Get Attribute Value" library="browser_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value inside specified attribute</doc>
+<kw name="Get Attribute" library="Browser">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:25.544" level="INFO">Attribute is: '1'</msg>
+<msg timestamp="20230829 15:21:25.544" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.532" endtime="20230829 15:21:25.544"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:21:25.544" endtime="20230829 15:21:25.544"/>
+</return>
+<msg timestamp="20230829 15:21:25.544" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:25.531" endtime="20230829 15:21:25.544"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:25.545" endtime="20230829 15:21:25.545"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:25.529" endtime="20230829 15:21:25.545"/>
+</iter>
+<status status="PASS" starttime="20230829 15:21:25.465" endtime="20230829 15:21:25.545"/>
+</for>
+<status status="PASS" starttime="20230829 15:21:25.314" endtime="20230829 15:21:25.545"/>
+</kw>
+<kw name="Customer Proceeds To Checkout" library="customer_actions">
+<doc>Click 'Proceed to checkout' button</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_checkout_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:25.546" endtime="20230829 15:21:26.273"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:25.546" endtime="20230829 15:21:26.273"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:25.546" endtime="20230829 15:21:26.273"/>
+</kw>
+<kw name="Customer Says Thank You In Comment Box" library="customer_actions">
+<doc>Leave a thank you message in the comment box</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${thank_you_message}</arg>
+<arg>First time customer, thank you for creating this shop! ^_^</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:26.276" level="INFO">${thank_you_message} = First time customer, thank you for creating this shop! ^_^</msg>
+<status status="PASS" starttime="20230829 15:21:26.274" endtime="20230829 15:21:26.276"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_checkout_commentbox}</arg>
+<arg>${thank_you_message}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:26.277" endtime="20230829 15:21:26.496"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:26.497" level="INFO">Fills the text 'First time customer, thank you for creating this shop! ^_^' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:26.496" endtime="20230829 15:21:26.589"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.277" endtime="20230829 15:21:26.589"/>
+</kw>
+<kw name="Set Focus To Selected Element" library="browser_wrapper">
+<arg>${customer_privacy_policy}</arg>
+<doc>Set focus to specified element</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:26.590" endtime="20230829 15:21:26.610"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.589" endtime="20230829 15:21:26.610"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.274" endtime="20230829 15:21:26.611"/>
+</kw>
+<kw name="Customer Places Order" library="customer_actions">
+<doc>Click the 'Place order' button</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_place_order_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:26.612" endtime="20230829 15:21:26.846"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.611" endtime="20230829 15:21:26.846"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.611" endtime="20230829 15:21:26.846"/>
+</kw>
+<kw name="Customer Checks The Order Was Succesful" library="customer_actions">
+<doc>Wait until the message for succesful order is found</doc>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_order_received}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:28.241" level="INFO">Waited for Element with selector css=.woocommerce-thankyou-order-received at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:26.848" endtime="20230829 15:21:28.241"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.847" endtime="20230829 15:21:28.241"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:26.847" endtime="20230829 15:21:28.242"/>
+</kw>
+<kw name="Save New Order Number" library="customer_actions">
+<var>${number_of_order_made}</var>
+<doc>Save the order number for the completed order</doc>
+<kw name="Get Element Text" library="browser_wrapper">
+<var>${new_order_number}</var>
+<arg>${customer_order_received_number}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="Browser">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:28.275" level="INFO">Text: '135'</msg>
+<msg timestamp="20230829 15:21:28.275" level="INFO">${element_text} = 135</msg>
+<status status="PASS" starttime="20230829 15:21:28.243" endtime="20230829 15:21:28.275"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:21:28.275" endtime="20230829 15:21:28.275"/>
+</return>
+<msg timestamp="20230829 15:21:28.276" level="INFO">${new_order_number} = 135</msg>
+<status status="PASS" starttime="20230829 15:21:28.242" endtime="20230829 15:21:28.276"/>
+</kw>
+<return>
+<value>${new_order_number}</value>
+<status status="PASS" starttime="20230829 15:21:28.276" endtime="20230829 15:21:28.276"/>
+</return>
+<msg timestamp="20230829 15:21:28.276" level="INFO">${number_of_order_made} = 135</msg>
+<status status="PASS" starttime="20230829 15:21:28.242" endtime="20230829 15:21:28.276"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>\${new_order_number}</arg>
+<arg>${number_of_order_made}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20230829 15:21:28.277" level="INFO">${new_order_number} = 135</msg>
+<status status="PASS" starttime="20230829 15:21:28.276" endtime="20230829 15:21:28.277"/>
+</kw>
+<kw name="Logout Customer From Shop" library="customer_actions">
+<doc>check location and logout customer from shop</doc>
+<kw name="Get Current Location URL" library="browser_wrapper">
+<var>${current_page}</var>
+<doc>Get the url of the currently active page</doc>
+<kw name="Get Url" library="Browser">
+<var>${current_url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<msg timestamp="20230829 15:21:28.279" level="INFO">${current_url} = https://happy-robot.nimbus.fi/checkout/order-received/135/?key=wc_order_l2CmLoEYdOBsr</msg>
+<status status="PASS" starttime="20230829 15:21:28.278" endtime="20230829 15:21:28.279"/>
+</kw>
+<return>
+<value>${current_url}</value>
+<status status="PASS" starttime="20230829 15:21:28.280" endtime="20230829 15:21:28.280"/>
+</return>
+<msg timestamp="20230829 15:21:28.280" level="INFO">${current_page} = https://happy-robot.nimbus.fi/checkout/order-received/135/?key=wc_order_l2CmLoEYdOBsr</msg>
+<status status="PASS" starttime="20230829 15:21:28.277" endtime="20230829 15:21:28.280"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;&quot;&quot;${current_page}&quot;&quot;&quot; == &quot;&quot;&quot;${customer_logout_url}&quot;&quot;&quot;">
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<status status="NOT RUN" starttime="20230829 15:21:28.281" endtime="20230829 15:21:28.281"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<status status="NOT RUN" starttime="20230829 15:21:28.281" endtime="20230829 15:21:28.281"/>
+</kw>
+<status status="NOT RUN" starttime="20230829 15:21:28.280" endtime="20230829 15:21:28.281"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:28.310" level="INFO">Waited for Element with selector //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:28.282" endtime="20230829 15:21:28.310"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:28.281" endtime="20230829 15:21:28.311"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2 sec</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230829 15:21:30.312" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230829 15:21:28.311" endtime="20230829 15:21:30.312"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:30.313" endtime="20230829 15:21:30.602"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:30.313" endtime="20230829 15:21:30.602"/>
+</kw>
+<kw name="Check Location By URL" library="browser_wrapper">
+<arg>${customer_logout_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Get Url" library="Browser">
+<arg>should be</arg>
+<arg>${url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:30.603" endtime="20230829 15:21:30.605"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:30.602" endtime="20230829 15:21:30.605"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:30.660" level="INFO">Waited for Element with selector css=.woocommerce-MyAccount-navigation-link--customer-logout a at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:30.606" endtime="20230829 15:21:30.660"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:30.606" endtime="20230829 15:21:30.660"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:30.661" endtime="20230829 15:21:31.215"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:30.661" endtime="20230829 15:21:31.215"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:31.317" level="INFO">Waited for Element with selector //button[@name="login"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:31.216" endtime="20230829 15:21:31.317"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:31.215" endtime="20230829 15:21:31.317"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:28.281" endtime="20230829 15:21:31.317"/>
+</branch>
+<status status="PASS" starttime="20230829 15:21:28.280" endtime="20230829 15:21:31.318"/>
+</if>
+<status status="PASS" starttime="20230829 15:21:28.277" endtime="20230829 15:21:31.318"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:17.921" endtime="20230829 15:21:31.318"/>
+</test>
+<test id="s1-t2" name="Login As Manager To Edit Order" line="82">
+<kw name="Login As Shop Manager" library="manager_actions">
+<doc>Go to shop management side and log manager in</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>manager</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:31.471" level="INFO">${usertype} = manager</msg>
+<status status="PASS" starttime="20230829 15:21:31.470" endtime="20230829 15:21:31.471"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${users}[${usertype}][display_name]</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:31.474" level="INFO">${manager_name} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:21:31.471" endtime="20230829 15:21:31.474"/>
+</kw>
+<kw name="Go To Given Page" library="browser_wrapper">
+<arg>${manager_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="Browser">
+<arg>${url}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<msg timestamp="20230829 15:21:32.309" level="INFO">Successfully opened URL https://happy-robot.nimbus.fi/wp-login.php</msg>
+<status status="PASS" starttime="20230829 15:21:31.475" endtime="20230829 15:21:32.310"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:31.474" endtime="20230829 15:21:32.310"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${manager_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:32.311" endtime="20230829 15:21:32.422"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:32.423" level="INFO">Fills the text 'robot.manager@nimbus.fi' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:32.423" endtime="20230829 15:21:32.443"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:32.310" endtime="20230829 15:21:32.444"/>
+</kw>
+<kw name="Fill Password Field With Input" library="browser_wrapper">
+<arg>${manager_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:32.444" endtime="20230829 15:21:32.454"/>
+</kw>
+<kw name="Fill Secret" library="Browser">
+<arg>${locator}</arg>
+<arg>$input</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Fills the given secret from ``variable_name`` into the
+text field found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:32.455" endtime="20230829 15:21:32.475"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:32.444" endtime="20230829 15:21:32.475"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:32.476" endtime="20230829 15:21:33.259"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:32.475" endtime="20230829 15:21:33.259"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_checkforpass}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:33.664" level="INFO">Waited for Element with selector //*[@id="wp-admin-bar-my-account"]/a/span at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:33.260" endtime="20230829 15:21:33.665"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:33.260" endtime="20230829 15:21:33.665"/>
+</kw>
+<kw name="Get Element Text" library="browser_wrapper">
+<var>${text_found}</var>
+<arg>${manager_checkforpass}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="Browser">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:33.751" level="INFO">Text: 'Robbie'</msg>
+<msg timestamp="20230829 15:21:33.752" level="INFO">${element_text} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:21:33.666" endtime="20230829 15:21:33.752"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:21:33.752" endtime="20230829 15:21:33.752"/>
+</return>
+<msg timestamp="20230829 15:21:33.752" level="INFO">${text_found} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:21:33.665" endtime="20230829 15:21:33.752"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${text_found}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230829 15:21:33.752" endtime="20230829 15:21:33.753"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:31.469" endtime="20230829 15:21:33.753"/>
+</kw>
+<kw name="Confirm Sidebar Menu Is Expanded" library="manager_actions">
+<doc>Make sure the sidebar menu is expanded to show text elements</doc>
+<kw name="Count Element" library="browser_wrapper">
+<var>${WPmenu_state}</var>
+<arg>${manager_WPmenu_collapse_state}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="Browser">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<msg timestamp="20230829 15:21:33.759" level="INFO">${element_count} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:33.754" endtime="20230829 15:21:33.759"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:21:33.759" endtime="20230829 15:21:33.759"/>
+</return>
+<msg timestamp="20230829 15:21:33.759" level="INFO">${WPmenu_state} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:33.753" endtime="20230829 15:21:33.759"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;&quot;&quot;${WPmenu_state}&quot;&quot;&quot; == &quot;&quot;&quot;0&quot;&quot;&quot;">
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>//button[@id="collapse-button"]</arg>
+<doc>Click element indicated by locator</doc>
+<status status="NOT RUN" starttime="20230829 15:21:33.760" endtime="20230829 15:21:33.760"/>
+</kw>
+<kw name="Confirm Element Found" library="browser_wrapper">
+<arg>//button[@id="collapse-button"][@aria-label="Collapse Main menu"]</arg>
+<doc>Confirm element is found on page</doc>
+<status status="NOT RUN" starttime="20230829 15:21:33.760" endtime="20230829 15:21:33.760"/>
+</kw>
+<status status="NOT RUN" starttime="20230829 15:21:33.760" endtime="20230829 15:21:33.760"/>
+</branch>
+<status status="PASS" starttime="20230829 15:21:33.759" endtime="20230829 15:21:33.760"/>
+</if>
+<status status="PASS" starttime="20230829 15:21:33.753" endtime="20230829 15:21:33.760"/>
+</kw>
+<kw name="Manager Goes To Order Handling Page" library="manager_actions">
+<doc>Use the sidebar menu to access WooCommerce Orders page</doc>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:33.977" level="INFO">Waited for Element with selector //div[@class="wp-menu-name"][text()="WooCommerce"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:33.762" endtime="20230829 15:21:33.978"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:33.761" endtime="20230829 15:21:33.978"/>
+</kw>
+<kw name="Hover Over Element" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Hover" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves the virtual mouse and scrolls to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:33.979" endtime="20230829 15:21:34.035"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:33.978" endtime="20230829 15:21:34.035"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:34.131" level="INFO">Waited for Element with selector //li[@id="toplevel_page_woocommerce"][contains(@class,"opensub")] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:34.036" endtime="20230829 15:21:34.131"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:34.036" endtime="20230829 15:21:34.132"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_orders_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:34.132" endtime="20230829 15:21:35.369"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:34.132" endtime="20230829 15:21:35.370"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:33.761" endtime="20230829 15:21:35.370"/>
+</kw>
+<kw name="Manager Finds And Opens A Placed Order" library="manager_actions">
+<arg>${new_order_number}</arg>
+<doc>Find an order and view it</doc>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${manager_all_orders}</arg>
+<arg>[contains(@href,"post=</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:35.371" level="INFO">${order_locator} = //a[@class="order-view"][contains(@href,"post=135")]</msg>
+<status status="PASS" starttime="20230829 15:21:35.371" endtime="20230829 15:21:35.371"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_page_check}</var>
+<arg>SEPARATOR=</arg>
+<arg>//div[@id="order_data"]/h2[contains(text(),"</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:35.372" level="INFO">${order_page_check} = //div[@id="order_data"]/h2[contains(text(),"135")]</msg>
+<status status="PASS" starttime="20230829 15:21:35.372" endtime="20230829 15:21:35.372"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${order_locator}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:35.372" endtime="20230829 15:21:39.238"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:35.372" endtime="20230829 15:21:39.239"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${order_page_check}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:40.019" level="INFO">Waited for Element with selector //div[@id="order_data"]/h2[contains(text(),"135")] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:39.240" endtime="20230829 15:21:40.019"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:39.239" endtime="20230829 15:21:40.019"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:35.370" endtime="20230829 15:21:40.020"/>
+</kw>
+<kw name="Manager Edits Order Status To Pending Payment" library="manager_actions">
+<doc>Change order status to 'Pending payment' for editing</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_orderstatus_dropdownmenu_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:40.021" endtime="20230829 15:21:40.378"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:40.020" endtime="20230829 15:21:40.378"/>
+</kw>
+<kw name="Count Element" library="browser_wrapper">
+<var>${menu_state}</var>
+<arg>${manager_orderstatus_dropdownmenu_state}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="Browser">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<msg timestamp="20230829 15:21:40.384" level="INFO">${element_count} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:40.379" endtime="20230829 15:21:40.384"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:21:40.385" endtime="20230829 15:21:40.385"/>
+</return>
+<msg timestamp="20230829 15:21:40.385" level="INFO">${menu_state} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:40.378" endtime="20230829 15:21:40.385"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"""${menu_state}""" == """1"""</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:40.385" endtime="20230829 15:21:40.386"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_orderstatus_pending_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:40.386" endtime="20230829 15:21:40.452"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:40.386" endtime="20230829 15:21:40.452"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_order_update_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:40.453" endtime="20230829 15:21:42.236"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:40.453" endtime="20230829 15:21:42.246"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:40.020" endtime="20230829 15:21:42.246"/>
+</kw>
+<kw name="Manager Adds A Discount Coupon To Order" library="manager_actions">
+<doc>Add a discount coupon to order just made</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${coupon code}</arg>
+<arg>0000011110111000</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:42.249" level="INFO">${coupon code} = 0000011110111000</msg>
+<status status="PASS" starttime="20230829 15:21:42.247" endtime="20230829 15:21:42.249"/>
+</kw>
+<kw name="Handle OnClick Popup With Input And Accept" library="browser_wrapper">
+<arg>${manager_add_coupon_button}</arg>
+<arg>${coupon code}</arg>
+<doc>Handle a popup/alert appearing after click, that requires input and accepting</doc>
+<kw name="Handle Future Dialogs" library="Browser">
+<arg>action=accept</arg>
+<arg>prompt_input=${input}</arg>
+<tag>PageContent</tag>
+<doc>Handle next dialog on page with ``action``.</doc>
+<status status="PASS" starttime="20230829 15:21:42.250" endtime="20230829 15:21:42.321"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:42.321" endtime="20230829 15:21:43.136"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:42.249" endtime="20230829 15:21:43.136"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5 sec</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230829 15:21:48.137" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20230829 15:21:43.136" endtime="20230829 15:21:48.137"/>
+</kw>
+<kw name="Confirm Element Found" library="browser_wrapper">
+<arg>${manager_check coupon}</arg>
+<doc>Confirm element is found on page</doc>
+<kw name="Get Element Count" library="Browser">
+<arg>${locator}</arg>
+<arg>&gt;=</arg>
+<arg>1</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:48.138" endtime="20230829 15:21:48.153"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:48.138" endtime="20230829 15:21:48.153"/>
+</kw>
+<kw name="Get Element Text" library="browser_wrapper">
+<var>${code_found}</var>
+<arg>${manager_check coupon}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="Browser">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:48.186" level="INFO">Text: '0000011110111000'</msg>
+<msg timestamp="20230829 15:21:48.186" level="INFO">${element_text} = 0000011110111000</msg>
+<status status="PASS" starttime="20230829 15:21:48.154" endtime="20230829 15:21:48.186"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:21:48.186" endtime="20230829 15:21:48.186"/>
+</return>
+<msg timestamp="20230829 15:21:48.187" level="INFO">${code_found} = 0000011110111000</msg>
+<status status="PASS" starttime="20230829 15:21:48.153" endtime="20230829 15:21:48.187"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"""${code_found}""" == """${coupon code}"""</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:48.187" endtime="20230829 15:21:48.189"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:42.246" endtime="20230829 15:21:48.189"/>
+</kw>
+<kw name="Scroll To Selected Element" library="browser_wrapper">
+<arg>${manager_orderstatus}</arg>
+<doc>Scroll the specified element to view</doc>
+<kw name="Scroll To Element" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>This method waits for actionability checks, then tries to scroll element into view,
+unless it is completely visible.</doc>
+<status status="PASS" starttime="20230829 15:21:48.190" endtime="20230829 15:21:48.254"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:48.190" endtime="20230829 15:21:48.255"/>
+</kw>
+<kw name="Manager Marks Order As Processed And Completed" library="manager_actions">
+<doc>Open order status menu and change order to 'Completed'</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_orderstatus_dropdownmenu_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:48.258" endtime="20230829 15:21:48.364"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:48.257" endtime="20230829 15:21:48.365"/>
+</kw>
+<kw name="Count Element" library="browser_wrapper">
+<var>${menu_state}</var>
+<arg>${manager_orderstatus_dropdownmenu_state}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="Browser">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<msg timestamp="20230829 15:21:48.369" level="INFO">${element_count} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:48.365" endtime="20230829 15:21:48.369"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:21:48.369" endtime="20230829 15:21:48.369"/>
+</return>
+<msg timestamp="20230829 15:21:48.370" level="INFO">${menu_state} = 1</msg>
+<status status="PASS" starttime="20230829 15:21:48.365" endtime="20230829 15:21:48.370"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"""${menu_state}""" == """1"""</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:21:48.370" endtime="20230829 15:21:48.370"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_orderstatus_completed_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:48.371" endtime="20230829 15:21:48.428"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:48.370" endtime="20230829 15:21:48.428"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_order_update_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:48.429" endtime="20230829 15:21:49.089"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:48.429" endtime="20230829 15:21:49.089"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:48.255" endtime="20230829 15:21:49.089"/>
+</kw>
+<kw name="Logout Shop Manager" library="manager_actions">
+<doc>Logout manager</doc>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:49.580" level="INFO">Waited for Element with selector css=#wp-admin-bar-my-account.menupop.with-avatar at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:49.091" endtime="20230829 15:21:49.580"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:49.090" endtime="20230829 15:21:49.580"/>
+</kw>
+<kw name="Hover Over Element" library="browser_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Hover" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves the virtual mouse and scrolls to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:49.581" endtime="20230829 15:21:49.899"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:49.580" endtime="20230829 15:21:49.900"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:50.109" level="INFO">Waited for Element with selector css=#wp-admin-bar-my-account.menupop.with-avatar.hover at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:49.900" endtime="20230829 15:21:50.109"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:49.900" endtime="20230829 15:21:50.109"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_hovermenu_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:50.110" endtime="20230829 15:21:51.547"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:50.110" endtime="20230829 15:21:51.548"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:49.090" endtime="20230829 15:21:51.548"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:31.464" endtime="20230829 15:21:51.549"/>
+</test>
+<test id="s1-t3" name="Login As Customer To Check Order Status" line="107">
+<kw name="Login As Existing Customer" library="customer_actions">
+<doc>Go to shop url and login as an existing customer</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>customer</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:51.704" level="INFO">${usertype} = customer</msg>
+<status status="PASS" starttime="20230829 15:21:51.701" endtime="20230829 15:21:51.704"/>
+</kw>
+<kw name="Go To Given Page" library="browser_wrapper">
+<arg>${customer_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="Browser">
+<arg>${url}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<msg timestamp="20230829 15:21:52.162" level="INFO">Successfully opened URL https://happy-robot.nimbus.fi/my-account/</msg>
+<status status="PASS" starttime="20230829 15:21:51.705" endtime="20230829 15:21:52.162"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:51.704" endtime="20230829 15:21:52.162"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${customer_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:52.163" endtime="20230829 15:21:52.247"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:52.248" level="INFO">Fills the text 'robot.giskard@nimbus.fi' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:52.248" endtime="20230829 15:21:52.266"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:52.162" endtime="20230829 15:21:52.267"/>
+</kw>
+<kw name="Fill Password Field With Input" library="browser_wrapper">
+<arg>${customer_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:52.268" endtime="20230829 15:21:52.282"/>
+</kw>
+<kw name="Fill Secret" library="Browser">
+<arg>${locator}</arg>
+<arg>$input</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Fills the given secret from ``variable_name`` into the
+text field found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:52.283" endtime="20230829 15:21:52.304"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:52.267" endtime="20230829 15:21:52.305"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:52.305" endtime="20230829 15:21:52.678"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:52.305" endtime="20230829 15:21:52.678"/>
+</kw>
+<kw name="Check Location By Element" library="browser_wrapper">
+<arg>${customer_login_checkforpass}</arg>
+<doc>Check current location by findind an element on the page</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element_locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:52.798" level="INFO">Waited for Element with selector //a[normalize-space()="Account details"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:52.679" endtime="20230829 15:21:52.799"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:52.678" endtime="20230829 15:21:52.799"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:51.700" endtime="20230829 15:21:52.799"/>
+</kw>
+<kw name="Customer Goes To Order Handling Page" library="customer_actions">
+<doc>Click link to orders page in shop</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_orders_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:52.800" endtime="20230829 15:21:53.142"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:52.800" endtime="20230829 15:21:53.142"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:52.800" endtime="20230829 15:21:53.143"/>
+</kw>
+<kw name="Customer Finds And Opens A Placed Order" library="customer_actions">
+<arg>${new_order_number}</arg>
+<doc>Find a previously placed order on the Orders page</doc>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_link}</var>
+<arg>SEPARATOR=</arg>
+<arg>//td[@data-title="Order"]/a[contains(@href,"/</arg>
+<arg>${new_order_number}</arg>
+<arg>/")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:53.144" level="INFO">${order_link} = //td[@data-title="Order"]/a[contains(@href,"/135/")]</msg>
+<status status="PASS" starttime="20230829 15:21:53.143" endtime="20230829 15:21:53.144"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${order_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:53.144" endtime="20230829 15:21:53.528"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.144" endtime="20230829 15:21:53.529"/>
+</kw>
+<kw name="Check Location By Partial URL" library="browser_wrapper">
+<arg>${customer_order_view_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Get Url" library="Browser">
+<arg>*=</arg>
+<arg>${partial_url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:53.529" endtime="20230829 15:21:53.532"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.529" endtime="20230829 15:21:53.532"/>
+</kw>
+<kw name="Get Current Location URL" library="browser_wrapper">
+<var>${current_url}</var>
+<doc>Get the url of the currently active page</doc>
+<kw name="Get Url" library="Browser">
+<var>${current_url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<msg timestamp="20230829 15:21:53.534" level="INFO">${current_url} = https://happy-robot.nimbus.fi/my-account/view-order/135/</msg>
+<status status="PASS" starttime="20230829 15:21:53.533" endtime="20230829 15:21:53.534"/>
+</kw>
+<return>
+<value>${current_url}</value>
+<status status="PASS" starttime="20230829 15:21:53.535" endtime="20230829 15:21:53.535"/>
+</return>
+<msg timestamp="20230829 15:21:53.535" level="INFO">${current_url} = https://happy-robot.nimbus.fi/my-account/view-order/135/</msg>
+<status status="PASS" starttime="20230829 15:21:53.532" endtime="20230829 15:21:53.535"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${current_url}</arg>
+<arg>${new_order_number}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230829 15:21:53.535" endtime="20230829 15:21:53.536"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.143" endtime="20230829 15:21:53.536"/>
+</kw>
+<kw name="Customer Confirms Discount Added" library="customer_actions">
+<doc>Confirm a discount on an order</doc>
+<kw name="Confirm Element Found" library="browser_wrapper">
+<arg>${customer_order_discount_check}</arg>
+<doc>Confirm element is found on page</doc>
+<kw name="Get Element Count" library="Browser">
+<arg>${locator}</arg>
+<arg>&gt;=</arg>
+<arg>1</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:53.537" endtime="20230829 15:21:53.625"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.537" endtime="20230829 15:21:53.625"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.536" endtime="20230829 15:21:53.626"/>
+</kw>
+<kw name="Customer Confirms Order Status Completed" library="customer_actions">
+<doc>Confirm order status is 'Completed'</doc>
+<kw name="Confirm Element Found" library="browser_wrapper">
+<arg>${customer_order_completed_check}</arg>
+<doc>Confirm element is found on page</doc>
+<kw name="Get Element Count" library="Browser">
+<arg>${locator}</arg>
+<arg>&gt;=</arg>
+<arg>1</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:53.628" endtime="20230829 15:21:53.649"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.628" endtime="20230829 15:21:53.649"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.627" endtime="20230829 15:21:53.649"/>
+</kw>
+<kw name="Logout Customer From Shop" library="customer_actions">
+<doc>check location and logout customer from shop</doc>
+<kw name="Get Current Location URL" library="browser_wrapper">
+<var>${current_page}</var>
+<doc>Get the url of the currently active page</doc>
+<kw name="Get Url" library="Browser">
+<var>${current_url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<msg timestamp="20230829 15:21:53.664" level="INFO">${current_url} = https://happy-robot.nimbus.fi/my-account/view-order/135/</msg>
+<status status="PASS" starttime="20230829 15:21:53.650" endtime="20230829 15:21:53.664"/>
+</kw>
+<return>
+<value>${current_url}</value>
+<status status="PASS" starttime="20230829 15:21:53.667" endtime="20230829 15:21:53.667"/>
+</return>
+<msg timestamp="20230829 15:21:53.671" level="INFO">${current_page} = https://happy-robot.nimbus.fi/my-account/view-order/135/</msg>
+<status status="PASS" starttime="20230829 15:21:53.650" endtime="20230829 15:21:53.671"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;&quot;&quot;${current_page}&quot;&quot;&quot; == &quot;&quot;&quot;${customer_logout_url}&quot;&quot;&quot;">
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<status status="NOT RUN" starttime="20230829 15:21:53.672" endtime="20230829 15:21:53.672"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<status status="NOT RUN" starttime="20230829 15:21:53.673" endtime="20230829 15:21:53.673"/>
+</kw>
+<status status="NOT RUN" starttime="20230829 15:21:53.671" endtime="20230829 15:21:53.673"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:53.705" level="INFO">Waited for Element with selector //li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:53.675" endtime="20230829 15:21:53.705"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.674" endtime="20230829 15:21:53.706"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2 sec</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230829 15:21:55.707" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230829 15:21:53.706" endtime="20230829 15:21:55.707"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:55.708" endtime="20230829 15:21:55.989"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:55.707" endtime="20230829 15:21:55.989"/>
+</kw>
+<kw name="Check Location By URL" library="browser_wrapper">
+<arg>${customer_logout_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Get Url" library="Browser">
+<arg>should be</arg>
+<arg>${url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:21:55.990" endtime="20230829 15:21:55.993"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:55.989" endtime="20230829 15:21:55.993"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:56.046" level="INFO">Waited for Element with selector css=.woocommerce-MyAccount-navigation-link--customer-logout a at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:55.994" endtime="20230829 15:21:56.046"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:55.993" endtime="20230829 15:21:56.047"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:56.048" endtime="20230829 15:21:56.546"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:56.047" endtime="20230829 15:21:56.546"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:56.633" level="INFO">Waited for Element with selector //button[@name="login"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:56.547" endtime="20230829 15:21:56.633"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:56.547" endtime="20230829 15:21:56.633"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:53.673" endtime="20230829 15:21:56.633"/>
+</branch>
+<status status="PASS" starttime="20230829 15:21:53.671" endtime="20230829 15:21:56.633"/>
+</if>
+<status status="PASS" starttime="20230829 15:21:53.650" endtime="20230829 15:21:56.633"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:51.603" endtime="20230829 15:21:56.634"/>
+</test>
+<test id="s1-t4" name="Login As Manager To Delete Order" line="125">
+<kw name="Login As Shop Manager" library="manager_actions">
+<doc>Go to shop management side and log manager in</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>manager</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:56.749" level="INFO">${usertype} = manager</msg>
+<status status="PASS" starttime="20230829 15:21:56.747" endtime="20230829 15:21:56.749"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${users}[${usertype}][display_name]</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:21:56.754" level="INFO">${manager_name} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:21:56.750" endtime="20230829 15:21:56.754"/>
+</kw>
+<kw name="Go To Given Page" library="browser_wrapper">
+<arg>${manager_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="Browser">
+<arg>${url}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<msg timestamp="20230829 15:21:56.994" level="INFO">Successfully opened URL https://happy-robot.nimbus.fi/wp-login.php</msg>
+<status status="PASS" starttime="20230829 15:21:56.759" endtime="20230829 15:21:56.994"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:56.755" endtime="20230829 15:21:56.994"/>
+</kw>
+<kw name="Fill Text Field With Input" library="browser_wrapper">
+<arg>${manager_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:56.995" endtime="20230829 15:21:57.094"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:57.095" level="INFO">Fills the text 'robot.manager@nimbus.fi' in the given field.</msg>
+<status status="PASS" starttime="20230829 15:21:57.094" endtime="20230829 15:21:57.114"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:56.994" endtime="20230829 15:21:57.114"/>
+</kw>
+<kw name="Fill Password Field With Input" library="browser_wrapper">
+<arg>${manager_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Focus" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves focus on to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:57.115" endtime="20230829 15:21:57.126"/>
+</kw>
+<kw name="Fill Secret" library="Browser">
+<arg>${locator}</arg>
+<arg>$input</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Fills the given secret from ``variable_name`` into the
+text field found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:57.126" endtime="20230829 15:21:57.145"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:57.115" endtime="20230829 15:21:57.145"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:57.146" endtime="20230829 15:21:57.618"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:57.145" endtime="20230829 15:21:57.619"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_checkforpass}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:57.936" level="INFO">Waited for Element with selector //*[@id="wp-admin-bar-my-account"]/a/span at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:57.619" endtime="20230829 15:21:57.936"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:57.619" endtime="20230829 15:21:57.937"/>
+</kw>
+<kw name="Get Element Text" library="browser_wrapper">
+<var>${text_found}</var>
+<arg>${manager_checkforpass}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="Browser">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230829 15:21:57.967" level="INFO">Text: 'Robbie'</msg>
+<msg timestamp="20230829 15:21:57.967" level="INFO">${element_text} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:21:57.937" endtime="20230829 15:21:57.968"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:21:57.968" endtime="20230829 15:21:57.968"/>
+</return>
+<msg timestamp="20230829 15:21:57.968" level="INFO">${text_found} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:21:57.937" endtime="20230829 15:21:57.968"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${text_found}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230829 15:21:57.968" endtime="20230829 15:21:57.969"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:56.747" endtime="20230829 15:21:57.969"/>
+</kw>
+<kw name="Manager Goes To Order Handling Page" library="manager_actions">
+<doc>Use the sidebar menu to access WooCommerce Orders page</doc>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:57.990" level="INFO">Waited for Element with selector //div[@class="wp-menu-name"][text()="WooCommerce"] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:57.970" endtime="20230829 15:21:57.992"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:57.970" endtime="20230829 15:21:57.993"/>
+</kw>
+<kw name="Hover Over Element" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Hover" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves the virtual mouse and scrolls to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:57.994" endtime="20230829 15:21:58.053"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:57.994" endtime="20230829 15:21:58.053"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:21:58.149" level="INFO">Waited for Element with selector //li[@id="toplevel_page_woocommerce"][contains(@class,"opensub")] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:58.054" endtime="20230829 15:21:58.149"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:58.053" endtime="20230829 15:21:58.149"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_WC_hovermenu_orders_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:58.150" endtime="20230829 15:21:58.630"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:58.150" endtime="20230829 15:21:58.630"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:57.969" endtime="20230829 15:21:58.631"/>
+</kw>
+<kw name="Manager Finds And Opens A Placed Order" library="manager_actions">
+<arg>${new_order_number}</arg>
+<doc>Find an order and view it</doc>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${manager_all_orders}</arg>
+<arg>[contains(@href,"post=</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:58.632" level="INFO">${order_locator} = //a[@class="order-view"][contains(@href,"post=135")]</msg>
+<status status="PASS" starttime="20230829 15:21:58.632" endtime="20230829 15:21:58.632"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_page_check}</var>
+<arg>SEPARATOR=</arg>
+<arg>//div[@id="order_data"]/h2[contains(text(),"</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:21:58.633" level="INFO">${order_page_check} = //div[@id="order_data"]/h2[contains(text(),"135")]</msg>
+<status status="PASS" starttime="20230829 15:21:58.632" endtime="20230829 15:21:58.633"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${order_locator}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:21:58.646" endtime="20230829 15:21:59.590"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:58.645" endtime="20230829 15:21:59.590"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${order_page_check}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:22:00.731" level="INFO">Waited for Element with selector //div[@id="order_data"]/h2[contains(text(),"135")] at state visible</msg>
+<status status="PASS" starttime="20230829 15:21:59.592" endtime="20230829 15:22:00.731"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:59.591" endtime="20230829 15:22:00.732"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:58.631" endtime="20230829 15:22:00.732"/>
+</kw>
+<kw name="Manager Deletes A Placed Order" library="manager_actions">
+<doc>Delete a single order from arrived orders</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_order_movetobin}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:22:00.733" endtime="20230829 15:22:03.044"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:00.733" endtime="20230829 15:22:03.045"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:00.732" endtime="20230829 15:22:03.045"/>
+</kw>
+<kw name="Manager Empties Bin Of Deleted Orders" library="manager_actions">
+<doc>Go to the Bin and delete all orders there</doc>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_order_bin_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:22:03.046" endtime="20230829 15:22:05.476"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:03.045" endtime="20230829 15:22:05.476"/>
+</kw>
+<kw name="Check Location By URL" library="browser_wrapper">
+<arg>${manager_order_bin_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Get Url" library="Browser">
+<arg>should be</arg>
+<arg>${url}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" starttime="20230829 15:22:05.477" endtime="20230829 15:22:05.479"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:05.476" endtime="20230829 15:22:05.479"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_empty_bin}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:22:05.480" endtime="20230829 15:22:07.932"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:05.480" endtime="20230829 15:22:07.932"/>
+</kw>
+<kw name="Confirm No Such Element" library="browser_wrapper">
+<arg>${manager_order_exist_check}</arg>
+<doc>Confirm element is not found</doc>
+<kw name="Get Element Count" library="Browser">
+<arg>${locator}</arg>
+<arg>==</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:22:07.933" endtime="20230829 15:22:08.059"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:07.932" endtime="20230829 15:22:08.059"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:03.045" endtime="20230829 15:22:08.059"/>
+</kw>
+<kw name="Logout Shop Manager" library="manager_actions">
+<doc>Logout manager</doc>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:22:08.555" level="INFO">Waited for Element with selector css=#wp-admin-bar-my-account.menupop.with-avatar at state visible</msg>
+<status status="PASS" starttime="20230829 15:22:08.061" endtime="20230829 15:22:08.555"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:08.060" endtime="20230829 15:22:08.555"/>
+</kw>
+<kw name="Hover Over Element" library="browser_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Hover" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Moves the virtual mouse and scrolls to the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:22:08.556" endtime="20230829 15:22:08.646"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:08.555" endtime="20230829 15:22:08.646"/>
+</kw>
+<kw name="Wait Until Visible" library="browser_wrapper">
+<arg>${manager_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=10 s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230829 15:22:08.850" level="INFO">Waited for Element with selector css=#wp-admin-bar-my-account.menupop.with-avatar.hover at state visible</msg>
+<status status="PASS" starttime="20230829 15:22:08.647" endtime="20230829 15:22:08.850"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:08.647" endtime="20230829 15:22:08.850"/>
+</kw>
+<kw name="Click Selected Element" library="browser_wrapper">
+<arg>${manager_hovermenu_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click" library="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230829 15:22:08.851" endtime="20230829 15:22:10.323"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:08.851" endtime="20230829 15:22:10.324"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:08.060" endtime="20230829 15:22:10.324"/>
+</kw>
+<status status="PASS" starttime="20230829 15:21:56.738" endtime="20230829 15:22:10.324"/>
+</test>
+<kw name="Close All Open Browsers" library="browser_wrapper" type="TEARDOWN">
+<doc>Close all open browsers</doc>
+<kw name="Close Browser" library="Browser">
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<msg timestamp="20230829 15:22:10.775" level="INFO">Closed all browsers</msg>
+<status status="PASS" starttime="20230829 15:22:10.349" endtime="20230829 15:22:10.775"/>
+</kw>
+<status status="PASS" starttime="20230829 15:22:10.349" endtime="20230829 15:22:10.776"/>
+</kw>
+<doc>This test will try out things from both customer and shop manager sides.</doc>
+<status status="PASS" starttime="20230829 15:21:14.319" endtime="20230829 15:22:10.776"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" skip="0" id="s1" name="Order handling test">Order handling test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

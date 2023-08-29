@@ -87,7 +87,7 @@ Fill Password Field With Input
 # Made a new keyword for handling the popup alert, as the other did not seem to work in Browser library...
 Handle OnClick Popup With Input And Accept
     [Documentation]            Handle a popup/alert appearing after click, that requires input and accepting
-    [Arguments]                ${locator}  ${input}
+    [Arguments]                ${locator}    ${input}
     Click Element              ${locator}
     Input Text Into Alert      ${input}      ACCEPT  # action defined here, 'ACCEPT' is default so it's optional
 

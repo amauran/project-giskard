@@ -71,7 +71,7 @@ Customer Adds Products To Cart
     # check location is the home page (shop main page)
     Check Location By URL          ${main_url}
     # get length of product name list (from yaml file)
-    ${length} =        Get Length    ${product_names}
+    ${length} =        Get Length  ${product_names}
 
     ### loop for adding products into cart one by one, by product name
     # the loop runs from range 0 until the length of the product list (gotten from yaml file)
@@ -92,8 +92,6 @@ Customer Adds Products To Cart
         Wait Until Visible                    ${cart_add_product}
         Click Selected Element                ${cart_add_product}
 
-        # debugging, making sure things go right
-        # Log Many   ${product_index}, ${current_product}
     END
 
 
@@ -104,12 +102,13 @@ Customer Goes To Shopping Cart
 
 Customer Checks Shopping Cart Items
     [Documentation]                Check number of product types and their quantity in cart
+
     # NOTE: for basic testing the quantity is 1 for each product,
     # and the shopping cart should be empty before running test series or this will fail
 
     # get length of product name list = the number of product types in shop (from yaml file)
     # NOTE: the yaml file must be updated if new products are added to shop
-    ${length} =           Get Length    ${product_names}
+    ${length} =         Get Length           ${product_names}
 
     # set two local variables for creating locator for quantity of a product type in shopping cart
     # (the missing part will be added in the loop later using Catenate)
@@ -133,14 +132,16 @@ Customer Checks Shopping Cart Items
 
         # find current product's quantity with previously made locator
         ${product_quantity} =   Get Attribute Value    ${quantity_locator}      value
+
         # check quantity is one (should be, unless something was left in the cart from previous test runs)
         Should Be True          ${product_quantity} == 1
+
     END
 
 
 Customer Goes To Order Handling Page
-    [Documentation]                   # click link to orders page in shop
-    Click Selected Element            ${customer_orders_link}
+    [Documentation]                Click link to orders page in shop
+    Click Selected Element         ${customer_orders_link}
 
 
 Customer Clears Their Shopping Cart
@@ -154,20 +155,21 @@ Customer Clears Their Shopping Cart
 
     # count number of remove buttons (= the number of product types in cart that can be removed)
     # (clicking the remove button removes that product regardless of quantity in cart)
-    ${button_count} =               Count Element    ${cart_remove_product}
+    ${button_count} =              Count Element    ${cart_remove_product}
 
     # for as long as there are product types in the cart (a remove button exists), click remove button
     FOR    ${click_times}    IN RANGE    0    ${button_count}
 
-        Wait Until Visible          ${cart_remove_product}
-        Click Selected Element      ${cart_remove_product}
+        Wait Until Visible         ${cart_remove_product}
+        Click Selected Element     ${cart_remove_product}
         # NOTE: this sleep is required so the page can 'find' the button again (this is a javascript issue)
         # (changed this from 1 second to 2 after some issues, may need to be adjusted at times)
-        Sleep    2 sec
+        Sleep  2 sec
+
     END
 
     # confirm no more remove buttons exist (no more products to remove, cart should be empty)
-    Confirm No Such Element         ${cart_remove_product}
+    Confirm No Such Element        ${cart_remove_product}
 
 
 Customer Proceeds To Checkout
@@ -177,39 +179,39 @@ Customer Proceeds To Checkout
 
 
 Customer Says Thank You In Comment Box
-    [Documentation]                 leave a thank you message in the comment box
+    [Documentation]                 Leave a thank you message in the comment box
     # (only works if an order is open and you are on the checkout page)
 
     # create local variable for the thank you message used later (no quotemarks needed for message in this)
     Set Local Variable              ${thank_you_message}    First time customer, thank you for creating this shop! ^_^
     # enter thank you message to the comment box
-    Fill Text Field With Input      ${customer_checkout_commentbox}     ${thank_you_message}
+    Fill Text Field With Input      ${customer_checkout_commentbox}    ${thank_you_message}
     # focus elsewhere to get out of text box
     Set Focus To Selected Element   ${customer_privacy_policy}
 
 
 Customer Places Order
-    [Documentation]                 click the 'Place order' button
+    [Documentation]                 Click the 'Place order' button
     # (only works if an order is open and you are on the checkout page)
     Click Selected Element          ${customer_place_order_button}
 
 
 Customer Checks The Order Was Succesful
-    [Documentation]                 wait until the message for succesful order is found
+    [Documentation]                 Wait until the message for succesful order is found
     # this will hopefully happen before timeout, as a new page is loaded for the completed order
     # NOTE: timeout (10 sec) for the keyword is set in the wrapper file, not here
     Wait Until Visible              ${customer_order_received}
 
 
 Save New Order Number
-    [Documentation]                 save the order number for the completed order
+    [Documentation]                 Save the order number for the completed order
     # NOTE: this is used in case there are more than one order to choose from
     ${new_order_number} =           Get Element Text    ${customer_order_received_number}
     RETURN                          ${new_order_number}
 
 
 Customer Finds And Opens A Placed Order
-    [Documentation]                 find a previously placed order on the Orders page
+    [Documentation]                 Find a previously placed order on the Orders page
     [Arguments]                     ${new_order_number}
     # NOTE: you will need an order number for this, and you need to be on the Orders page
     # in this test series, the order found will always be the newest one
@@ -225,20 +227,14 @@ Customer Finds And Opens A Placed Order
 
 
 Customer Confirms Discount Added
-    [Documentation]                 confirm a discount on an order
+    [Documentation]                 Confirm a discount on an order
     # confirms that a discount has been added, not the type or amount
     # NOTE: you need to be viewing a single order for this to work
     Confirm Element Found           ${customer_order_discount_check}
 
 
 Customer Confirms Order Status Completed
-    [Documentation]                 confirm order status is 'Completed'
+    [Documentation]                 Confirm order status is 'Completed'
     # NOTE: you need to be viewing a single order for this to work
     Confirm Element Found           ${customer_order_completed_check}
-
-
-
-
-
-
 

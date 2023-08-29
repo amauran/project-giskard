@@ -79,7 +79,6 @@ Login As Customer To Make An Order
     Logout Customer From Shop
 
 
-
 Login As Manager To Edit Order
     ### the manager logs in and finds the previously made order by order number, and adds a discount coupon
     # NOTE: a browser page should be left open from the previous section, no need to open a new one
@@ -105,7 +104,6 @@ Login As Manager To Edit Order
     Logout Shop Manager
 
 
-
 Login As Customer To Check Order Status
 ### Customer logs in to view order, to see a discount has been added and the order has been completed
 # NOTE: a browser page should be left open from the previous section, no need to open a new one
@@ -124,7 +122,6 @@ Login As Customer To Check Order Status
     Logout Customer From Shop
 
 
-
 Login As Manager To Delete Order
 ### Manager logs in to find order again, and delete it now that it's completed
 # NOTE: a browser page should be left open from the previous section, no need to open a new one
@@ -141,7 +138,6 @@ Login As Manager To Delete Order
     Logout Shop Manager
 
 
-
 *** Keywords ***
 
 
@@ -149,3 +145,4 @@ Login As Manager To Delete Order
 
 While using the same browser window, the customer has to log out before the admin can log in, and vice versa.
 This is to ensure the current user is who it's supposed to be.
+

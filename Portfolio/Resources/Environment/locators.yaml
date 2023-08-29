@@ -7,6 +7,7 @@
 # Also, make sure to use "" for things inside '' or there may be errors
 
 
+
 ### ADMIN ###
 
 # this section is not used in the test, shop side will be handled by a 'manager' level user
@@ -44,7 +45,6 @@ manager_hovermenu_logout_link:      //*[@id="wp-admin-bar-logout"]/a
 # NOTE: since we are using the text elements of the sidebar menu items (both WP and WC) to find them
 # the text elements must actually be visible to exist, so the menu HAS TO BE EXPANDED to reveal them
 # (locators for doing that are below)
-
 
 # WP collapse/expand menu button for sidebar (hide/show text components of sidebar menu items)
 manager_WPmenu_collapse_button:     //button[@id="collapse-button"]
@@ -105,7 +105,7 @@ manager_add_coupon_button:          //button[@class="button add-coupon"]
 manager_check coupon:               //a[@class="tips"]/span
 
 # 'move to Bin' link (on the single order page) (will not permanently delete order!!!)
-manager_order_movetobin:               //a[@class="submitdelete deletion"]
+manager_order_movetobin:            //a[@class="submitdelete deletion"]
 
 # message to find after an order has been moved to the bin
 manager_order_delete_check:         //div[@id="message"]/p[contains(text(),"order moved to the Bin")]
@@ -115,11 +115,10 @@ manager_order_bin_link:             //li[@class="trash"]/a[contains(@href,"statu
 manager_order_bin_url:              https://happy-robot.nimbus.fi/wp-admin/edit.php?post_status=trash&post_type=shop_order
 
 # any order in the Orders or in the Bin (can be used to check if any/none exist)
-manager_order_exist_check:         //td[@data-colname="Order"]
+manager_order_exist_check:          //td[@data-colname="Order"]
 
 # 'Empty Bin' button (permanently deletes every order in bin -- DOES NOT ASK FOR CONFIRMATION)
-manager_empty_bin:                //div[@class="tablenav top"]//input[@id="delete_all"]
-
+manager_empty_bin:                  //div[@class="tablenav top"]//input[@id="delete_all"]
 
 
 
@@ -164,6 +163,7 @@ customer_login_checkforpass:   //a[normalize-space()="Account details"]
 
 ## Shopping And Orders
 
+
 # Product pages
 
 # partial url of any product page (product name will be after this)
@@ -189,11 +189,10 @@ cart_product_names:     //tbody/tr/td[@class="product-name"]/a/parent::td/follow
 cart_product_quantity:  //tbody/tr/td[@class="product-name"]/a/parent::td/following-sibling::td[@class="product-quantity"]/div/input/
 
 # add item to cart (general for any such button on any page, full shop or single product)
-cart_add_product:            css=button[name="add-to-cart"]
+cart_add_product:       css=button[name="add-to-cart"]
 
 # remove button in cart (general for any such button)
-cart_remove_product:            css=a.remove
-
+cart_remove_product:    css=a.remove
 
 
 # Orders and checkout
@@ -230,14 +229,14 @@ customer_order_received_number:      css=li.woocommerce-order-overview__order st
 customer_order_completed_check:      //mark[@class="order-status"][contains(text(),"Completed")]
 
 # partial url for single order viewing page
-customer_order_view_partial_url:    https://happy-robot.nimbus.fi/my-account/view-order/
+customer_order_view_partial_url:     https://happy-robot.nimbus.fi/my-account/view-order/
 
 # this element should exist if a discount has been added to a single order
-customer_order_discount_check:      //tr/th[@scope="row"][contains(text(),"Discount:")]
-
+customer_order_discount_check:       //tr/th[@scope="row"][contains(text(),"Discount:")]
 
 
 # Search
 
 # top corner search box (should be there on every shop page)
 customer_searchfield_top:   css=input#woocommerce-product-search-field-0
+
