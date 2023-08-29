@@ -1,0 +1,2044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.10.12 on linux)" generated="20230829 15:25:27.144" rpa="false" schemaversion="3">
+<suite id="s1" name="Order handling test" source="/home/anne/Git/project-giskard/Portfolio/Tests/Order_handling_test.robot">
+<kw name="Open New Browser Window" library="selenium_wrapper" type="SETUP">
+<arg>${browser}</arg>
+<doc>Open a new browser window</doc>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>browser=${generic_browser_name_to_local_name}[${browser}]</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20230829 15:25:27.446" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20230829 15:25:27.446" endtime="20230829 15:25:39.129"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:27.445" endtime="20230829 15:25:39.172"/>
+</kw>
+<test id="s1-t1" name="Login As Customer To Make An Order" line="55">
+<kw name="Login As Existing Customer" library="customer_actions">
+<doc>Go to shop url and login as an existing customer</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>customer</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:25:39.493" level="INFO">${usertype} = customer</msg>
+<status status="PASS" starttime="20230829 15:25:39.450" endtime="20230829 15:25:39.493"/>
+</kw>
+<kw name="Go To Given Page" library="selenium_wrapper">
+<arg>${customer_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20230829 15:25:39.531" level="INFO">Opening url 'https://happy-robot.nimbus.fi/my-account/'</msg>
+<status status="PASS" starttime="20230829 15:25:39.521" endtime="20230829 15:25:41.447"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:39.493" endtime="20230829 15:25:41.449"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:41.582" level="INFO">Typing text 'robot.giskard@nimbus.fi' into text field '//input[@id="username"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:41.454" endtime="20230829 15:25:42.188"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:41.451" endtime="20230829 15:25:42.189"/>
+</kw>
+<kw name="Fill Password Field With Input" library="selenium_wrapper">
+<arg>${customer_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:42.192" level="INFO">Typing password into text field '//input[@id="password"]'.</msg>
+<msg timestamp="20230829 15:25:42.252" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20230829 15:25:42.356" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230829 15:25:42.191" endtime="20230829 15:25:42.356"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:42.189" endtime="20230829 15:25:42.356"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:42.364" level="INFO">Clicking element '//button[@name="login"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:42.359" endtime="20230829 15:25:43.171"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:42.357" endtime="20230829 15:25:43.171"/>
+</kw>
+<kw name="Check Location By Element" library="selenium_wrapper">
+<arg>${customer_login_checkforpass}</arg>
+<doc>Check current location by findind an element on the page</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:43.180" endtime="20230829 15:25:43.217"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:43.172" endtime="20230829 15:25:43.217"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:39.398" endtime="20230829 15:25:43.217"/>
+</kw>
+<kw name="Customer Adds Products To Cart" library="customer_actions">
+<doc>add each product in the shop into the cart once via search box</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${shop_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:43.224" level="INFO">Clicking element '//a[normalize-space()="Shop"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:43.224" endtime="20230829 15:25:43.770"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:43.222" endtime="20230829 15:25:43.771"/>
+</kw>
+<kw name="Check Location By URL" library="selenium_wrapper">
+<arg>${main_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20230829 15:25:43.805" level="INFO">Current location is 'https://happy-robot.nimbus.fi/'.</msg>
+<status status="PASS" starttime="20230829 15:25:43.776" endtime="20230829 15:25:43.805"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:43.771" endtime="20230829 15:25:43.806"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${product_names}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230829 15:25:43.810" level="INFO">Length is 4</msg>
+<msg timestamp="20230829 15:25:43.811" level="INFO">${length} = 4</msg>
+<status status="PASS" starttime="20230829 15:25:43.808" endtime="20230829 15:25:43.812"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${product_index}</var>
+<value>0</value>
+<value>${length}</value>
+<iter>
+<var name="${product_index}">0</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:43.829" level="INFO">${current_product} = Can of Oil</msg>
+<status status="PASS" starttime="20230829 15:25:43.826" endtime="20230829 15:25:43.829"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:43.831" level="INFO">Typing text 'Can of Oil' into text field 'css=input#woocommerce-product-search-field-0'.</msg>
+<status status="PASS" starttime="20230829 15:25:43.830" endtime="20230829 15:25:44.036"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:43.829" endtime="20230829 15:25:44.036"/>
+</kw>
+<kw name="Press Enter" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20230829 15:25:44.066" level="INFO">Sending key(s) ('RETURN',) to css=input#woocommerce-product-search-field-0 element.</msg>
+<msg timestamp="20230829 15:25:44.510" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20230829 15:25:44.512" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20230829 15:25:44.040" endtime="20230829 15:25:45.173"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:44.036" endtime="20230829 15:25:45.173"/>
+</kw>
+<kw name="Check Location By Partial URL" library="selenium_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Location Should Contain" library="SeleniumLibrary">
+<arg>${partial_url}</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20230829 15:25:45.181" level="INFO">Current location contains 'https://happy-robot.nimbus.fi/product/'.</msg>
+<status status="PASS" starttime="20230829 15:25:45.174" endtime="20230829 15:25:45.181"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:45.173" endtime="20230829 15:25:45.181"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:45.181" endtime="20230829 15:25:45.197"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:45.181" endtime="20230829 15:25:45.197"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:45.198" level="INFO">Clicking element 'css=button[name="add-to-cart"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:45.198" endtime="20230829 15:25:45.611"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:45.197" endtime="20230829 15:25:45.612"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:43.824" endtime="20230829 15:25:45.612"/>
+</iter>
+<iter>
+<var name="${product_index}">1</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:45.612" level="INFO">${current_product} = Dexterous Thin Leg</msg>
+<status status="PASS" starttime="20230829 15:25:45.612" endtime="20230829 15:25:45.612"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:45.614" level="INFO">Typing text 'Dexterous Thin Leg' into text field 'css=input#woocommerce-product-search-field-0'.</msg>
+<status status="PASS" starttime="20230829 15:25:45.613" endtime="20230829 15:25:46.029"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:45.613" endtime="20230829 15:25:46.029"/>
+</kw>
+<kw name="Press Enter" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20230829 15:25:46.031" level="INFO">Sending key(s) ('RETURN',) to css=input#woocommerce-product-search-field-0 element.</msg>
+<msg timestamp="20230829 15:25:46.689" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20230829 15:25:46.689" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20230829 15:25:46.030" endtime="20230829 15:25:47.283"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:46.029" endtime="20230829 15:25:47.284"/>
+</kw>
+<kw name="Check Location By Partial URL" library="selenium_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Location Should Contain" library="SeleniumLibrary">
+<arg>${partial_url}</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20230829 15:25:47.300" level="INFO">Current location contains 'https://happy-robot.nimbus.fi/product/'.</msg>
+<status status="PASS" starttime="20230829 15:25:47.284" endtime="20230829 15:25:47.301"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:47.284" endtime="20230829 15:25:47.301"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:47.302" endtime="20230829 15:25:47.328"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:47.301" endtime="20230829 15:25:47.328"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:47.332" level="INFO">Clicking element 'css=button[name="add-to-cart"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:47.329" endtime="20230829 15:25:47.778"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:47.328" endtime="20230829 15:25:47.778"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:45.612" endtime="20230829 15:25:47.779"/>
+</iter>
+<iter>
+<var name="${product_index}">2</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:47.780" level="INFO">${current_product} = Varied Nuts &amp; Bolts</msg>
+<status status="PASS" starttime="20230829 15:25:47.779" endtime="20230829 15:25:47.781"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:47.784" level="INFO">Typing text 'Varied Nuts &amp; Bolts' into text field 'css=input#woocommerce-product-search-field-0'.</msg>
+<status status="PASS" starttime="20230829 15:25:47.783" endtime="20230829 15:25:47.981"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:47.782" endtime="20230829 15:25:47.981"/>
+</kw>
+<kw name="Press Enter" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20230829 15:25:47.991" level="INFO">Sending key(s) ('RETURN',) to css=input#woocommerce-product-search-field-0 element.</msg>
+<msg timestamp="20230829 15:25:48.515" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20230829 15:25:48.515" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20230829 15:25:47.987" endtime="20230829 15:25:49.042"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:47.981" endtime="20230829 15:25:49.042"/>
+</kw>
+<kw name="Check Location By Partial URL" library="selenium_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Location Should Contain" library="SeleniumLibrary">
+<arg>${partial_url}</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20230829 15:25:49.090" level="INFO">Current location contains 'https://happy-robot.nimbus.fi/product/'.</msg>
+<status status="PASS" starttime="20230829 15:25:49.045" endtime="20230829 15:25:49.090"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:49.042" endtime="20230829 15:25:49.090"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:49.092" endtime="20230829 15:25:49.189"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:49.091" endtime="20230829 15:25:49.189"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:49.191" level="INFO">Clicking element 'css=button[name="add-to-cart"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:49.190" endtime="20230829 15:25:49.543"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:49.190" endtime="20230829 15:25:49.543"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:47.779" endtime="20230829 15:25:49.543"/>
+</iter>
+<iter>
+<var name="${product_index}">3</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:49.546" level="INFO">${current_product} = Versatile Thin Arm</msg>
+<status status="PASS" starttime="20230829 15:25:49.543" endtime="20230829 15:25:49.546"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<arg>${current_product}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:49.547" level="INFO">Typing text 'Versatile Thin Arm' into text field 'css=input#woocommerce-product-search-field-0'.</msg>
+<status status="PASS" starttime="20230829 15:25:49.546" endtime="20230829 15:25:49.775"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:49.546" endtime="20230829 15:25:49.775"/>
+</kw>
+<kw name="Press Enter" library="selenium_wrapper">
+<arg>${customer_searchfield_top}</arg>
+<doc>Simulate pressing Return/Enter on keyboard</doc>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20230829 15:25:49.777" level="INFO">Sending key(s) ('RETURN',) to css=input#woocommerce-product-search-field-0 element.</msg>
+<msg timestamp="20230829 15:25:50.138" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20230829 15:25:50.138" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20230829 15:25:49.776" endtime="20230829 15:25:50.665"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:49.775" endtime="20230829 15:25:50.665"/>
+</kw>
+<kw name="Check Location By Partial URL" library="selenium_wrapper">
+<arg>${product-page_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Location Should Contain" library="SeleniumLibrary">
+<arg>${partial_url}</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20230829 15:25:50.676" level="INFO">Current location contains 'https://happy-robot.nimbus.fi/product/'.</msg>
+<status status="PASS" starttime="20230829 15:25:50.666" endtime="20230829 15:25:50.676"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:50.666" endtime="20230829 15:25:50.676"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:50.677" endtime="20230829 15:25:50.698"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:50.676" endtime="20230829 15:25:50.699"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${cart_add_product}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:50.707" level="INFO">Clicking element 'css=button[name="add-to-cart"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:50.702" endtime="20230829 15:25:51.120"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:50.700" endtime="20230829 15:25:51.120"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:49.543" endtime="20230829 15:25:51.120"/>
+</iter>
+<status status="PASS" starttime="20230829 15:25:43.819" endtime="20230829 15:25:51.121"/>
+</for>
+<status status="PASS" starttime="20230829 15:25:43.222" endtime="20230829 15:25:51.121"/>
+</kw>
+<kw name="Customer Goes To Shopping Cart" library="customer_actions">
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${cart_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:51.123" level="INFO">Clicking element '//li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/basket/")]'.</msg>
+<status status="PASS" starttime="20230829 15:25:51.122" endtime="20230829 15:25:51.823"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:51.122" endtime="20230829 15:25:51.823"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:51.122" endtime="20230829 15:25:51.824"/>
+</kw>
+<kw name="Customer Checks Shopping Cart Items" library="customer_actions">
+<doc>Check number of product types and their quantity in cart</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${product_names}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230829 15:25:51.825" level="INFO">Length is 4</msg>
+<msg timestamp="20230829 15:25:51.825" level="INFO">${length} = 4</msg>
+<status status="PASS" starttime="20230829 15:25:51.825" endtime="20230829 15:25:51.825"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${quantity_loc_pt1}</arg>
+<arg>//tbody/tr/td[@class="product-name"]/a[contains(@href,"</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:25:51.871" level="INFO">${quantity_loc_pt1} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"</msg>
+<status status="PASS" starttime="20230829 15:25:51.828" endtime="20230829 15:25:51.871"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${quantity_loc_pt2}</arg>
+<arg>")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:25:51.921" level="INFO">${quantity_loc_pt2} = ")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:25:51.872" endtime="20230829 15:25:51.921"/>
+</kw>
+<kw name="Count Element" library="selenium_wrapper">
+<var>${product_types_in_cart}</var>
+<arg>${cart_product_types}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20230829 15:25:51.968" level="INFO">${element_count} = 4</msg>
+<status status="PASS" starttime="20230829 15:25:51.922" endtime="20230829 15:25:51.968"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:25:51.971" endtime="20230829 15:25:51.974"/>
+</return>
+<msg timestamp="20230829 15:25:51.975" level="INFO">${product_types_in_cart} = 4</msg>
+<status status="PASS" starttime="20230829 15:25:51.922" endtime="20230829 15:25:51.975"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${length}</arg>
+<arg>${product_types_in_cart}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230829 15:25:51.975" endtime="20230829 15:25:51.978"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${product_index}</var>
+<value>0</value>
+<value>${length}</value>
+<iter>
+<var name="${product_index}">0</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:51.978" level="INFO">${current_product} = /product/can-of-oil/</msg>
+<status status="PASS" starttime="20230829 15:25:51.978" endtime="20230829 15:25:51.978"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:51.979" level="INFO">${product_name} = Can of Oil</msg>
+<status status="PASS" starttime="20230829 15:25:51.979" endtime="20230829 15:25:51.979"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:25:51.980" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/can-of-oil/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:25:51.979" endtime="20230829 15:25:51.980"/>
+</kw>
+<kw name="Get Attribute Value" library="selenium_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value of the named and specified attribute</doc>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230829 15:25:52.056" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:51.981" endtime="20230829 15:25:52.056"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:25:52.056" endtime="20230829 15:25:52.056"/>
+</return>
+<msg timestamp="20230829 15:25:52.056" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:51.980" endtime="20230829 15:25:52.056"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:25:52.066" endtime="20230829 15:25:52.068"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:51.978" endtime="20230829 15:25:52.068"/>
+</iter>
+<iter>
+<var name="${product_index}">1</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:52.069" level="INFO">${current_product} = /product/dexterous-thin-leg/</msg>
+<status status="PASS" starttime="20230829 15:25:52.069" endtime="20230829 15:25:52.069"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:52.069" level="INFO">${product_name} = Dexterous Thin Leg</msg>
+<status status="PASS" starttime="20230829 15:25:52.069" endtime="20230829 15:25:52.069"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:25:52.070" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/dexterous-thin-leg/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:25:52.070" endtime="20230829 15:25:52.070"/>
+</kw>
+<kw name="Get Attribute Value" library="selenium_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value of the named and specified attribute</doc>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230829 15:25:52.111" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:52.070" endtime="20230829 15:25:52.111"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:25:52.111" endtime="20230829 15:25:52.111"/>
+</return>
+<msg timestamp="20230829 15:25:52.112" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:52.070" endtime="20230829 15:25:52.112"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:25:52.112" endtime="20230829 15:25:52.112"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:52.069" endtime="20230829 15:25:52.112"/>
+</iter>
+<iter>
+<var name="${product_index}">2</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:52.113" level="INFO">${current_product} = /product/varied-nuts-bolts/</msg>
+<status status="PASS" starttime="20230829 15:25:52.112" endtime="20230829 15:25:52.113"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:52.113" level="INFO">${product_name} = Varied Nuts &amp; Bolts</msg>
+<status status="PASS" starttime="20230829 15:25:52.113" endtime="20230829 15:25:52.113"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:25:52.113" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/varied-nuts-bolts/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:25:52.113" endtime="20230829 15:25:52.113"/>
+</kw>
+<kw name="Get Attribute Value" library="selenium_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value of the named and specified attribute</doc>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230829 15:25:52.158" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:52.114" endtime="20230829 15:25:52.158"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:25:52.158" endtime="20230829 15:25:52.158"/>
+</return>
+<msg timestamp="20230829 15:25:52.158" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:52.113" endtime="20230829 15:25:52.158"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:25:52.158" endtime="20230829 15:25:52.159"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:52.112" endtime="20230829 15:25:52.159"/>
+</iter>
+<iter>
+<var name="${product_index}">3</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${current_product}</var>
+<arg>${product_namesinurl}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:52.159" level="INFO">${current_product} = /product/versatile-thin-arm/</msg>
+<status status="PASS" starttime="20230829 15:25:52.159" endtime="20230829 15:25:52.159"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${product_name}</var>
+<arg>${product_names}[${product_index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230829 15:25:52.159" level="INFO">${product_name} = Versatile Thin Arm</msg>
+<status status="PASS" starttime="20230829 15:25:52.159" endtime="20230829 15:25:52.159"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${quantity_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${quantity_loc_pt1}</arg>
+<arg>${current_product}</arg>
+<arg>${quantity_loc_pt2}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:25:52.161" level="INFO">${quantity_locator} = //tbody/tr/td[@class="product-name"]/a[contains(@href,"/product/versatile-thin-arm/")]/parent::td/following-sibling::td[@class="product-quantity"]/div/input</msg>
+<status status="PASS" starttime="20230829 15:25:52.160" endtime="20230829 15:25:52.161"/>
+</kw>
+<kw name="Get Attribute Value" library="selenium_wrapper">
+<var>${product_quantity}</var>
+<arg>${quantity_locator}</arg>
+<arg>value</arg>
+<doc>Get the value of the named and specified attribute</doc>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${attribute_value}</var>
+<arg>${locator}</arg>
+<arg>${attribute_name}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230829 15:25:52.232" level="INFO">${attribute_value} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:52.162" endtime="20230829 15:25:52.232"/>
+</kw>
+<return>
+<value>${attribute_value}</value>
+<status status="PASS" starttime="20230829 15:25:52.232" endtime="20230829 15:25:52.233"/>
+</return>
+<msg timestamp="20230829 15:25:52.235" level="INFO">${product_quantity} = 1</msg>
+<status status="PASS" starttime="20230829 15:25:52.161" endtime="20230829 15:25:52.236"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${product_quantity} == 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:25:52.237" endtime="20230829 15:25:52.240"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:52.159" endtime="20230829 15:25:52.240"/>
+</iter>
+<status status="PASS" starttime="20230829 15:25:51.978" endtime="20230829 15:25:52.240"/>
+</for>
+<status status="PASS" starttime="20230829 15:25:51.824" endtime="20230829 15:25:52.241"/>
+</kw>
+<kw name="Customer Proceeds To Checkout" library="customer_actions">
+<doc>Click 'Proceed to checkout' button</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_checkout_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:52.249" level="INFO">Clicking element 'css=a.checkout-button'.</msg>
+<status status="PASS" starttime="20230829 15:25:52.248" endtime="20230829 15:25:53.041"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:52.245" endtime="20230829 15:25:53.041"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:52.242" endtime="20230829 15:25:53.041"/>
+</kw>
+<kw name="Customer Says Thank You In Comment Box" library="customer_actions">
+<doc>Leave a thank you message in the comment box</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${thank_you_message}</arg>
+<arg>First time customer, thank you for creating this shop! ^_^</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:25:53.044" level="INFO">${thank_you_message} = First time customer, thank you for creating this shop! ^_^</msg>
+<status status="PASS" starttime="20230829 15:25:53.042" endtime="20230829 15:25:53.044"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_checkout_commentbox}</arg>
+<arg>${thank_you_message}</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:53.045" level="INFO">Typing text 'First time customer, thank you for creating this shop! ^_^' into text field 'css=textarea#order_comments.input-text'.</msg>
+<status status="PASS" starttime="20230829 15:25:53.045" endtime="20230829 15:25:53.476"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.044" endtime="20230829 15:25:53.476"/>
+</kw>
+<kw name="Set Focus To Selected Element" library="selenium_wrapper">
+<arg>${customer_privacy_policy}</arg>
+<doc>Set focus to specified element</doc>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20230829 15:25:53.477" endtime="20230829 15:25:53.511"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.477" endtime="20230829 15:25:53.511"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.041" endtime="20230829 15:25:53.511"/>
+</kw>
+<kw name="Customer Places Order" library="customer_actions">
+<doc>Click the 'Place order' button</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_place_order_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:53.512" level="INFO">Clicking element 'css=button#place_order'.</msg>
+<status status="PASS" starttime="20230829 15:25:53.512" endtime="20230829 15:25:53.692"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.511" endtime="20230829 15:25:53.692"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.511" endtime="20230829 15:25:53.692"/>
+</kw>
+<kw name="Customer Checks The Order Was Succesful" library="customer_actions">
+<doc>Wait until the message for succesful order is found</doc>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_order_received}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:53.694" endtime="20230829 15:25:54.630"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.693" endtime="20230829 15:25:54.630"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:53.693" endtime="20230829 15:25:54.630"/>
+</kw>
+<kw name="Save New Order Number" library="customer_actions">
+<var>${number_of_order_made}</var>
+<doc>Save the order number for the completed order</doc>
+<kw name="Get Element Text" library="selenium_wrapper">
+<var>${new_order_number}</var>
+<arg>${customer_order_received_number}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:54.704" level="INFO">${element_text} = 136</msg>
+<status status="PASS" starttime="20230829 15:25:54.631" endtime="20230829 15:25:54.704"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:25:54.704" endtime="20230829 15:25:54.704"/>
+</return>
+<msg timestamp="20230829 15:25:54.705" level="INFO">${new_order_number} = 136</msg>
+<status status="PASS" starttime="20230829 15:25:54.631" endtime="20230829 15:25:54.705"/>
+</kw>
+<return>
+<value>${new_order_number}</value>
+<status status="PASS" starttime="20230829 15:25:54.705" endtime="20230829 15:25:54.705"/>
+</return>
+<msg timestamp="20230829 15:25:54.705" level="INFO">${number_of_order_made} = 136</msg>
+<status status="PASS" starttime="20230829 15:25:54.631" endtime="20230829 15:25:54.705"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>\${new_order_number}</arg>
+<arg>${number_of_order_made}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20230829 15:25:54.740" level="INFO">${new_order_number} = 136</msg>
+<status status="PASS" starttime="20230829 15:25:54.737" endtime="20230829 15:25:54.740"/>
+</kw>
+<kw name="Logout Customer From Shop" library="customer_actions">
+<doc>check location and logout customer from shop</doc>
+<kw name="Get Current Location URL" library="selenium_wrapper">
+<var>${current_page}</var>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${current_url}</var>
+<doc>Returns the current browser window URL.</doc>
+<msg timestamp="20230829 15:25:54.748" level="INFO">${current_url} = https://happy-robot.nimbus.fi/checkout/order-received/136/?key=wc_order_nbeWQJUgAXFCp</msg>
+<status status="PASS" starttime="20230829 15:25:54.741" endtime="20230829 15:25:54.748"/>
+</kw>
+<return>
+<value>${current_url}</value>
+<status status="PASS" starttime="20230829 15:25:54.748" endtime="20230829 15:25:54.748"/>
+</return>
+<msg timestamp="20230829 15:25:54.749" level="INFO">${current_page} = https://happy-robot.nimbus.fi/checkout/order-received/136/?key=wc_order_nbeWQJUgAXFCp</msg>
+<status status="PASS" starttime="20230829 15:25:54.741" endtime="20230829 15:25:54.749"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;&quot;&quot;${current_page}&quot;&quot;&quot; == &quot;&quot;&quot;${customer_logout_url}&quot;&quot;&quot;">
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<status status="NOT RUN" starttime="20230829 15:25:54.768" endtime="20230829 15:25:54.769"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<status status="NOT RUN" starttime="20230829 15:25:54.769" endtime="20230829 15:25:54.769"/>
+</kw>
+<status status="NOT RUN" starttime="20230829 15:25:54.766" endtime="20230829 15:25:54.769"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:54.769" endtime="20230829 15:25:54.804"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:54.769" endtime="20230829 15:25:54.805"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2 sec</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230829 15:25:56.812" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230829 15:25:54.808" endtime="20230829 15:25:56.813"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:56.814" level="INFO">Clicking element '//li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")]'.</msg>
+<status status="PASS" starttime="20230829 15:25:56.814" endtime="20230829 15:25:57.148"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:56.813" endtime="20230829 15:25:57.149"/>
+</kw>
+<kw name="Check Location By URL" library="selenium_wrapper">
+<arg>${customer_logout_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20230829 15:25:57.173" level="INFO">Current location is 'https://happy-robot.nimbus.fi/my-account/'.</msg>
+<status status="PASS" starttime="20230829 15:25:57.149" endtime="20230829 15:25:57.174"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:57.149" endtime="20230829 15:25:57.174"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:57.176" endtime="20230829 15:25:57.206"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:57.174" endtime="20230829 15:25:57.207"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:57.208" level="INFO">Clicking element 'css=.woocommerce-MyAccount-navigation-link--customer-logout a'.</msg>
+<status status="PASS" starttime="20230829 15:25:57.207" endtime="20230829 15:25:57.997"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:57.207" endtime="20230829 15:25:57.997"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:25:57.998" endtime="20230829 15:25:58.173"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:57.997" endtime="20230829 15:25:58.173"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:54.769" endtime="20230829 15:25:58.173"/>
+</branch>
+<status status="PASS" starttime="20230829 15:25:54.765" endtime="20230829 15:25:58.173"/>
+</if>
+<status status="PASS" starttime="20230829 15:25:54.740" endtime="20230829 15:25:58.173"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:39.196" endtime="20230829 15:25:58.177"/>
+</test>
+<test id="s1-t2" name="Login As Manager To Edit Order" line="82">
+<kw name="Login As Shop Manager" library="manager_actions">
+<doc>Go to shop management side and log manager in</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>manager</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:25:58.231" level="INFO">${usertype} = manager</msg>
+<status status="PASS" starttime="20230829 15:25:58.221" endtime="20230829 15:25:58.231"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${users}[${usertype}][display_name]</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:25:58.234" level="INFO">${manager_name} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:25:58.231" endtime="20230829 15:25:58.234"/>
+</kw>
+<kw name="Go To Given Page" library="selenium_wrapper">
+<arg>${manager_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20230829 15:25:58.235" level="INFO">Opening url 'https://happy-robot.nimbus.fi/wp-login.php'</msg>
+<status status="PASS" starttime="20230829 15:25:58.235" endtime="20230829 15:25:58.857"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:58.234" endtime="20230829 15:25:58.858"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${manager_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:58.864" level="INFO">Typing text 'robot.manager@nimbus.fi' into text field '//input[@id="user_login"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:58.862" endtime="20230829 15:25:59.095"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:58.859" endtime="20230829 15:25:59.095"/>
+</kw>
+<kw name="Fill Password Field With Input" library="selenium_wrapper">
+<arg>${manager_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:59.097" level="INFO">Typing password into text field '//input[@id="user_pass"]'.</msg>
+<msg timestamp="20230829 15:25:59.171" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20230829 15:25:59.344" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230829 15:25:59.096" endtime="20230829 15:25:59.344"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:59.096" endtime="20230829 15:25:59.344"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:25:59.348" level="INFO">Clicking element '//input[@id="wp-submit"]'.</msg>
+<status status="PASS" starttime="20230829 15:25:59.345" endtime="20230829 15:26:04.849"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:59.345" endtime="20230829 15:26:04.925"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_checkforpass}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:04.957" endtime="20230829 15:26:05.120"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:04.945" endtime="20230829 15:26:05.121"/>
+</kw>
+<kw name="Get Element Text" library="selenium_wrapper">
+<var>${text_found}</var>
+<arg>${manager_checkforpass}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:05.172" level="INFO">${element_text} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:26:05.126" endtime="20230829 15:26:05.172"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:26:05.179" endtime="20230829 15:26:05.189"/>
+</return>
+<msg timestamp="20230829 15:26:05.190" level="INFO">${text_found} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:26:05.123" endtime="20230829 15:26:05.190"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${text_found}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230829 15:26:05.193" endtime="20230829 15:26:05.197"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:58.217" endtime="20230829 15:26:05.198"/>
+</kw>
+<kw name="Confirm Sidebar Menu Is Expanded" library="manager_actions">
+<doc>Make sure the sidebar menu is expanded to show text elements</doc>
+<kw name="Count Element" library="selenium_wrapper">
+<var>${WPmenu_state}</var>
+<arg>${manager_WPmenu_collapse_state}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20230829 15:26:05.242" level="INFO">${element_count} = 1</msg>
+<status status="PASS" starttime="20230829 15:26:05.225" endtime="20230829 15:26:05.242"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:26:05.242" endtime="20230829 15:26:05.243"/>
+</return>
+<msg timestamp="20230829 15:26:05.243" level="INFO">${WPmenu_state} = 1</msg>
+<status status="PASS" starttime="20230829 15:26:05.219" endtime="20230829 15:26:05.243"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;&quot;&quot;${WPmenu_state}&quot;&quot;&quot; == &quot;&quot;&quot;0&quot;&quot;&quot;">
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>//button[@id="collapse-button"]</arg>
+<doc>Click element indicated by locator</doc>
+<status status="NOT RUN" starttime="20230829 15:26:05.266" endtime="20230829 15:26:05.267"/>
+</kw>
+<kw name="Confirm Element Found" library="selenium_wrapper">
+<arg>//button[@id="collapse-button"][@aria-label="Collapse Main menu"]</arg>
+<doc>Confirm element is found on page</doc>
+<status status="NOT RUN" starttime="20230829 15:26:05.267" endtime="20230829 15:26:05.267"/>
+</kw>
+<status status="NOT RUN" starttime="20230829 15:26:05.260" endtime="20230829 15:26:05.267"/>
+</branch>
+<status status="PASS" starttime="20230829 15:26:05.258" endtime="20230829 15:26:05.267"/>
+</if>
+<status status="PASS" starttime="20230829 15:26:05.215" endtime="20230829 15:26:05.267"/>
+</kw>
+<kw name="Manager Goes To Order Handling Page" library="manager_actions">
+<doc>Use the sidebar menu to access WooCommerce Orders page</doc>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:05.270" endtime="20230829 15:26:05.287"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:05.268" endtime="20230829 15:26:05.287"/>
+</kw>
+<kw name="Hover Over Element" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Mouse Over" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<msg timestamp="20230829 15:26:05.289" level="INFO">Simulating Mouse Over on element '//div[@class="wp-menu-name"][text()="WooCommerce"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:05.288" endtime="20230829 15:26:05.623"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:05.287" endtime="20230829 15:26:05.623"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:05.624" endtime="20230829 15:26:05.648"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:05.624" endtime="20230829 15:26:05.648"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_orders_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:05.649" level="INFO">Clicking element '//ul[@class="wp-submenu wp-submenu-wrap"]/li/a[contains(@href,"shop_order")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:05.649" endtime="20230829 15:26:11.541"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:05.648" endtime="20230829 15:26:11.579"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:05.268" endtime="20230829 15:26:11.582"/>
+</kw>
+<kw name="Manager Finds And Opens A Placed Order" library="manager_actions">
+<arg>${new_order_number}</arg>
+<doc>Find an order and view it</doc>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${manager_all_orders}</arg>
+<arg>[contains(@href,"post=</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:26:11.687" level="INFO">${order_locator} = //a[@class="order-view"][contains(@href,"post=136")]</msg>
+<status status="PASS" starttime="20230829 15:26:11.684" endtime="20230829 15:26:11.687"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_page_check}</var>
+<arg>SEPARATOR=</arg>
+<arg>//div[@id="order_data"]/h2[contains(text(),"</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:26:11.689" level="INFO">${order_page_check} = //div[@id="order_data"]/h2[contains(text(),"136")]</msg>
+<status status="PASS" starttime="20230829 15:26:11.688" endtime="20230829 15:26:11.689"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${order_locator}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:11.716" level="INFO">Clicking element '//a[@class="order-view"][contains(@href,"post=136")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:11.690" endtime="20230829 15:26:16.228"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:11.689" endtime="20230829 15:26:16.244"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${order_page_check}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:16.271" endtime="20230829 15:26:16.387"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:16.262" endtime="20230829 15:26:16.387"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:11.630" endtime="20230829 15:26:16.387"/>
+</kw>
+<kw name="Manager Edits Order Status To Pending Payment" library="manager_actions">
+<doc>Change order status to 'Pending payment' for editing</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_orderstatus_dropdownmenu_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:16.397" level="INFO">Clicking element 'css=#select2-order_status-container + span.select2-selection__arrow'.</msg>
+<status status="PASS" starttime="20230829 15:26:16.392" endtime="20230829 15:26:16.654"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:16.391" endtime="20230829 15:26:16.655"/>
+</kw>
+<kw name="Count Element" library="selenium_wrapper">
+<var>${menu_state}</var>
+<arg>${manager_orderstatus_dropdownmenu_state}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20230829 15:26:16.700" level="INFO">${element_count} = 1</msg>
+<status status="PASS" starttime="20230829 15:26:16.672" endtime="20230829 15:26:16.700"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:26:16.704" endtime="20230829 15:26:16.731"/>
+</return>
+<msg timestamp="20230829 15:26:16.732" level="INFO">${menu_state} = 1</msg>
+<status status="PASS" starttime="20230829 15:26:16.656" endtime="20230829 15:26:16.732"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"""${menu_state}""" == """1"""</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:26:16.734" endtime="20230829 15:26:16.759"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_orderstatus_pending_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:16.761" level="INFO">Clicking element '//li[contains(@id,"wc-pending")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:16.761" endtime="20230829 15:26:16.921"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:16.760" endtime="20230829 15:26:16.921"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_order_update_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:16.924" level="INFO">Clicking element '//button[@class="button save_order button-primary"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:16.923" endtime="20230829 15:26:19.387"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:16.922" endtime="20230829 15:26:19.388"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:16.390" endtime="20230829 15:26:19.388"/>
+</kw>
+<kw name="Manager Adds A Discount Coupon To Order" library="manager_actions">
+<doc>Add a discount coupon to order just made</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${coupon code}</arg>
+<arg>0000011110111000</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:26:19.475" level="INFO">${coupon code} = 0000011110111000</msg>
+<status status="PASS" starttime="20230829 15:26:19.394" endtime="20230829 15:26:19.476"/>
+</kw>
+<kw name="Handle OnClick Popup With Input And Accept" library="selenium_wrapper">
+<arg>${manager_add_coupon_button}</arg>
+<arg>${coupon code}</arg>
+<doc>Handle a popup/alert appearing after click, that requires input and accepting</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:19.482" level="INFO">Clicking element '//button[@class="button add-coupon"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:19.480" endtime="20230829 15:26:19.988"/>
+</kw>
+<kw name="Input Text Into Alert" library="SeleniumLibrary">
+<arg>${input}</arg>
+<arg>ACCEPT</arg>
+<doc>Types the given ``text`` into an input field in an alert.</doc>
+<status status="PASS" starttime="20230829 15:26:19.989" endtime="20230829 15:26:20.094"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:19.476" endtime="20230829 15:26:20.095"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5 sec</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230829 15:26:25.131" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20230829 15:26:20.110" endtime="20230829 15:26:25.132"/>
+</kw>
+<kw name="Confirm Element Found" library="selenium_wrapper">
+<arg>${manager_check coupon}</arg>
+<doc>Confirm element is found on page</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20230829 15:26:25.162" level="INFO">Current page contains element '//a[@class="tips"]/span'.</msg>
+<status status="PASS" starttime="20230829 15:26:25.135" endtime="20230829 15:26:25.162"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:25.133" endtime="20230829 15:26:25.162"/>
+</kw>
+<kw name="Get Element Text" library="selenium_wrapper">
+<var>${code_found}</var>
+<arg>${manager_check coupon}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:25.200" level="INFO">${element_text} = 0000011110111000</msg>
+<status status="PASS" starttime="20230829 15:26:25.164" endtime="20230829 15:26:25.200"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:26:25.200" endtime="20230829 15:26:25.200"/>
+</return>
+<msg timestamp="20230829 15:26:25.200" level="INFO">${code_found} = 0000011110111000</msg>
+<status status="PASS" starttime="20230829 15:26:25.162" endtime="20230829 15:26:25.200"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"""${code_found}""" == """${coupon code}"""</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:26:25.200" endtime="20230829 15:26:25.203"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:19.389" endtime="20230829 15:26:25.203"/>
+</kw>
+<kw name="Scroll To Selected Element" library="selenium_wrapper">
+<arg>${manager_orderstatus}</arg>
+<doc>Scroll the specified element to view</doc>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20230829 15:26:25.208" endtime="20230829 15:26:25.531"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:25.205" endtime="20230829 15:26:25.531"/>
+</kw>
+<kw name="Manager Marks Order As Processed And Completed" library="manager_actions">
+<doc>Open order status menu and change order to 'Completed'</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_orderstatus_dropdownmenu_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:25.534" level="INFO">Clicking element 'css=#select2-order_status-container + span.select2-selection__arrow'.</msg>
+<status status="PASS" starttime="20230829 15:26:25.533" endtime="20230829 15:26:25.760"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:25.532" endtime="20230829 15:26:25.760"/>
+</kw>
+<kw name="Count Element" library="selenium_wrapper">
+<var>${menu_state}</var>
+<arg>${manager_orderstatus_dropdownmenu_state}</arg>
+<doc>Count how many of specified elements there are on the page</doc>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${element_count}</var>
+<arg>${locator}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20230829 15:26:25.786" level="INFO">${element_count} = 1</msg>
+<status status="PASS" starttime="20230829 15:26:25.762" endtime="20230829 15:26:25.787"/>
+</kw>
+<return>
+<value>${element_count}</value>
+<status status="PASS" starttime="20230829 15:26:25.787" endtime="20230829 15:26:25.787"/>
+</return>
+<msg timestamp="20230829 15:26:25.787" level="INFO">${menu_state} = 1</msg>
+<status status="PASS" starttime="20230829 15:26:25.761" endtime="20230829 15:26:25.787"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"""${menu_state}""" == """1"""</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230829 15:26:25.787" endtime="20230829 15:26:25.788"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_orderstatus_completed_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:25.789" level="INFO">Clicking element '//li[contains(@id,"wc-completed")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:25.789" endtime="20230829 15:26:25.937"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:25.788" endtime="20230829 15:26:25.938"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_order_update_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:25.940" level="INFO">Clicking element '//button[@class="button save_order button-primary"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:25.939" endtime="20230829 15:26:29.746"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:25.938" endtime="20230829 15:26:29.749"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:25.531" endtime="20230829 15:26:29.749"/>
+</kw>
+<kw name="Logout Shop Manager" library="manager_actions">
+<doc>Logout manager</doc>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:29.764" endtime="20230829 15:26:29.857"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:29.756" endtime="20230829 15:26:29.858"/>
+</kw>
+<kw name="Hover Over Element" library="selenium_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Mouse Over" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<msg timestamp="20230829 15:26:29.877" level="INFO">Simulating Mouse Over on element 'css=#wp-admin-bar-my-account.menupop.with-avatar'.</msg>
+<status status="PASS" starttime="20230829 15:26:29.869" endtime="20230829 15:26:30.826"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:29.858" endtime="20230829 15:26:30.826"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:30.827" endtime="20230829 15:26:30.860"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:30.827" endtime="20230829 15:26:30.860"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_hovermenu_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:30.861" level="INFO">Clicking element '//*[@id="wp-admin-bar-logout"]/a'.</msg>
+<status status="PASS" starttime="20230829 15:26:30.860" endtime="20230829 15:26:32.096"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:30.860" endtime="20230829 15:26:32.096"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:29.754" endtime="20230829 15:26:32.096"/>
+</kw>
+<status status="PASS" starttime="20230829 15:25:58.184" endtime="20230829 15:26:32.116"/>
+</test>
+<test id="s1-t3" name="Login As Customer To Check Order Status" line="107">
+<kw name="Login As Existing Customer" library="customer_actions">
+<doc>Go to shop url and login as an existing customer</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>customer</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:26:32.217" level="INFO">${usertype} = customer</msg>
+<status status="PASS" starttime="20230829 15:26:32.156" endtime="20230829 15:26:32.217"/>
+</kw>
+<kw name="Go To Given Page" library="selenium_wrapper">
+<arg>${customer_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20230829 15:26:32.223" level="INFO">Opening url 'https://happy-robot.nimbus.fi/my-account/'</msg>
+<status status="PASS" starttime="20230829 15:26:32.219" endtime="20230829 15:26:33.133"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:32.218" endtime="20230829 15:26:33.134"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${customer_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:33.154" level="INFO">Typing text 'robot.giskard@nimbus.fi' into text field '//input[@id="username"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:33.141" endtime="20230829 15:26:33.738"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:33.137" endtime="20230829 15:26:33.739"/>
+</kw>
+<kw name="Fill Password Field With Input" library="selenium_wrapper">
+<arg>${customer_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:33.743" level="INFO">Typing password into text field '//input[@id="password"]'.</msg>
+<msg timestamp="20230829 15:26:33.796" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20230829 15:26:33.894" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230829 15:26:33.741" endtime="20230829 15:26:33.894"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:33.739" endtime="20230829 15:26:33.894"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:33.896" level="INFO">Clicking element '//button[@name="login"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:33.895" endtime="20230829 15:26:34.547"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:33.894" endtime="20230829 15:26:34.547"/>
+</kw>
+<kw name="Check Location By Element" library="selenium_wrapper">
+<arg>${customer_login_checkforpass}</arg>
+<doc>Check current location by findind an element on the page</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:34.549" endtime="20230829 15:26:34.739"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:34.548" endtime="20230829 15:26:34.739"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:32.149" endtime="20230829 15:26:34.739"/>
+</kw>
+<kw name="Customer Goes To Order Handling Page" library="customer_actions">
+<doc>Click link to orders page in shop</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_orders_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:34.745" level="INFO">Clicking element 'css=.woocommerce-MyAccount-navigation-link--orders a'.</msg>
+<status status="PASS" starttime="20230829 15:26:34.745" endtime="20230829 15:26:35.407"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:34.743" endtime="20230829 15:26:35.408"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:34.741" endtime="20230829 15:26:35.409"/>
+</kw>
+<kw name="Customer Finds And Opens A Placed Order" library="customer_actions">
+<arg>${new_order_number}</arg>
+<doc>Find a previously placed order on the Orders page</doc>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_link}</var>
+<arg>SEPARATOR=</arg>
+<arg>//td[@data-title="Order"]/a[contains(@href,"/</arg>
+<arg>${new_order_number}</arg>
+<arg>/")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:26:35.419" level="INFO">${order_link} = //td[@data-title="Order"]/a[contains(@href,"/136/")]</msg>
+<status status="PASS" starttime="20230829 15:26:35.413" endtime="20230829 15:26:35.419"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${order_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:35.439" level="INFO">Clicking element '//td[@data-title="Order"]/a[contains(@href,"/136/")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:35.437" endtime="20230829 15:26:36.258"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:35.421" endtime="20230829 15:26:36.259"/>
+</kw>
+<kw name="Check Location By Partial URL" library="selenium_wrapper">
+<arg>${customer_order_view_partial_url}</arg>
+<doc>Check that current url matches a partial url</doc>
+<kw name="Location Should Contain" library="SeleniumLibrary">
+<arg>${partial_url}</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20230829 15:26:36.365" level="INFO">Current location contains 'https://happy-robot.nimbus.fi/my-account/view-order/'.</msg>
+<status status="PASS" starttime="20230829 15:26:36.263" endtime="20230829 15:26:36.365"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.259" endtime="20230829 15:26:36.365"/>
+</kw>
+<kw name="Get Current Location URL" library="selenium_wrapper">
+<var>${current_url}</var>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${current_url}</var>
+<doc>Returns the current browser window URL.</doc>
+<msg timestamp="20230829 15:26:36.388" level="INFO">${current_url} = https://happy-robot.nimbus.fi/my-account/view-order/136/</msg>
+<status status="PASS" starttime="20230829 15:26:36.369" endtime="20230829 15:26:36.388"/>
+</kw>
+<return>
+<value>${current_url}</value>
+<status status="PASS" starttime="20230829 15:26:36.438" endtime="20230829 15:26:36.448"/>
+</return>
+<msg timestamp="20230829 15:26:36.449" level="INFO">${current_url} = https://happy-robot.nimbus.fi/my-account/view-order/136/</msg>
+<status status="PASS" starttime="20230829 15:26:36.366" endtime="20230829 15:26:36.449"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${current_url}</arg>
+<arg>${new_order_number}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230829 15:26:36.451" endtime="20230829 15:26:36.453"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:35.409" endtime="20230829 15:26:36.453"/>
+</kw>
+<kw name="Customer Confirms Discount Added" library="customer_actions">
+<doc>Confirm a discount on an order</doc>
+<kw name="Confirm Element Found" library="selenium_wrapper">
+<arg>${customer_order_discount_check}</arg>
+<doc>Confirm element is found on page</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20230829 15:26:36.503" level="INFO">Current page contains element '//tr/th[@scope="row"][contains(text(),"Discount:")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:36.457" endtime="20230829 15:26:36.504"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.454" endtime="20230829 15:26:36.505"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.453" endtime="20230829 15:26:36.506"/>
+</kw>
+<kw name="Customer Confirms Order Status Completed" library="customer_actions">
+<doc>Confirm order status is 'Completed'</doc>
+<kw name="Confirm Element Found" library="selenium_wrapper">
+<arg>${customer_order_completed_check}</arg>
+<doc>Confirm element is found on page</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20230829 15:26:36.582" level="INFO">Current page contains element '//mark[@class="order-status"][contains(text(),"Completed")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:36.509" endtime="20230829 15:26:36.582"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.509" endtime="20230829 15:26:36.582"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.508" endtime="20230829 15:26:36.583"/>
+</kw>
+<kw name="Logout Customer From Shop" library="customer_actions">
+<doc>check location and logout customer from shop</doc>
+<kw name="Get Current Location URL" library="selenium_wrapper">
+<var>${current_page}</var>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${current_url}</var>
+<doc>Returns the current browser window URL.</doc>
+<msg timestamp="20230829 15:26:36.591" level="INFO">${current_url} = https://happy-robot.nimbus.fi/my-account/view-order/136/</msg>
+<status status="PASS" starttime="20230829 15:26:36.584" endtime="20230829 15:26:36.591"/>
+</kw>
+<return>
+<value>${current_url}</value>
+<status status="PASS" starttime="20230829 15:26:36.591" endtime="20230829 15:26:36.591"/>
+</return>
+<msg timestamp="20230829 15:26:36.591" level="INFO">${current_page} = https://happy-robot.nimbus.fi/my-account/view-order/136/</msg>
+<status status="PASS" starttime="20230829 15:26:36.584" endtime="20230829 15:26:36.591"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;&quot;&quot;${current_page}&quot;&quot;&quot; == &quot;&quot;&quot;${customer_logout_url}&quot;&quot;&quot;">
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<status status="NOT RUN" starttime="20230829 15:26:36.622" endtime="20230829 15:26:36.622"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<status status="NOT RUN" starttime="20230829 15:26:36.623" endtime="20230829 15:26:36.623"/>
+</kw>
+<status status="NOT RUN" starttime="20230829 15:26:36.603" endtime="20230829 15:26:36.623"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:36.623" endtime="20230829 15:26:36.658"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.623" endtime="20230829 15:26:36.659"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2 sec</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230829 15:26:38.670" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230829 15:26:36.667" endtime="20230829 15:26:38.671"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_my-account_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:38.672" level="INFO">Clicking element '//li[contains(@id, "menu-item-")]/a[contains(@href, "https://happy-robot.nimbus.fi/my-account/")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:38.671" endtime="20230829 15:26:39.211"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:38.671" endtime="20230829 15:26:39.211"/>
+</kw>
+<kw name="Check Location By URL" library="selenium_wrapper">
+<arg>${customer_logout_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20230829 15:26:39.286" level="INFO">Current location is 'https://happy-robot.nimbus.fi/my-account/'.</msg>
+<status status="PASS" starttime="20230829 15:26:39.213" endtime="20230829 15:26:39.287"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:39.211" endtime="20230829 15:26:39.287"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:39.288" endtime="20230829 15:26:39.318"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:39.287" endtime="20230829 15:26:39.318"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${customer_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:39.320" level="INFO">Clicking element 'css=.woocommerce-MyAccount-navigation-link--customer-logout a'.</msg>
+<status status="PASS" starttime="20230829 15:26:39.319" endtime="20230829 15:26:40.595"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:39.319" endtime="20230829 15:26:40.595"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${customer_login_button}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:40.596" endtime="20230829 15:26:40.698"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:40.596" endtime="20230829 15:26:40.699"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:36.623" endtime="20230829 15:26:40.699"/>
+</branch>
+<status status="PASS" starttime="20230829 15:26:36.602" endtime="20230829 15:26:40.699"/>
+</if>
+<status status="PASS" starttime="20230829 15:26:36.583" endtime="20230829 15:26:40.699"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:32.133" endtime="20230829 15:26:40.748"/>
+</test>
+<test id="s1-t4" name="Login As Manager To Delete Order" line="125">
+<kw name="Login As Shop Manager" library="manager_actions">
+<doc>Go to shop management side and log manager in</doc>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${usertype}</arg>
+<arg>manager</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:26:41.054" level="INFO">${usertype} = manager</msg>
+<status status="PASS" starttime="20230829 15:26:41.004" endtime="20230829 15:26:41.054"/>
+</kw>
+<kw name="Set Local Variable" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${users}[${usertype}][display_name]</arg>
+<doc>Makes a variable available everywhere within the local scope.</doc>
+<msg timestamp="20230829 15:26:41.065" level="INFO">${manager_name} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:26:41.055" endtime="20230829 15:26:41.066"/>
+</kw>
+<kw name="Go To Given Page" library="selenium_wrapper">
+<arg>${manager_login_url}</arg>
+<doc>Go to a given page in an already opened browser</doc>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20230829 15:26:41.084" level="INFO">Opening url 'https://happy-robot.nimbus.fi/wp-login.php'</msg>
+<status status="PASS" starttime="20230829 15:26:41.081" endtime="20230829 15:26:41.921"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:41.066" endtime="20230829 15:26:41.921"/>
+</kw>
+<kw name="Fill Text Field With Input" library="selenium_wrapper">
+<arg>${manager_username_field}</arg>
+<arg>${users}[${usertype}][username]</arg>
+<doc>Fill field indicated by locator with given input</doc>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:41.936" level="INFO">Typing text 'robot.manager@nimbus.fi' into text field '//input[@id="user_login"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:41.927" endtime="20230829 15:26:42.247"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:41.921" endtime="20230829 15:26:42.247"/>
+</kw>
+<kw name="Fill Password Field With Input" library="selenium_wrapper">
+<arg>${manager_password_field}</arg>
+<arg>${users}[${usertype}][password]</arg>
+<doc>Fill password field indicated by locator with given input</doc>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${input}</arg>
+<arg>True</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:42.252" level="INFO">Typing password into text field '//input[@id="user_pass"]'.</msg>
+<msg timestamp="20230829 15:26:42.393" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20230829 15:26:42.715" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230829 15:26:42.248" endtime="20230829 15:26:42.715"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:42.248" endtime="20230829 15:26:42.715"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_login_button}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:42.719" level="INFO">Clicking element '//input[@id="wp-submit"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:42.716" endtime="20230829 15:26:48.194"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:42.716" endtime="20230829 15:26:48.385"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_checkforpass}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:48.612" endtime="20230829 15:26:48.805"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:48.486" endtime="20230829 15:26:48.806"/>
+</kw>
+<kw name="Get Element Text" library="selenium_wrapper">
+<var>${text_found}</var>
+<arg>${manager_checkforpass}</arg>
+<doc>Get text content of given element</doc>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${element_text}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:48.860" level="INFO">${element_text} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:26:48.808" endtime="20230829 15:26:48.861"/>
+</kw>
+<return>
+<value>${element_text}</value>
+<status status="PASS" starttime="20230829 15:26:48.865" endtime="20230829 15:26:48.877"/>
+</return>
+<msg timestamp="20230829 15:26:48.878" level="INFO">${text_found} = Robbie</msg>
+<status status="PASS" starttime="20230829 15:26:48.806" endtime="20230829 15:26:48.878"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${manager_name}</arg>
+<arg>${text_found}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230829 15:26:48.880" endtime="20230829 15:26:48.885"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:40.981" endtime="20230829 15:26:48.886"/>
+</kw>
+<kw name="Manager Goes To Order Handling Page" library="manager_actions">
+<doc>Use the sidebar menu to access WooCommerce Orders page</doc>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:48.906" endtime="20230829 15:26:48.924"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:48.905" endtime="20230829 15:26:48.924"/>
+</kw>
+<kw name="Hover Over Element" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Mouse Over" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<msg timestamp="20230829 15:26:48.933" level="INFO">Simulating Mouse Over on element '//div[@class="wp-menu-name"][text()="WooCommerce"]'.</msg>
+<status status="PASS" starttime="20230829 15:26:48.929" endtime="20230829 15:26:49.281"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:48.924" endtime="20230829 15:26:49.281"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:26:49.282" endtime="20230829 15:26:49.305"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:49.282" endtime="20230829 15:26:49.305"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_WC_hovermenu_orders_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:49.345" level="INFO">Clicking element '//ul[@class="wp-submenu wp-submenu-wrap"]/li/a[contains(@href,"shop_order")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:49.332" endtime="20230829 15:26:55.706"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:49.305" endtime="20230829 15:26:55.766"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:48.903" endtime="20230829 15:26:55.769"/>
+</kw>
+<kw name="Manager Finds And Opens A Placed Order" library="manager_actions">
+<arg>${new_order_number}</arg>
+<doc>Find an order and view it</doc>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_locator}</var>
+<arg>SEPARATOR=</arg>
+<arg>${manager_all_orders}</arg>
+<arg>[contains(@href,"post=</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:26:55.966" level="INFO">${order_locator} = //a[@class="order-view"][contains(@href,"post=136")]</msg>
+<status status="PASS" starttime="20230829 15:26:55.956" endtime="20230829 15:26:55.966"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${order_page_check}</var>
+<arg>SEPARATOR=</arg>
+<arg>//div[@id="order_data"]/h2[contains(text(),"</arg>
+<arg>${order_number}</arg>
+<arg>")]</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230829 15:26:55.967" level="INFO">${order_page_check} = //div[@id="order_data"]/h2[contains(text(),"136")]</msg>
+<status status="PASS" starttime="20230829 15:26:55.966" endtime="20230829 15:26:55.967"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${order_locator}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:26:56.093" level="INFO">Clicking element '//a[@class="order-view"][contains(@href,"post=136")]'.</msg>
+<status status="PASS" starttime="20230829 15:26:55.975" endtime="20230829 15:27:02.491"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:55.973" endtime="20230829 15:27:02.671"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${order_page_check}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:27:02.820" endtime="20230829 15:27:03.098"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:02.757" endtime="20230829 15:27:03.098"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:55.803" endtime="20230829 15:27:03.099"/>
+</kw>
+<kw name="Manager Deletes A Placed Order" library="manager_actions">
+<doc>Delete a single order from arrived orders</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_order_movetobin}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:27:03.206" level="INFO">Clicking element '//a[@class="submitdelete deletion"]'.</msg>
+<status status="PASS" starttime="20230829 15:27:03.134" endtime="20230829 15:27:07.536"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:03.131" endtime="20230829 15:27:07.547"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:03.126" endtime="20230829 15:27:07.548"/>
+</kw>
+<kw name="Manager Empties Bin Of Deleted Orders" library="manager_actions">
+<doc>Go to the Bin and delete all orders there</doc>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_order_bin_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:27:07.593" level="INFO">Clicking element '//li[@class="trash"]/a[contains(@href,"status=trash")]'.</msg>
+<status status="PASS" starttime="20230829 15:27:07.571" endtime="20230829 15:27:10.435"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:07.561" endtime="20230829 15:27:10.435"/>
+</kw>
+<kw name="Check Location By URL" library="selenium_wrapper">
+<arg>${manager_order_bin_url}</arg>
+<doc>Check current location by url</doc>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20230829 15:27:10.477" level="INFO">Current location is 'https://happy-robot.nimbus.fi/wp-admin/edit.php?post_status=trash&amp;post_type=shop_order'.</msg>
+<status status="PASS" starttime="20230829 15:27:10.440" endtime="20230829 15:27:10.478"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:10.436" endtime="20230829 15:27:10.478"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_empty_bin}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:27:10.480" level="INFO">Clicking element '//div[@class="tablenav top"]//input[@id="delete_all"]'.</msg>
+<status status="PASS" starttime="20230829 15:27:10.479" endtime="20230829 15:27:14.358"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:10.478" endtime="20230829 15:27:14.409"/>
+</kw>
+<kw name="Confirm No Such Element" library="selenium_wrapper">
+<arg>${manager_order_exist_check}</arg>
+<doc>Confirm element is not found</doc>
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<msg timestamp="20230829 15:27:14.795" level="INFO">Current page does not contain element '//td[@data-colname="Order"]'.</msg>
+<status status="PASS" starttime="20230829 15:27:14.495" endtime="20230829 15:27:14.797"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:14.453" endtime="20230829 15:27:14.797"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:07.556" endtime="20230829 15:27:14.810"/>
+</kw>
+<kw name="Logout Shop Manager" library="manager_actions">
+<doc>Logout manager</doc>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:27:14.826" endtime="20230829 15:27:14.938"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:14.824" endtime="20230829 15:27:14.938"/>
+</kw>
+<kw name="Hover Over Element" library="selenium_wrapper">
+<arg>${manager_hovermenu_link}</arg>
+<doc>Simulate hovering over element with mouse cursor</doc>
+<kw name="Mouse Over" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<msg timestamp="20230829 15:27:14.941" level="INFO">Simulating Mouse Over on element 'css=#wp-admin-bar-my-account.menupop.with-avatar'.</msg>
+<status status="PASS" starttime="20230829 15:27:14.940" endtime="20230829 15:27:15.372"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:14.939" endtime="20230829 15:27:15.372"/>
+</kw>
+<kw name="Wait Until Visible" library="selenium_wrapper">
+<arg>${manager_hovermenu_visible}</arg>
+<doc>Wait until element specified by locator is visible</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>10 sec</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230829 15:27:15.373" endtime="20230829 15:27:15.393"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:15.372" endtime="20230829 15:27:15.393"/>
+</kw>
+<kw name="Click Selected Element" library="selenium_wrapper">
+<arg>${manager_hovermenu_logout_link}</arg>
+<doc>Click element indicated by locator</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230829 15:27:15.400" level="INFO">Clicking element '//*[@id="wp-admin-bar-logout"]/a'.</msg>
+<status status="PASS" starttime="20230829 15:27:15.395" endtime="20230829 15:27:16.247"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:15.393" endtime="20230829 15:27:16.247"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:14.822" endtime="20230829 15:27:16.248"/>
+</kw>
+<status status="PASS" starttime="20230829 15:26:40.808" endtime="20230829 15:27:16.316"/>
+</test>
+<kw name="Close All Open Browsers" library="selenium_wrapper" type="TEARDOWN">
+<doc>Close all open browsers</doc>
+<kw name="Close All Browsers" library="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20230829 15:27:16.482" endtime="20230829 15:27:16.953"/>
+</kw>
+<status status="PASS" starttime="20230829 15:27:16.482" endtime="20230829 15:27:16.954"/>
+</kw>
+<doc>This test will try out things from both customer and shop manager sides.</doc>
+<status status="PASS" starttime="20230829 15:25:27.145" endtime="20230829 15:27:16.954"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" skip="0" id="s1" name="Order handling test">Order handling test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

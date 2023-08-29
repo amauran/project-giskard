@@ -1,3 +1,12 @@
+# Ignore passwordfile for test user in Happy Robot
+shop_loginpwds.yaml
+
+# Must contain the following info:
+# ---
+# logins:
+#     username: username
+#     password: password
+
 # Ignore driver binaries
 drivers/
 
@@ -6,6 +15,20 @@ browser/
 log.html
 output.xml
 report.html
+selenium-screenshot-*
+interactive_console_output.xml
+playwright-log.txt
+
+# Allow selected reports from Logs folder
+!Portfolio/Tests/Logs/**/log.html
+!Portfolio/Tests/Logs/**/output.xml
+!Portfolio/Tests/Logs/**/report.html
+
+# Ignore my messy practice tests
+sandbox/
+
+# Ignore documentation temp
+/documentation temp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

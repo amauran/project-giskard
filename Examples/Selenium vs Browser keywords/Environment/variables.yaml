@@ -1,0 +1,17 @@
+---
+# these variable defines which web library wrapper is used for testing, and which browser
+# 'SeleniumLibrary' or 'Browser' library (selenium/browser as value for variable)
+# for browsers using generic name, which will be converted to the proper one in the wrapper
+# (like chrome -> chromium for Browser library wrapper )
+
+wrapper: selenium             # choose selenium or browser
+usebrowser: chrome            # only chrome, firefox, safari work for this test version
+                              # (must of course be installed)
+
+
+
+
+
+
+
+
