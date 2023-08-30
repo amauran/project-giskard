@@ -1,27 +1,42 @@
 # Project Giskard - The Portfolio
 
-This contains the results of my learning process so far:
+## A Robot Framework test with user defined keywords that are executable both with SeleniumLibrary and Browser library.
 
-* The final order handling robot test for the Happy Robot shop (WordPress and WooCommerce)
+### The portfolio contains:
+
+* A robot test for the *Happy Robot Shop* (WordPress and WooCommerce) that includes:
   - the customer making an order
   - the manager editing order
   - the customer checking edited order
   - the manager deleting order
 
 
-* The resources:
-  - user defined keyword wrappers for Selenium and Browser libraries
-  - user defined keywords for customer and shop manager
-  - the locators and variables used, in yaml files (The password file is only a template, the real one is in gitignore.)
+* User defined keyword wrappers for Selenium and Browser libraries:
+  - each have the same user defined keywords, built based on the SeleniumLibrary and Browser library keywords
+  - interchangeable, only one variable needs to be changed to switch from one to another
 
+* User defined keywords for customer and shop manager actions
+  - created using the wrapper keywords, so they work with either SeleniumLibrary or Browser library
+
+* The .yaml variables files used
+  - *locators.yaml*
+      - contains variables used to locate things via selectors
+      - this helps reduce clutter in the keywords and the actual test code
+  - *product-names.yaml*
+      - the products in the shop, both searchable names and url endings
+  - *variables.yaml*
+      - contains environment settings for the wrapper and browser used
+  - *passwords_template.yaml*
+      - a template file for passwords needed to login as a customer, a manager, or an admin
+
+
+## To choose which web testing library to use
+
+You only need to change one variable!
+
+Edit the *Resources/Environment/variables.yaml* file, and set the wrapper to either **'selenium'** for SeleniumLibrary or **'browser'** for Browser library.
 
 ## To run the test
-
-To choose which web testing library to use, edit the Resources/Environment/variables.yaml file, and set the wrapper to either 'selenium' for SeleniumLibrary or 'browser' for Browser library.
-
-Note: Browser library will run the test headless unless told otherwise. Edit the 'Open New Browser Window' keyword in the browser_wrapper.resource file to change that. (The option is already there, it has just been commented out.)
-
-Edit the same file to choose the browser (I have only tested things with Chrome.)
 
 #### To run the test using default logging:
 `robot Order_handling_test.robot`
@@ -32,7 +47,11 @@ Selenium: `robot -d Logs/Selenium_library/ Order_handling_test.robot`\
 Browser: `robot -d Logs/Browser_library/ Order_handling_test.robot`
 
 
-### NOTE:
+Browser library will run the test **headless** unless told otherwise, so edit the '*Open New Browser Window*' keyword in the *browser_wrapper.resource* file to change that. (The option is already there, it has just been commented out.)
+
+Edit the *Resources/Environment/variables.yaml* file to choose the browser (I have only tested things with Chrome.)
+
+## Notes on requirements to run test
 
 *The Happy Robot Shop* set up as the test environment is not usable by others, so these tests cannot be run as they are. If you wish to try them out, in addition to Robot Framework and the required libraries, your test environment must include a test shop made with *WordPress + WooCommerce*.
 
