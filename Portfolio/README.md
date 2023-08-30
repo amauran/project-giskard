@@ -12,4 +12,28 @@ This contains the results of my learning process so far:
 * The resources:
   - user defined keyword wrappers for Selenium and Browser libraries
   - user defined keywords for customer and shop manager
-  - the locators and variables used
+  - the locators and variables used, in yaml files
+
+
+## To run the test
+
+To choose which web testing library to use, edit the Resources/Environment/variables.yaml file, and set the wrapper to either 'selenium' for SeleniumLibrary or 'browser' for Browser library. Edit the same file to choose the browser (I have only tested things with Chrome.)
+
+#### To run the test using default logging:
+`robot Order_handling_test.robot`\
+
+
+#### To create test logs in the specified folders:
+Selenium: `robot -d Logs/Selenium_library/ Order_handling_test.robot`\
+Browser: `robot -d Logs/Browser_library/ Order_handling_test.robot`
+
+
+### NOTE:
+
+*The Happy Robot Shop* set up as the test environment is not usable by others, so these tests cannot be run as they are. If you wish to try them out, in addition to Robot Framework and the required libraries, your test environment must include a test shop made with *WordPress + WooCommerce*.
+
+You also  must edit the product related yaml files to contain the test items in your shop, and create a login credentials yaml file with the proper format. For this, you need to create one customer and one manager level user for your test shop.
+
+If the folder structure is kept the same, the resource paths and locators should work, apart from of course any url that includes the name of your shop.
+
+To learn more about the test setup used, check how we set up the [work environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-work-environment) and the [test environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-target-environment).
