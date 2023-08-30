@@ -1,6 +1,6 @@
 # Project Giskard - The Portfolio
 
-## A Robot Framework test with user defined keywords that are executable both with SeleniumLibrary and Browser library.
+## A Robot Framework test with user defined keywords that are executable both with SeleniumLibrary and Browser library
 
 ### The portfolio contains:
 
