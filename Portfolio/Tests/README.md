@@ -1,9 +1,11 @@
 ## WHAT IS TESTED
 
-1) customer will place an order
-2) shop manager will find the order, edit to add a discount coupon, mark the order as completed and save it.
-3) customer will check new order to see a discount has been applied and the order is marked 'completed'
-4) shop manager will find the order again, and delete it.
+The test uses the Happy Robot test shop created with WordPress and the WooCommerce plugin. The test run has four segments:
+
+1) the customer will add items to shopping cart and place an order.
+2) the shop manager will find the order, edit to add a discount coupon, then marks the order as completed and saves it.
+3) the customer will then check the order to see a discount has been applied and the order is marked as 'completed'
+4) the shop manager will find the order again, and delete it.
 
 #### NOTES:
 

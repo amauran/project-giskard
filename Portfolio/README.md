@@ -12,12 +12,16 @@ This contains the results of my learning process so far:
 * The resources:
   - user defined keyword wrappers for Selenium and Browser libraries
   - user defined keywords for customer and shop manager
-  - the locators and variables used, in yaml files
+  - the locators and variables used, in yaml files (The password file is only a template, the real one is in gitignore.)
 
 
 ## To run the test
 
-To choose which web testing library to use, edit the Resources/Environment/variables.yaml file, and set the wrapper to either 'selenium' for SeleniumLibrary or 'browser' for Browser library. Edit the same file to choose the browser (I have only tested things with Chrome.)
+To choose which web testing library to use, edit the Resources/Environment/variables.yaml file, and set the wrapper to either 'selenium' for SeleniumLibrary or 'browser' for Browser library.
+
+Note: Browser library will run the test headless unless told otherwise. Edit the 'Open New Browser Window' keyword in the browser_wrapper.resource file to change that. (The option is already there, it has just been commented out.)
+
+Edit the same file to choose the browser (I have only tested things with Chrome.)
 
 #### To run the test using default logging:
 `robot Order_handling_test.robot`
@@ -36,4 +40,4 @@ You also  must edit the product related yaml files to contain the test items in 
 
 If the folder structure is kept the same, the resource paths and locators should work, apart from of course any url that includes the name of your shop.
 
-To learn more about the test setup used, check how we set up the [work environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-work-environment) and the [test environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-target-environment).
+To learn more about the requirements and the test setup used, check how we built the [work environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-work-environment) and the [test environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-target-environment).
