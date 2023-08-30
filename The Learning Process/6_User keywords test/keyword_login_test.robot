@@ -7,7 +7,7 @@
 #     username: username
 #     password: password
 
-Variables  ../Resources/shop_loginpwds.yaml
+Variables  ../2_Login/resources/shop_loginpwds.yaml
 Variables  ../Resources/shop_paths.yaml
 
 # importing user defined keywords from a resource file
@@ -46,4 +46,3 @@ Login As Existing User
 
     Close Browser
 
-    

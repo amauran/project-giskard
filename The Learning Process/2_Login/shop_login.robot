@@ -3,12 +3,12 @@
 Library  SeleniumLibrary
 
 # Importing resouce files
-Variables  /home/anne/Git/project-giskard/Examples/Login/resources/shop_loginpwds.yaml
-Variables  /home/anne/Git/project-giskard/Examples/Login/resources/shop_paths.yaml
+Variables  ../2_Login/resources/shop_loginpwds.yaml
+Variables  ../2_Login/resources/shop_paths.yaml
 
 *** Variables ***
 ${Browser}  Chrome
-${URL}  https://happy-robot.nimbus.fi/my-account/   # test shop login page url
+${URL}      https://happy-robot.nimbus.fi/my-account/   # test shop login page url
 
 
 # Resource files are imported using the Resource setting in the Settings table.
