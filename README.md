@@ -12,3 +12,7 @@ You can find the timetable of the process in the
 The project [Wiki](https://github.com/amauran/project-giskard/wiki) also contains a lot of other bits and pieces learned along the way, including how we set up the [work environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-work-environment) and the [test environment](https://github.com/amauran/project-giskard/wiki/Setting-up-the-target-environment).
 
 To learn more about the final test and how to run it, you can [read this](https://github.com/amauran/project-giskard/blob/feature/documents/Portfolio/README.md).
+
+Screenshot of test shop:
+
+![happy-robot](https://github.com/amauran/project-giskard/assets/112192399/8c7c79aa-0e99-4179-af4f-352fd8a43004)
