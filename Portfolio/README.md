@@ -20,7 +20,7 @@ This contains the results of my learning process so far:
 To choose which web testing library to use, edit the Resources/Environment/variables.yaml file, and set the wrapper to either 'selenium' for SeleniumLibrary or 'browser' for Browser library. Edit the same file to choose the browser (I have only tested things with Chrome.)
 
 #### To run the test using default logging:
-`robot Order_handling_test.robot`\
+`robot Order_handling_test.robot`
 
 
 #### To create test logs in the specified folders:
