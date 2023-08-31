@@ -1,7 +1,7 @@
 *** Settings ***
 # paths to variable files
-Variables  ../Login/resources/shop_loginpwds.yaml
-Variables  ../Login/resources/shop_paths.yaml
+Variables  ../2_Login/resources/shop_loginpwds.yaml
+Variables  ../2_Login/resources/shop_paths.yaml
 
 #importing libraries
 Library    SeleniumLibrary
@@ -10,7 +10,7 @@ Library    String
 *** Variables ***
 
 ${browser}  Chrome
-${product_search_string}           nuts                       # string to search with
+${product_search_string}           nuts     # string to search with
 
 *** Test Cases ***
 
@@ -33,6 +33,7 @@ Shop Login With Existing Customer
     # click loging button and see if we got in by checking if 'Account details' link exists
     Click Button                   xpath = ${paths}[login_button_relxpath]
     Page Should Contain Element    xpath = //a[normalize-space()='Account details']
+
 
 Product search, add to cart, find in cart
 

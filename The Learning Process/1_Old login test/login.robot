@@ -1,11 +1,14 @@
 # just a login test
+# used the site Dreamwidth but without the actual login information
+# checking the attempt was made, got the expected error message
+# (also checked this with the real account to see that it worked too)
 
 *** Settings ***
 Library  SeleniumLibrary
 
 # Importing resouce files
-Variables  /home/anne/Git/project-giskard/tests/Login/resources/anne_passwords.yaml
-Variables  /home/anne/Git/project-giskard/tests/Login/resources/locator_paths.yaml
+Variables  ../Login/resources/anne_passwords.yaml
+Variables  ../Login/resources/locator_paths.yaml
 
 *** Variables ***
 ${Browser}  Chrome

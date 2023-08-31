@@ -1,9 +1,9 @@
 *** Settings ***
 # paths to variable files
 # note that the shop_loginpwds.yaml file is in gitignore and will not be pushed to github
-Variables  ../Login/resources/shop_loginpwds.yaml
-Variables  ../Login/resources/shop_paths.yaml
-Variables  ../../Examples/Emptying cart test/product_names.yaml
+Variables  ../2_Login/resources/shop_loginpwds.yaml
+Variables  ../2_Login/resources/shop_paths.yaml
+Variables  product_names.yaml
 
 #importing libraries
 Library    SeleniumLibrary

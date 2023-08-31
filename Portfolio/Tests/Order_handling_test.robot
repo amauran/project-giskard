@@ -6,7 +6,7 @@ Documentation        This test will try out things from both customer and shop m
 # The test will run in a single browser window, so customer and manager will log out when switching sides
 
 # 1) customer will place an order
-# 2) shop manager will find the order, edit to add a discount coupo, mark the order as completed and save it.
+# 2) shop manager will find the order, edit to add a discount coupon, mark the order as completed and save it.
 # 3) customer will check new order to see a discount has been applied and the order is marked 'completed'
 # 4) shop manager will find the order again, and delete it.
 
@@ -16,7 +16,7 @@ Documentation        This test will try out things from both customer and shop m
 
 # NOTE: This test implements a lot of user defined keywords from resource file
 # 1) a wrapper for either Seleniumlibrary or Browser library (chosen in the variables.yaml)
-# 2) user or admin action keywords as needed
+# 2) user or manager keywords as needed
 
 
 ### IMPORTS ###
