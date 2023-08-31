@@ -2,7 +2,7 @@
 
 Anne learns Robot Framework ^_^
 
-This project covers what I have learned about Robot Framework. Prior to this my only experience in programming was completing a basic course of Python, which helped in understanding a bit more about how programming languages work.
+This project covers what I have learned about Robot Framework. Prior to this my experience in programming was completing a basic course of Python, which helped in understanding a bit more about how programming languages work.
 
 The [Portfolio](https://github.com/amauran/project-giskard/tree/main/Portfolio) contains the results of my learning so far, but hopefully the journey has only just begun :)
 
