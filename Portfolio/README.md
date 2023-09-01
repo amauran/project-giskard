@@ -40,19 +40,19 @@ Edit the *Resources/Environment/variables.yaml* file, and set the wrapper to eit
 
 #### To run the test using default logging:
 ```bash
-`robot Order_handling_test.robot`
+robot Order_handling_test.robot
 ```
 
 
 #### To create test logs in the specified folders:
 Selenium:
 ```bash
-`robot -d Logs/Selenium_library/ Order_handling_test.robot`
+robot -d Logs/Selenium_library/ Order_handling_test.robot
 ```
 
 Browser:
 ```bash
-`robot -d Logs/Browser_library/ Order_handling_test.robot`
+robot -d Logs/Browser_library/ Order_handling_test.robot
 ```
 
 
