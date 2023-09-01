@@ -39,12 +39,21 @@ Edit the *Resources/Environment/variables.yaml* file, and set the wrapper to eit
 ## To run the test
 
 #### To run the test using default logging:
-`robot Order_handling_test.robot`
+```bash
+robot Order_handling_test.robot
+```
 
 
 #### To create test logs in the specified folders:
-Selenium: `robot -d Logs/Selenium_library/ Order_handling_test.robot`\
-Browser: `robot -d Logs/Browser_library/ Order_handling_test.robot`
+Selenium:
+```bash
+robot -d Logs/Selenium_library/ Order_handling_test.robot
+```
+
+Browser:
+```bash
+robot -d Logs/Browser_library/ Order_handling_test.robot
+```
 
 
 Browser library will run the test **headless** unless told otherwise, so edit the '*Open New Browser Window*' keyword in the *browser_wrapper.resource* file to change that. (The option is already there, it has just been commented out.)
